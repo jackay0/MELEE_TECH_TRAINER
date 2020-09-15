@@ -88,31 +88,31 @@ public class ButtonFlash {                    //this is not to be confused with 
             y = 390;
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            x = 245;
+            x = 246;
             y = 390;
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            x = 245;
+            x = 244;
             y = 390;
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             x = 245;
-            y = 390;
+            y = 391;
         }
         if (e.getKeyCode() == KeyEvent.VK_1) {
             x = 245;
-            y = 390;
+            y = 389;
         }
         if (e.getKeyCode() == KeyEvent.VK_2) {
-            x = 245;
-            y = 390;
+            x = 246;
+            y = 391;
         }
         if (e.getKeyCode() == KeyEvent.VK_3) {
-            x = 245;
-            y = 390;
+            x = 244;
+            y = 389;
         }
         if (e.getKeyCode() == KeyEvent.VK_4) {
-            x = 245;
+            x = 247;
             y = 390;
         }
 
@@ -227,33 +227,33 @@ public class ButtonFlash {                    //this is not to be confused with 
         if (x == 405 && y == 340) {
             g.drawImage(rbutton2, (int) x, (int) y, null);
         }
-        if (x == 300 && y == 420) {
+        if (x == 245 && y == 390) {
             g.drawImage(stickUp2, (int) x, (int) y, null);
         }
-        if (x == 390 && y == 350) {
+        if (x == 246 && y == 390) {
             g.drawImage(stickDown2, (int) x, (int) y, null);
         }
-        if (x == 245 && y == 390) {
+        if (x == 244 && y == 390) {
             g.drawImage(stickLeft2, (int) x, (int) y, null);
         }
 
-        if (x == 245 && y == 390) {
+        if (x == 245 && y == 391) {
             g.drawImage(stickRight2, (int) x, (int) y, null);
         }
 
-        if (x == 245 && y == 390) {
+        if (x == 245 && y == 389) {
             g.drawImage(stickURight2, (int) x, (int) y, null);
         }
 
-        if (x == 245 && y == 390) {
+        if (x == 246 && y == 391) {
             g.drawImage(stickULeft2, (int) x, (int) y, null);
         }
 
-        if (x == 245 && y == 390) {
+        if (x == 244 && y == 389) {
             g.drawImage(stickDRight2, (int) x, (int) y, null);
         }
 
-        if (x == 245 && y == 390) {
+        if (x == 247 && y == 390) {
             g.drawImage(stickDLeft2, (int) x, (int) y, null);
         }
 
