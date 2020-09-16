@@ -61,10 +61,14 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private ButtonFlash stickDRight2;
 	private ButtonFlash stickDLeft2;
 
-	private ButtonFlash cDown;
-	private ButtonFlash cUp;
-	private ButtonFlash cLeft;
-	private ButtonFlash cRight;
+	private ButtonFlash cDown2;
+	private ButtonFlash cUp2;
+	private ButtonFlash cLeft2;
+	private ButtonFlash cRight2;
+	private ButtonFlash cURight2;
+	private ButtonFlash cULeft2;
+	private ButtonFlash cDRight2;
+	private ButtonFlash cDLeft2;
 
 	private Note anote;
 
@@ -94,10 +98,14 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickULeft2 = new ButtonFlash(-100, -100, this);
 		stickDRight2 = new ButtonFlash(-100, -100, this);
 		stickDLeft2 = new ButtonFlash(-100, -100, this);
-		cUp = new ButtonFlash(-100, -100, this);
-		cDown = new ButtonFlash(-100, -100, this);
-		cLeft = new ButtonFlash(-100, -100, this);
-		cRight = new ButtonFlash(-100, -100, this);
+		cUp2 = new ButtonFlash(-100, -100, this);
+		cDown2 = new ButtonFlash(-100, -100, this);
+		cLeft2 = new ButtonFlash(-100, -100, this);
+		cRight2 = new ButtonFlash(-100, -100, this);
+		cURight2 = new ButtonFlash(-100, -100, this);
+		cULeft2 = new ButtonFlash(-100, -100, this);
+		cDRight2 = new ButtonFlash(-100, -100, this);
+		cDLeft2 = new ButtonFlash(-100, -100, this);
 
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
 		abutton = ss.grabImage(1, 1, 32, 32);
@@ -250,10 +258,14 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickULeft2.render(g);
 		stickDRight2.render(g);
 		stickDLeft2.render(g);
-		cUp.render(g);
-		cDown.render(g);
-		cLeft.render(g);
-		cRight.render(g);
+		cUp2.render(g);
+		cDown2.render(g);
+		cLeft2.render(g);
+		cRight2.render(g);
+		cURight2.render(g);
+		cULeft2.render(g);
+		cDRight2.render(g);
+		cDLeft2.render(g);
 
 		anote.render(g);
 
@@ -281,6 +293,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			rbutton2.keyPressed(e);
 			startbutton2.keyPressed(e);
 			zbutton2.keyPressed(e);
+			
 			stickUp2.keyPressed(e);
 			stickDown2.keyPressed(e);
 			stickLeft2.keyPressed(e);
@@ -289,6 +302,15 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			stickULeft2.keyPressed(e);
 			stickDRight2.keyPressed(e);
 			stickDLeft2.keyPressed(e);
+
+			cUp2.keyPressed(e); 
+			cDown2.keyPressed(e);
+			cLeft2.keyPressed(e);
+			cRight2.keyPressed(e);
+			cURight2.keyPressed(e);
+			cULeft2.keyPressed(e);
+			cDRight2.keyPressed(e);
+			cDLeft2.keyPressed(e);
 
 		}
 
@@ -302,6 +324,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			rbutton2.keyReleased(e);
 			startbutton2.keyReleased(e);
 			zbutton2.keyReleased(e);
+			
 			stickUp2.keyReleased(e);
 			stickDown2.keyReleased(e);
 			stickLeft2.keyReleased(e);
@@ -310,6 +333,15 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			stickULeft2.keyReleased(e);
 			stickDRight2.keyReleased(e);
 			stickDLeft2.keyReleased(e);
+			
+			cUp2.keyReleased(e);
+			cDown2.keyReleased(e);
+			cLeft2.keyReleased(e);
+			cRight2.keyReleased(e);
+			cURight2.keyReleased(e);
+			cULeft2.keyReleased(e);
+			cDRight2.keyReleased(e);
+			cDLeft2.keyReleased(e);
 		}
 
 	}
