@@ -105,34 +105,42 @@ public class ButtonFlash {                    //this is not to be confused with 
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             x = 245;
             y = 390;
+            z=1;
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            x = 246;
+            x = 245;
             y = 390;
+            z=2;
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            x = 244;
+            x = 245;
             y = 390;
+            z=3;
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             x = 245;
-            y = 391;
+            y = 390;
+            z=4;
         }
         if (e.getKeyCode() == KeyEvent.VK_1) {
             x = 245;
-            y = 389;
+            y = 390;
+            z=5;
         }
         if (e.getKeyCode() == KeyEvent.VK_2) {
-            x = 246;
-            y = 391;
+            x = 245;
+            y = 390;
+            z=6;
         }
         if (e.getKeyCode() == KeyEvent.VK_3) {
-            x = 244;
-            y = 389;
+            x = 245;
+            y = 390;
+            z=7;
         }
         if (e.getKeyCode() == KeyEvent.VK_4) {
-            x = 247;
+            x = 245;
             y = 390;
+            z=8;
         }
       //c stick (needs a z coord simply because there are so many sprites going into 390, 440)
         // maybe, if one key is pressed, move two sprites?
@@ -225,41 +233,49 @@ public class ButtonFlash {                    //this is not to be confused with 
 
             x = -100;
             y = -100;
+            z=0;
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 
             x = -100;
             y = -100;
+            z=0;
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 
             x = -100;
             y = -100;
+            z=0;
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 
             x = -100;
             y = -100;
+            z=0;
         }
         if (e.getKeyCode() == KeyEvent.VK_1) {
 
             x = -100;
             y = -100;
+            z=0;
         }
         if (e.getKeyCode() == KeyEvent.VK_2) {
 
             x = -100;
             y = -100;
+            z=0;
         }
         if (e.getKeyCode() == KeyEvent.VK_3) {
 
             x = -100;
             y = -100;
+            z=0;
         }
         if (e.getKeyCode() == KeyEvent.VK_4) {
 
             x = -100;
             y = -100;
+            z=0;
         }
       //c stick diagonals: // try an if statement within an if statement? instead of the and?
         if (e.getKeyCode() == KeyEvent.VK_5) {
@@ -338,39 +354,39 @@ public class ButtonFlash {                    //this is not to be confused with 
         if (x == 405 && y == 340) {
             g.drawImage(rbutton2, (int) x, (int) y, null);
         }
-        if (x == 245 && y == 390) {
-            g.drawImage(stickUp2, (int) x, (int) y, null);
-        }
-        if (x == 246 && y == 390) {
-            g.drawImage(stickDown2, (int) x, (int) y, null);
-        }
-        if (x == 244 && y == 390) {
-            g.drawImage(stickLeft2, (int) x, (int) y, null);
-        }
-
-        if (x == 245 && y == 391) {
-            g.drawImage(stickRight2, (int) x, (int) y, null);
-        }
-
-        if (x == 245 && y == 389) {
-            g.drawImage(stickURight2, (int) x, (int) y, null);
-        }
-
-        if (x == 246 && y == 391) {
-            g.drawImage(stickULeft2, (int) x, (int) y, null);
-        }
-
-        if (x == 244 && y == 389) {
-            g.drawImage(stickDRight2, (int) x, (int) y, null);
-        }
-
-        if (x == 247 && y == 390) {
-            g.drawImage(stickDLeft2, (int) x, (int) y, null);
-        }
-
         if (x == 390 && y == 350) {
             g.drawImage(zbutton2, (int) x, (int) y, null);
         }
+        if (x == 245 && y == 390 && z == 1) {
+            g.drawImage(stickUp2, (int) x, (int) y, null);
+        }
+        if (x == 245 && y == 390 && z == 2) {
+            g.drawImage(stickDown2, (int) x, (int) y, null);
+        }
+        if (x == 245 && y == 390 && z == 3) {
+            g.drawImage(stickLeft2, (int) x, (int) y, null);
+        }
+
+        if (x == 245 && y == 390 && z == 4) {
+            g.drawImage(stickRight2, (int) x, (int) y, null);
+        }
+
+        if (x == 245 && y == 390 && z == 5) {
+            g.drawImage(stickURight2, (int) x, (int) y, null);
+        }
+
+        if (x == 245 && y == 390 && z == 6) {
+            g.drawImage(stickULeft2, (int) x, (int) y, null);
+        }
+
+        if (x == 245 && y == 390 && z == 7) {
+            g.drawImage(stickDRight2, (int) x, (int) y, null);
+        }
+
+        if (x == 245 && y == 390 && z == 8) {
+            g.drawImage(stickDLeft2, (int) x, (int) y, null);
+        }
+
         if (x == 390 && y == 440 && z == 1) {
             g.drawImage(cUp2, (int) x, (int) y, null);
         }
