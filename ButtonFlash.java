@@ -24,14 +24,14 @@ public class ButtonFlash {                    //this is not to be confused with 
 	private BufferedImage stickULeft2;
 	private BufferedImage stickDRight2;
 	private BufferedImage stickDLeft2;
-    private BufferedImage cUp;
-    private BufferedImage cDown;
-    private BufferedImage cLeft;
-    private BufferedImage cRight;
-    private BufferedImage cUR;
-    private BufferedImage cUL;
-    private BufferedImage cDR;
-    private BufferedImage cDL;
+    private BufferedImage cUp2;
+    private BufferedImage cDown2;
+    private BufferedImage cLeft2;
+    private BufferedImage cRight2;
+    private BufferedImage cURight2;
+    private BufferedImage cULeft2;
+    private BufferedImage cDRight2;
+    private BufferedImage cDLeft2;
 
 
     public ButtonFlash(double x, double y, GameWindow g) {
@@ -56,15 +56,15 @@ public class ButtonFlash {                    //this is not to be confused with 
 		stickDRight2 = ss.grabImage(6, 5, 32, 32);
 		stickDLeft2 = ss.grabImage(4, 5, 32, 32);
 		//c stick
-        cDown = ss.grabImage(4, 6, 32, 32);
-        cUp = ss.grabImage(7, 6, 32, 32);
-        cLeft = ss.grabImage(1, 7, 32, 32);
-        cRight = ss.grabImage(2, 7, 32, 32);
+        cDown2 = ss.grabImage(4, 6, 32, 32);
+        cUp2 = ss.grabImage(7, 6, 32, 32);
+        cLeft2 = ss.grabImage(1, 7, 32, 32);
+        cRight2 = ss.grabImage(2, 7, 32, 32);
         //c stick diagonals
-        cUR = ss.grabImage(8, 6, 32, 32);
-        cUL = ss.grabImage(6, 6, 32, 32);
-        cDL = ss.grabImage(3, 6, 32, 32);
-        cDR = ss.grabImage(5, 6, 32, 32);
+        cURight2 = ss.grabImage(8, 6, 32, 32);
+        cULeft2 = ss.grabImage(6, 6, 32, 32);
+        cDLeft2 = ss.grabImage(3, 6, 32, 32);
+        cDRight2 = ss.grabImage(5, 6, 32, 32);
 
     }
 
@@ -158,22 +158,22 @@ public class ButtonFlash {                    //this is not to be confused with 
         }
         
         // c stick diagonal inputs
-        if (e.getKeyCode() == KeyEvent.VK_7) {
+        if (e.getKeyCode() == KeyEvent.VK_5) {
         	x = 390;
         	y = 440;
             z = 5;
         }
-        if (e.getKeyCode() == KeyEvent.VK_I) {
+        if (e.getKeyCode() == KeyEvent.VK_6) {
         	x = 390;
         	y = 440;
             z = 6;
         }
-        if (e.getKeyCode() == KeyEvent.VK_N) {
+        if (e.getKeyCode() == KeyEvent.VK_7) {
         	x = 390;
         	y = 440;
             z = 7;
         }
-        if (e.getKeyCode() == KeyEvent.VK_M) {
+        if (e.getKeyCode() == KeyEvent.VK_8) {
         	x = 390;
         	y = 440;
             z = 8;
@@ -262,22 +262,22 @@ public class ButtonFlash {                    //this is not to be confused with 
             y = -100;
         }
       //c stick diagonals: // try an if statement within an if statement? instead of the and?
+        if (e.getKeyCode() == KeyEvent.VK_5) {
+            x = -100;
+            y = -100;
+            z=0;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_6) {
+            x = -100;
+            y = -100;
+            z=0;
+        }
         if (e.getKeyCode() == KeyEvent.VK_7) {
             x = -100;
             y = -100;
             z=0;
         }
-        if (e.getKeyCode() == KeyEvent.VK_I) {
-            x = -100;
-            y = -100;
-            z=0;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_N) {
-            x = -100;
-            y = -100;
-            z=0;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_M) {
+        if (e.getKeyCode() == KeyEvent.VK_8) {
             x = -100;
             y = -100;
             z=0;
@@ -372,28 +372,28 @@ public class ButtonFlash {                    //this is not to be confused with 
             g.drawImage(zbutton2, (int) x, (int) y, null);
         }
         if (x == 390 && y == 440 && z == 1) {
-            g.drawImage(cUp, (int) x, (int) y, null);
+            g.drawImage(cUp2, (int) x, (int) y, null);
         }
         if (x == 390 && y == 440 && z == 2) {
-            g.drawImage(cLeft, (int) x, (int) y, null);
+            g.drawImage(cLeft2, (int) x, (int) y, null);
         }
         if (x == 390 && y == 440 && z == 3) {
-            g.drawImage(cDown, (int) x, (int) y, null);
+            g.drawImage(cDown2, (int) x, (int) y, null);
         }
         if (x == 390 && y == 440 && z == 4) {
-            g.drawImage(cRight, (int) x, (int) y, null);
+            g.drawImage(cRight2, (int) x, (int) y, null);
         }
         if (x == 390 && y == 440 && z == 5) {
-            g.drawImage(cUL, (int) x, (int) y, null);
+            g.drawImage(cULeft2, (int) x, (int) y, null);
         }
         if (x == 390 && y == 440 && z == 6) {
-            g.drawImage(cUR, (int) x, (int) y, null);
+            g.drawImage(cURight2, (int) x, (int) y, null);
         }
         if (x == 390 && y == 440 && z == 7) {
-            g.drawImage(cDL, (int) x, (int) y, null);
+            g.drawImage(cDLeft2, (int) x, (int) y, null);
         }
         if (x == 390 && y == 440 && z == 8) {
-            g.drawImage(cDR, (int) x, (int) y, null);
+            g.drawImage(cDRight2, (int) x, (int) y, null);
         }
     
 
