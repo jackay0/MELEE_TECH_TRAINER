@@ -41,6 +41,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private BufferedImage stickULeft;
 	private BufferedImage stickDRight;
 	private BufferedImage stickDLeft;
+	private BufferedImage cstick;
+
 	private ButtonFlash abutton2;
 	private ButtonFlash bbutton2;
 	private ButtonFlash xbutton2;
@@ -49,6 +51,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private ButtonFlash rbutton2;
 	private ButtonFlash startbutton2;
 	private ButtonFlash zbutton2;
+
 	private ButtonFlash stickUp2;
 	private ButtonFlash stickDown2;
 	private ButtonFlash stickLeft2;
@@ -57,6 +60,13 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private ButtonFlash stickULeft2;
 	private ButtonFlash stickDRight2;
 	private ButtonFlash stickDLeft2;
+
+	private ButtonFlash cDown;
+	private ButtonFlash cUp;
+	private ButtonFlash cLeft;
+	private ButtonFlash cRight;
+
+	private Note anote;
 
 	public void init() {
 
@@ -84,7 +94,10 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickULeft2 = new ButtonFlash(-100, -100, this);
 		stickDRight2 = new ButtonFlash(-100, -100, this);
 		stickDLeft2 = new ButtonFlash(-100, -100, this);
-		
+		cUp = new ButtonFlash(-100, -100, this);
+		cDown = new ButtonFlash(-100, -100, this);
+		cLeft = new ButtonFlash(-100, -100, this);
+		cRight = new ButtonFlash(-100, -100, this);
 
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
 		abutton = ss.grabImage(1, 1, 32, 32);
@@ -95,7 +108,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		rbutton = ss.grabImage(6, 1, 32, 32);
 		startbutton = ss.grabImage(8, 1, 32, 32);
 		zbutton = ss.grabImage(7, 1, 32, 32);
-        stick = ss.grabImage(1, 3, 32, 32);
+		stick = ss.grabImage(1, 3, 32, 32);
 		stickUp = ss.grabImage(5, 2, 32, 32);
 		stickDown = ss.grabImage(2, 2, 32, 32);
 		stickLeft = ss.grabImage(7, 2, 32, 32);
@@ -104,6 +117,10 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickULeft = ss.grabImage(4, 2, 32, 32);
 		stickDRight = ss.grabImage(3, 2, 32, 32);
 		stickDLeft = ss.grabImage(1, 2, 32, 32);
+		cstick = ss.grabImage(2, 4, 32, 32);
+
+		anote = new Note(400, 60, this);
+
 	}
 
 	private synchronized void start() { // synchronization is an important thing when dealing with multiple Threads
@@ -216,7 +233,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		g.drawImage(startbutton, 300, 420, this);
 		g.drawImage(zbutton, 390, 350, this);
 		g.drawImage(stick, 245, 390, this);
-		
+		g.drawImage(cstick, 390, 440, this); // UHJK
+
 		abutton2.render(g);
 		bbutton2.render(g);
 		xbutton2.render(g);
@@ -232,7 +250,12 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickULeft2.render(g);
 		stickDRight2.render(g);
 		stickDLeft2.render(g);
-		
+		cUp.render(g);
+		cDown.render(g);
+		cLeft.render(g);
+		cRight.render(g);
+
+		anote.render(g);
 
 		//////////////////////////////////// where we can draw images ^^^^^
 
@@ -266,7 +289,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			stickULeft2.keyPressed(e);
 			stickDRight2.keyPressed(e);
 			stickDLeft2.keyPressed(e);
-			
+
 		}
 
 		@Override
