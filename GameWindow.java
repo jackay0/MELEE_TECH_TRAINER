@@ -5,8 +5,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class GameWindow extends Canvas implements Runnable { // This interface is useful when utilizing multiple threads
@@ -42,6 +45,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private BufferedImage stickDRight;
 	private BufferedImage stickDLeft;
 	private BufferedImage cstick;
+	private BufferedImage GCC = null;
 
 	private ButtonFlash abutton2;
 	private ButtonFlash bbutton2;
@@ -69,15 +73,18 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private ButtonFlash cULeft2;
 	private ButtonFlash cDRight2;
 	private ButtonFlash cDLeft2;
+	
 
 	private Note anote;
 
 	public void init() {
 
 		BufferedImageLoader loader = new BufferedImageLoader();
-		try { // try catch means: try to do this, if it cant be done, then catch, in this case
+		try { // try catch means: try to do this, if it can't be done, then catch, in this case
 				// an error report
 			spriteSheet = loader.LoadImage("/Sprite_Sheet.png");
+			GCC = loader.LoadImage("/GCC.png");
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -106,7 +113,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		cULeft2 = new ButtonFlash(-100, -100, this);
 		cDRight2 = new ButtonFlash(-100, -100, this);
 		cDLeft2 = new ButtonFlash(-100, -100, this);
-
+		
+		
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
 		abutton = ss.grabImage(1, 1, 32, 32);
 		bbutton = ss.grabImage(2, 1, 32, 32);
@@ -201,7 +209,12 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				updater++;
 				chng--;
 			}
-			render();
+			try {
+				render();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			fps++;
 
 			if (System.currentTimeMillis() - time > 1000) {
@@ -221,7 +234,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 	}
 
-	private void render() // everything in the game that renders
+	private void render() throws IOException // everything in the game that renders
 	{
 		// creates a buffer strategy that handles all the buffering behind the scenes
 		BufferStrategy bs = this.getBufferStrategy(); // returns a BufferStrategy
@@ -231,6 +244,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		}
 		Graphics g = bs.getDrawGraphics();
 		/////////////////////////////////////
+		g.drawImage(GCC,300,300,this);
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
 		g.drawImage(abutton, 400, 400, this); // this was to test and see if we could access an individual sprite\
 		g.drawImage(bbutton, 360, 420, this);
