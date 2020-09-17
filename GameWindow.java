@@ -83,7 +83,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		try { // try catch means: try to do this, if it can't be done, then catch, in this case
 				// an error report
 			spriteSheet = loader.LoadImage("/Sprite_Sheet.png");
-			GCC = loader.LoadImage("/GCC.png");
+			//GCC = loader.LoadImage("/GCC.png");
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -165,10 +165,10 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		GameWindow game = new GameWindow();
 		game.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE)); // Dimension class: simply works with width
-																				// and height variables to size the
+		BufferedImage GCC = ImageIO.read(GameWindow.class.getClassLoader().getResourceAsStream("GCC.png"));																		// and height variables to size the
 																				// window
 		game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
@@ -244,7 +244,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		}
 		Graphics g = bs.getDrawGraphics();
 		/////////////////////////////////////
-		g.drawImage(GCC,300,300,this);
+		g.drawImage(GCC,300,300,200,100,this);
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
 		g.drawImage(abutton, 400, 400, this); // this was to test and see if we could access an individual sprite\
 		g.drawImage(bbutton, 360, 420, this);
