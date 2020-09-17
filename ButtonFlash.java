@@ -400,16 +400,16 @@ public class ButtonFlash {                    //this is not to be confused with 
             g.drawImage(cRight2, (int) x, (int) y, null);
         }
         if (x == 390 && y == 440 && z == 5) {
-            g.drawImage(cULeft2, (int) x, (int) y, null);
-        }
-        if (x == 390 && y == 440 && z == 6) {
             g.drawImage(cURight2, (int) x, (int) y, null);
         }
+        if (x == 390 && y == 440 && z == 6) {
+            g.drawImage(cULeft2, (int) x, (int) y, null);
+        }
         if (x == 390 && y == 440 && z == 7) {
-            g.drawImage(cDLeft2, (int) x, (int) y, null);
+            g.drawImage(cDRight2, (int) x, (int) y, null);
         }
         if (x == 390 && y == 440 && z == 8) {
-            g.drawImage(cDRight2, (int) x, (int) y, null);
+            g.drawImage(cDLeft2, (int) x, (int) y, null);
         }
     
 
@@ -418,5 +418,4 @@ public class ButtonFlash {                    //this is not to be confused with 
 
 
 }
-
 
