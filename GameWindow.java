@@ -46,6 +46,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private BufferedImage stickDLeft;
 	private BufferedImage cstick;
 	private BufferedImage GCC = null;
+	private BufferedImage controller;
 
 	private ButtonFlash abutton2;
 	private ButtonFlash bbutton2;
@@ -78,12 +79,13 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private Note anote;
 
 	public void init() {
-
+		
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try { // try catch means: try to do this, if it can't be done, then catch, in this case
 				// an error report
 			spriteSheet = loader.LoadImage("/Sprite_Sheet.png");
-			//GCC = loader.LoadImage("/GCC.png");
+			GCC = loader.LoadImage("/GCC.png");
+			//GCC = ImageIO.read(getClass().getResource("/GCC.png"));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -114,7 +116,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		cDRight2 = new ButtonFlash(-100, -100, this);
 		cDLeft2 = new ButtonFlash(-100, -100, this);
 		
-		
+		SpriteSheet gcc = new SpriteSheet(GCC);
+		controller = gcc.grabController(0, 0, 200, 100);
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
 		abutton = ss.grabImage(1, 1, 32, 32);
 		bbutton = ss.grabImage(2, 1, 32, 32);
@@ -168,7 +171,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	public static void main(String[] args) throws IOException {
 		GameWindow game = new GameWindow();
 		game.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE)); // Dimension class: simply works with width
-		BufferedImage GCC = ImageIO.read(GameWindow.class.getClassLoader().getResourceAsStream("GCC.png"));																		// and height variables to size the
+		//BufferedImage GCC = ImageIO.read(GameWindow.class.getClassLoader().getResourceAsStream("GCC.png"));																		// and height variables to size the
 																				// window
 		game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
@@ -244,7 +247,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		}
 		Graphics g = bs.getDrawGraphics();
 		/////////////////////////////////////
-		g.drawImage(GCC,300,300,200,100,this);
+		g.drawImage(controller, 0, 0, 200,100, this);
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
 		g.drawImage(abutton, 400, 400, this); // this was to test and see if we could access an individual sprite\
 		g.drawImage(bbutton, 360, 420, this);
