@@ -77,19 +77,31 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	
 
 	private Note anote;
-
+    
+	/*public GameWindow(BufferedImage img) throws IOException {
+		try {
+			img = ImageIO.read(getClass().getResourceAsStream("/GCC.png"));
+		} catch(IOException e) { 
+			e.printStackTrace();
+		}
+		
+	}*/
+	
+	
 	public void init() {
 		
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try { // try catch means: try to do this, if it can't be done, then catch, in this case
 				// an error report
 			spriteSheet = loader.LoadImage("/Sprite_Sheet.png");
-			GCC = loader.LoadImage("/GCC.png");
+			//GCC = loader.LoadImage("/GCC.png");
 			//GCC = ImageIO.read(getClass().getResource("/GCC.png"));
+			//GCC = ImageIO.read(getClass().getResourceAsStream("/GCC.png"));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		//repaint();
 
 		abutton2 = new ButtonFlash(-100, -100, this);
 		bbutton2 = new ButtonFlash(-100, -100, this);
@@ -247,7 +259,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		}
 		Graphics g = bs.getDrawGraphics();
 		/////////////////////////////////////
-		g.drawImage(controller, 0, 0, 200,100, this);
+		g.drawImage(GCC, 100, 100, 100,100, null);
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
 		g.drawImage(abutton, 400, 400, this); // this was to test and see if we could access an individual sprite\
 		g.drawImage(bbutton, 360, 420, this);
@@ -292,6 +304,9 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		bs.show();
 
 	}
+	//public void paint(Graphics g) {
+	//g.drawImage(GCC, 100, 100, 100,100, null);
+	//}
 
 	public BufferedImage getSpriteSheet() // this is a getter that will allow us to access the spritesheet from any
 											// other class
