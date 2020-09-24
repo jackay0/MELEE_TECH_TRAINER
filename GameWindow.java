@@ -1,15 +1,15 @@
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class GameWindow extends Canvas implements Runnable { // This interface is useful when utilizing multiple threads
@@ -25,12 +25,12 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private BufferedImage spriteSheet = null;
-
-	// temp
-	private BufferedImage abutton; // sprite for a button
-	private BufferedImage bbutton; // sprite for b button
-	private BufferedImage xbutton; // sprite for x button
-	private BufferedImage ybutton; // sprite for y button
+	private BufferedImage controller = null;
+	// sprites for buttons on screen
+	private BufferedImage abutton;
+	private BufferedImage bbutton;
+	private BufferedImage xbutton;
+	private BufferedImage ybutton;
 	private BufferedImage lbutton;
 	private BufferedImage rbutton;
 	private BufferedImage startbutton;
@@ -45,92 +45,32 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private BufferedImage stickDRight;
 	private BufferedImage stickDLeft;
 	private BufferedImage cstick;
-	private BufferedImage GCC = null;
-	private BufferedImage controller;
+	private BufferedImage controllerr;
+	private int score;
 
-	private ButtonFlash abutton2;
-	private ButtonFlash bbutton2;
-	private ButtonFlash xbutton2;
-	private ButtonFlash ybutton2;
-	private ButtonFlash lbutton2;
-	private ButtonFlash rbutton2;
-	private ButtonFlash startbutton2;
-	private ButtonFlash zbutton2;
-
-	private ButtonFlash stickUp2;
-	private ButtonFlash stickDown2;
-	private ButtonFlash stickLeft2;
-	private ButtonFlash stickRight2;
-	private ButtonFlash stickURight2;
-	private ButtonFlash stickULeft2;
-	private ButtonFlash stickDRight2;
-	private ButtonFlash stickDLeft2;
-
-	private ButtonFlash cDown2;
-	private ButtonFlash cUp2;
-	private ButtonFlash cLeft2;
-	private ButtonFlash cRight2;
-	private ButtonFlash cURight2;
-	private ButtonFlash cULeft2;
-	private ButtonFlash cDRight2;
-	private ButtonFlash cDLeft2;
-	
+	private ButtonFlash ButtonFlash;
 
 	private Note anote;
-    
-	/*public GameWindow(BufferedImage img) throws IOException {
-		try {
-			img = ImageIO.read(getClass().getResourceAsStream("/GCC.png"));
-		} catch(IOException e) { 
-			e.printStackTrace();
-		}
-		
-	}*/
-	
-	
+
 	public void init() {
-		
+
 		BufferedImageLoader loader = new BufferedImageLoader();
-		try { // try catch means: try to do this, if it can't be done, then catch, in this case
+		try { // try catch means: try to do this, if it cant be done, then catch, in this case
 				// an error report
 			spriteSheet = loader.LoadImage("/Sprite_Sheet.png");
-			//GCC = loader.LoadImage("/GCC.png");
-			//GCC = ImageIO.read(getClass().getResource("/GCC.png"));
-			//GCC = ImageIO.read(getClass().getResourceAsStream("/GCC.png"));
-			
+			controller = loader.LoadImage("/GCC.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//repaint();
 
-		abutton2 = new ButtonFlash(-100, -100, this);
-		bbutton2 = new ButtonFlash(-100, -100, this);
-		xbutton2 = new ButtonFlash(-100, -100, this);
-		ybutton2 = new ButtonFlash(-100, -100, this);
-		lbutton2 = new ButtonFlash(-100, -100, this);
-		rbutton2 = new ButtonFlash(-100, -100, this);
-		startbutton2 = new ButtonFlash(-100, -100, this);
-		zbutton2 = new ButtonFlash(-100, -100, this);
-		stickUp2 = new ButtonFlash(-100, -100, this);
-		stickDown2 = new ButtonFlash(-100, -100, this);
-		stickLeft2 = new ButtonFlash(-100, -100, this);
-		stickRight2 = new ButtonFlash(-100, -100, this);
-		stickURight2 = new ButtonFlash(-100, -100, this);
-		stickULeft2 = new ButtonFlash(-100, -100, this);
-		stickDRight2 = new ButtonFlash(-100, -100, this);
-		stickDLeft2 = new ButtonFlash(-100, -100, this);
-		cUp2 = new ButtonFlash(-100, -100, this);
-		cDown2 = new ButtonFlash(-100, -100, this);
-		cLeft2 = new ButtonFlash(-100, -100, this);
-		cRight2 = new ButtonFlash(-100, -100, this);
-		cURight2 = new ButtonFlash(-100, -100, this);
-		cULeft2 = new ButtonFlash(-100, -100, this);
-		cDRight2 = new ButtonFlash(-100, -100, this);
-		cDLeft2 = new ButtonFlash(-100, -100, this);
-		
-		SpriteSheet gcc = new SpriteSheet(GCC);
-		controller = gcc.grabController(0, 0, 200, 100);
+		// Below are the buttonflash objects, which are the white button sprites. They
+		// are off screen until a button press
+		ButtonFlash = new ButtonFlash(-100, -100, this);
+
+		// These are the images for the regular buttons, not objects because their
+		// locations aren't manipulated.
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
+		SpriteSheet gcc = new SpriteSheet(controller);
 		abutton = ss.grabImage(1, 1, 32, 32);
 		bbutton = ss.grabImage(2, 1, 32, 32);
 		xbutton = ss.grabImage(4, 1, 32, 32);
@@ -149,6 +89,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickDRight = ss.grabImage(3, 2, 32, 32);
 		stickDLeft = ss.grabImage(1, 2, 32, 32);
 		cstick = ss.grabImage(2, 4, 32, 32);
+		controllerr = gcc.grabImage(1, 1, 200, 100);
 
 		anote = new Note(400, 60, this);
 
@@ -180,10 +121,10 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		GameWindow game = new GameWindow();
 		game.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE)); // Dimension class: simply works with width
-		//BufferedImage GCC = ImageIO.read(GameWindow.class.getClassLoader().getResourceAsStream("GCC.png"));																		// and height variables to size the
+																				// and height variables to size the
 																				// window
 		game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
@@ -224,12 +165,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				updater++;
 				chng--;
 			}
-			try {
-				render();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			render();
 			fps++;
 
 			if (System.currentTimeMillis() - time > 1000) {
@@ -246,67 +182,49 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 	private void tick() // everything in the game that updates
 	{
+		anote.tick();
+		if (Physics.Collision(anote, ButtonFlash) && anote.getY() > 405 && anote.getY() < 420) {
+			score++;
+			// System.out.println(score);
+		}
 
 	}
 
-	private void render() throws IOException // everything in the game that renders
+	private void render() // everything in the game that renders
 	{
 		// creates a buffer strategy that handles all the buffering behind the scenes
 		BufferStrategy bs = this.getBufferStrategy(); // returns a BufferStrategy
 		if (bs == null) {
-			createBufferStrategy(3); // We are going to have 3 buffers which increases loading speed over time
+			createBufferStrategy(3); // We are going to have 3 buffers whi h increases loading speed over time
 			return;
 		}
+
 		Graphics g = bs.getDrawGraphics();
 		/////////////////////////////////////
-		g.drawImage(GCC, 100, 100, 100,100, null);
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-		g.drawImage(abutton, 400, 400, this); // this was to test and see if we could access an individual sprite\
-		g.drawImage(bbutton, 360, 420, this);
-		g.drawImage(xbutton, 440, 385, this);
-		g.drawImage(ybutton, 385, 370, this);
-		g.drawImage(lbutton, 250, 340, this);
-		g.drawImage(rbutton, 405, 340, this);
-		g.drawImage(startbutton, 300, 420, this);
-		g.drawImage(zbutton, 390, 350, this);
-		g.drawImage(stick, 245, 390, this);
-		g.drawImage(cstick, 390, 440, this); // UHJK
+		g.drawImage(controllerr, 200, 350, this);
+		g.drawImage(abutton, 327, 367, this);
+		g.drawImage(bbutton, 313, 372, this);
+		g.drawImage(xbutton, 339, 356, this);
+		g.drawImage(ybutton, 319, 353, this);
+		g.drawImage(lbutton, 238, 336, this);
+		g.drawImage(rbutton, 327, 336, this);
+		g.drawImage(startbutton, 282, 375, this);
+		g.drawImage(zbutton, 327, 345, this);
+		g.drawImage(stick, 244, 364, this);
+		g.drawImage(cstick, 307, 397, this); // UHJK
 
-		abutton2.render(g);
-		bbutton2.render(g);
-		xbutton2.render(g);
-		ybutton2.render(g);
-		lbutton2.render(g);
-		rbutton2.render(g);
-		startbutton2.render(g);
-		zbutton2.render(g);
-		stickUp2.render(g);
-		stickDown2.render(g);
-		stickRight2.render(g);
-		stickURight2.render(g);
-		stickULeft2.render(g);
-		stickDRight2.render(g);
-		stickDLeft2.render(g);
-		cUp2.render(g);
-		cDown2.render(g);
-		cLeft2.render(g);
-		cRight2.render(g);
-		cURight2.render(g);
-		cULeft2.render(g);
-		cDRight2.render(g);
-		cDLeft2.render(g);
+		g.drawString("Score:" + score, 10, 10);
+
+		ButtonFlash.render(g);
 
 		anote.render(g);
-
 		//////////////////////////////////// where we can draw images ^^^^^
 
 		g.dispose();
 		bs.show();
 
 	}
-	//public void paint(Graphics g) {
-	//g.drawImage(GCC, 100, 100, 100,100, null);
-	//}
 
 	public BufferedImage getSpriteSheet() // this is a getter that will allow us to access the spritesheet from any
 											// other class
@@ -314,67 +232,23 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		return spriteSheet;
 	}
 
+	public ButtonFlash getButtonFlash() {
+		return ButtonFlash;
+	}
+
+	// This class is used for the ButtonFlash class, enabling communication with the
+	// keyboard and the class
 	public class AL extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
-			abutton2.keyPressed(e);
-			bbutton2.keyPressed(e);
-			xbutton2.keyPressed(e);
-			ybutton2.keyPressed(e);
-			lbutton2.keyPressed(e);
-			rbutton2.keyPressed(e);
-			startbutton2.keyPressed(e);
-			zbutton2.keyPressed(e);
-			
-			stickUp2.keyPressed(e);
-			stickDown2.keyPressed(e);
-			stickLeft2.keyPressed(e);
-			stickRight2.keyPressed(e);
-			stickURight2.keyPressed(e);
-			stickULeft2.keyPressed(e);
-			stickDRight2.keyPressed(e);
-			stickDLeft2.keyPressed(e);
-
-			cUp2.keyPressed(e); 
-			cDown2.keyPressed(e);
-			cLeft2.keyPressed(e);
-			cRight2.keyPressed(e);
-			cURight2.keyPressed(e);
-			cULeft2.keyPressed(e);
-			cDRight2.keyPressed(e);
-			cDLeft2.keyPressed(e);
+			ButtonFlash.keyPressed(e);
 
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			abutton2.keyReleased(e);
-			bbutton2.keyReleased(e);
-			xbutton2.keyReleased(e);
-			ybutton2.keyReleased(e);
-			lbutton2.keyReleased(e);
-			rbutton2.keyReleased(e);
-			startbutton2.keyReleased(e);
-			zbutton2.keyReleased(e);
-			
-			stickUp2.keyReleased(e);
-			stickDown2.keyReleased(e);
-			stickLeft2.keyReleased(e);
-			stickRight2.keyReleased(e);
-			stickURight2.keyReleased(e);
-			stickULeft2.keyReleased(e);
-			stickDRight2.keyReleased(e);
-			stickDLeft2.keyReleased(e);
-			
-			cUp2.keyReleased(e);
-			cDown2.keyReleased(e);
-			cLeft2.keyReleased(e);
-			cRight2.keyReleased(e);
-			cURight2.keyReleased(e);
-			cULeft2.keyReleased(e);
-			cDRight2.keyReleased(e);
-			cDLeft2.keyReleased(e);
-		}
+			ButtonFlash.keyReleased(e);
 
+		}
 	}
 }
