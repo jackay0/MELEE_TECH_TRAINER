@@ -91,7 +91,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		cstick = ss.grabImage(2, 4, 32, 32);
 		controllerr = gcc.grabImage(1, 1, 200, 100);
 
-		anote = new Note(400, 60, this);
+		anote = new Note(327, 60, this);
 
 	}
 
@@ -183,7 +183,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private void tick() // everything in the game that updates
 	{
 		anote.tick();
-		if (Physics.Collision(anote, ButtonFlash) && anote.getY() > 405 && anote.getY() < 420) {
+		if (Physics.Collision(anote, ButtonFlash) && anote.getY() > 332 && anote.getY() < 337) {
 			score++;
 			// System.out.println(score);
 		}
@@ -236,19 +236,26 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		return ButtonFlash;
 	}
 
+	public Note GetANote() {
+		return anote;
+	}
+
 	// This class is used for the ButtonFlash class, enabling communication with the
 	// keyboard and the class
 	public class AL extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			ButtonFlash.keyPressed(e);
-
+			// Input.keyPressed(e);
+			// anote.setFalling(true);
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
 			ButtonFlash.keyReleased(e);
-
+			// Input.keyReleased(e);
+			// anote.setFalling(false);
 		}
+
 	}
 }
