@@ -1,11 +1,13 @@
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import com.game.src.main.classes.EntityB;
 
-public class ButtonFlash {                    //this is not to be confused with the NOTE class which will be the moving notes that fall on screen
+public class ButtonFlash extends GameObject implements EntityB {  //this is not to be confused with the NOTE class which will be the moving notes that fall on screen
+                    //this is not to be confused with the NOTE class which will be the moving notes that fall on screen
 
-    private double x;
-    private double y;
+ 
     private int z;
     GameWindow g;
     private BufferedImage abutton2; //sprite for white a button
@@ -35,8 +37,7 @@ public class ButtonFlash {                    //this is not to be confused with 
 
 
     public ButtonFlash(double x, double y, GameWindow g) {
-        this.x = x;
-        this.y = y;
+    	super(x,y);
         this.g = g;
         SpriteSheet ss = new SpriteSheet(g.getSpriteSheet());
         abutton2 = ss.grabImage(3, 4, 32, 32);
@@ -102,7 +103,7 @@ public class ButtonFlash {                    //this is not to be confused with 
             x = 390;
             y = 350;
         }
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
+        if (e.getKeyCode() == KeyEvent.VK_UP) { 
             x = 245;
             y = 390;
             z=1;
@@ -416,6 +417,26 @@ public class ButtonFlash {                    //this is not to be confused with 
 
     }
 
+
+	@Override
+	public double getX() {
+		// TODO Auto-generated method stub
+		return x;
+	}
+
+
+	@Override
+	public double getY() {
+		// TODO Auto-generated method stub
+		return y;
+	}
+
+
+	
+	public Rectangle getBounds() {
+		
+		return new Rectangle((int)x,(int)y, 32, 32);
+	}
 
 }
 
