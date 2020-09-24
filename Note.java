@@ -5,69 +5,60 @@ import com.game.src.main.classes.EntityA;
 
 public class Note extends GameObject implements EntityA {
 
+	private String type;
+	GameWindow g;
+	BufferedImage a;
+	private boolean falling = false;
 
-private String type;
-GameWindow g;
-BufferedImage a;
+	public Note(int x, int y, GameWindow g) {
 
+		super(x, y);
+		this.g = g;
 
+		// this.type = type;
+		SpriteSheet z = new SpriteSheet(g.getSpriteSheet());
+		a = z.grabImage(1, 1, 32, 32);
 
+	}
 
+	public void tick() // update method
+	{
+		if (falling == true) {
+			y++;
+		}
+		// note is entity a, checks to see if collision is true for colliding with a
+		// buttonflash
+	}
 
-public Note(int x, int y, GameWindow g) 
-{
-	
-	super(x,y);
-	this.g = g;
-	
-	//this.type = type;
-	SpriteSheet z = new SpriteSheet(g.getSpriteSheet());
-	a = z.grabImage(1, 1, 32, 32);
+	public void render(Graphics g) // draws out image
+	{
+		g.drawImage(a, (int) x, (int) y, null);
 
-}
+	}
 
+	@Override
+	public double getX() {
+		// TODO Auto-generated method stub
+		return x;
+	}
 
+	@Override
+	public double getY() {
+		// TODO Auto-generated method stub
+		return y;
+	}
 
-public void tick() //update method
-{
-	y++;
-	 //note is entity a, checks to see if collision is true for colliding with a buttonflash
-}
+	public Rectangle getBounds() {
 
+		return new Rectangle((int) x, (int) y, 32, 32);
+	}
 
+	public boolean getFalling() {
+		return falling;
+	}
 
-public void render(Graphics g)  //draws out image
-{
-	g.drawImage(a, (int) x, (int) y, null);
-
-
-}
-
-
-
-@Override
-public double getX() {
-	// TODO Auto-generated method stub
-	return x;
-}
-
-
-
-@Override
-public double getY() {
-	// TODO Auto-generated method stub
-	return y;
-}
-
-
-
-
-public Rectangle getBounds() {
-	
-	return new Rectangle((int)x,(int)y, 32, 32);
-}
-
-
-
+	public void setFalling(boolean x) {
+		falling = x;
+	}
 
 }
