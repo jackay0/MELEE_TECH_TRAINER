@@ -246,14 +246,14 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		@Override
 		public void keyPressed(KeyEvent e) {
 			ButtonFlash.keyPressed(e);
-			// Input.keyPressed(e);
+			anote.keyPressed(e);
 			// anote.setFalling(true);
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
 			ButtonFlash.keyReleased(e);
-			// Input.keyReleased(e);
+			//anote.keyReleased(e);
 			// anote.setFalling(false);
 		}
 
