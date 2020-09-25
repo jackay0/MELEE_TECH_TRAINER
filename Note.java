@@ -25,7 +25,12 @@ public class Note extends GameObject implements EntityA {
 	public void tick() // update method
 	{
 		if (falling == true) {
-			y++;
+			if (y < 460)
+				y++;
+			else {
+				y = 0;
+				y++;
+			}
 		}
 		// note is entity a, checks to see if collision is true for colliding with a
 		// buttonflash
@@ -61,12 +66,13 @@ public class Note extends GameObject implements EntityA {
 	public void setFalling(boolean x) {
 		falling = x;
 	}
+
 	public void keyPressed(KeyEvent e) {
 
 		if (e.getKeyCode() == KeyEvent.VK_S) {
-			if(falling)
+			if (falling)
 				falling = false;
-			else if(!falling)
+			else if (!falling)
 				falling = true;
 		}
 
