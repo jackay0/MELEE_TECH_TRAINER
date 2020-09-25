@@ -2,13 +2,14 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import com.game.src.main.classes.EntityA;
+import java.awt.event.KeyEvent;
 
 public class Note extends GameObject implements EntityA {
 
 	private String type;
 	GameWindow g;
 	BufferedImage a;
-	private boolean falling = false;
+	private boolean falling = true;
 
 	public Note(int x, int y, GameWindow g) {
 
@@ -59,6 +60,16 @@ public class Note extends GameObject implements EntityA {
 
 	public void setFalling(boolean x) {
 		falling = x;
+	}
+	public void keyPressed(KeyEvent e) {
+
+		if (e.getKeyCode() == KeyEvent.VK_S) {
+			if(falling)
+				falling = false;
+			else if(!falling)
+				falling = true;
+		}
+
 	}
 
 }
