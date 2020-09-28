@@ -46,7 +46,12 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private BufferedImage stickDLeft;
 	private BufferedImage cstick;
 	private BufferedImage controllerr;
-	private int score;
+	//private int score;
+	//vars dealing specifically with scoring
+	private int a;
+	private int x;
+	private int y;
+	
 
 	private ButtonFlash ButtonFlash;
 
@@ -183,8 +188,9 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private void tick() // everything in the game that updates
 	{
 		anote.tick();
-		if (Physics.Collision(anote, ButtonFlash) && anote.getY() > 332 && anote.getY() < 337) {
-			score++;
+		int eye = ButtonFlash.getI();
+		if (Physics.Collision(anote, ButtonFlash) && anote.getY() > 375 && ButtonFlash.getI() == eye + 2 ) {
+			a++;
 			// System.out.println(score);
 		}
 
@@ -195,10 +201,10 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		// creates a buffer strategy that handles all the buffering behind the scenes
 		BufferStrategy bs = this.getBufferStrategy(); // returns a BufferStrategy
 		if (bs == null) {
-			createBufferStrategy(3); // We are going to have 3 buffers whi h increases loading speed over time
+			createBufferStrategy(3); // We are going to have 3 buffers which increases loading speed over time
 			return;
 		}
-
+		int score = a;
 		Graphics g = bs.getDrawGraphics();
 		/////////////////////////////////////
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
@@ -235,25 +241,25 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	public ButtonFlash getButtonFlash() {
 		return ButtonFlash;
 	}
-
-	public Note GetANote() {
-		return anote;
+	public double getDistance()
+	{
+		
+		return anote.getY() - ButtonFlash.getY();
 	}
-
 	// This class is used for the ButtonFlash class, enabling communication with the
 	// keyboard and the class
 	public class AL extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			ButtonFlash.keyPressed(e);
-			anote.keyPressed(e);
-			// anote.setFalling(true);
+			anote.keyPressed(e); //no released because it is unecessary for something you press to pause and unpause
+		
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
 			ButtonFlash.keyReleased(e);
-			//anote.keyReleased(e);
+			// anote.keyReleased(e);
 			// anote.setFalling(false);
 		}
 
