@@ -9,7 +9,7 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 	// this is not to be confused with the NOTE class which will be the moving notes
 	// that fall on screen
 
-    private int i;
+    private double i;
 	private int z;
 	GameWindow g;
 	private BufferedImage abutton2; // sprite for white a button
@@ -426,10 +426,10 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 		return y;
 	}
 
-	public int getI() {
+	public double getI() {
 		return i;
 	}
-	public void setI(int i) {
+	public void setI(double i) {
 	   this.i = i;
 	}
 	public Rectangle getBounds() {
