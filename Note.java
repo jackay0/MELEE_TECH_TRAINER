@@ -8,7 +8,14 @@ public class Note extends GameObject implements EntityA {
 
 	private String type;
 	GameWindow g;
-	BufferedImage a;
+	BufferedImage A;
+	BufferedImage B;
+	BufferedImage X;
+	BufferedImage Y;
+	BufferedImage L;
+	BufferedImage R;
+	BufferedImage Z;
+	BufferedImage stickUp;
 	private boolean falling = true;
 
 	public Note(int x, int y, GameWindow g) {
@@ -17,19 +24,25 @@ public class Note extends GameObject implements EntityA {
 		this.g = g;
 
 		// this.type = type;
-		SpriteSheet z = new SpriteSheet(g.getSpriteSheet());
-		a = z.grabImage(1, 1, 32, 32);
-
+		SpriteSheet ss = new SpriteSheet(g.getSpriteSheet());
+		A = ss.grabImage(1, 1, 32, 32);
+		B = ss.grabImage(2, 1, 32, 32);
+		X = ss.grabImage(4, 1, 32, 32);
+		Y = ss.grabImage(3, 1, 32, 32);
+		L = ss.grabImage(5, 1, 32, 32);
+		R = ss.grabImage(6, 1, 32, 32);
+		Z = ss.grabImage(7, 1, 32, 32);
+		stickUp = ss.grabImage(5, 2, 32, 32);
 	}
 
 	public void tick() // update method
 	{
-		if (falling == true) {
+	 if (falling == true) {
 			if (y < 460)
-				y++;
+				y=y+3;
 			else {
 				y = 0;
-				y++;
+				y=y+3;  
 			}
 		}
 		// note is entity a, checks to see if collision is true for colliding with a
@@ -38,7 +51,7 @@ public class Note extends GameObject implements EntityA {
 
 	public void render(Graphics g) // draws out image
 	{
-		g.drawImage(a, (int) x, (int) y, null);
+		g.drawImage(A, (int) x, (int) y, null);
 
 	}
 
@@ -65,6 +78,9 @@ public class Note extends GameObject implements EntityA {
 
 	public void setFalling(boolean x) {
 		falling = x;
+	}
+	public void setY(int y) {
+		this.y = y;
 	}
 
 	public void keyPressed(KeyEvent e) {
