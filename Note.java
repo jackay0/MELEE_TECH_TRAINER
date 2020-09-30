@@ -51,14 +51,14 @@ public class Note extends GameObject implements EntityA {
 
 	public void render(Graphics g) // draws out image
 	{
-		g.drawImage(A, 327, (int) y, null);
-		g.drawImage(B, 313, (int) y, null);
+		//g.drawImage(A, 327, (int) y, null);
+		//g.drawImage(B, 313, (int) y, null);
 		g.drawImage(X, 339, (int) y, null);
-		g.drawImage(Y, 319, (int) y, null);
-		g.drawImage(L, 238, (int) y, null);
+		//g.drawImage(Y, 319, (int) y, null);
+		//g.drawImage(L, 238, (int) y, null);
 		g.drawImage(R, 327, (int) y, null);
-		g.drawImage(Z, 327, (int) y, null);
-		g.drawImage(stickUp, 244, (int) y, null);
+		//g.drawImage(Z, 327, (int) y, null);
+		g.drawImage(stickUp, 244, 28, null);
 	}
 
 	@Override
