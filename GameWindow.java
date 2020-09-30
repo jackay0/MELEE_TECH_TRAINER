@@ -94,7 +94,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		controllerr = gcc.grabImage(1, 1, 200, 100);
 
 		note = new Note(327, 0, this);
-
+        
         
 	}
 
