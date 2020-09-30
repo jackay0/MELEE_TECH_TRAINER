@@ -52,14 +52,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 	private ButtonFlash ButtonFlash;
 
-	private Note anote;
-	private Note bnote;
-	private Note xnote;
-	private Note ynote;
-	private Note Lnote;
-	private Note Rnote;
-	private Note znote;
-	private Note stickUpnote;
+	private Note note;
+
 	public void init() {
 
 		BufferedImageLoader loader = new BufferedImageLoader();
@@ -99,14 +93,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		cstick = ss.grabImage(2, 4, 32, 32);
 		controllerr = gcc.grabImage(1, 1, 200, 100);
 
-		anote = new Note(327, 0, this);
-        bnote = new Note(313, 0, this);
-        xnote = new Note(339, 0, this);
-        ynote = new Note(319, 0, this);
-        Lnote = new Note(238, 0, this);
-        Rnote = new Note(327, 0, this);
-        znote = new Note(327, 0, this);
-        stickUpnote = new Note(327, 0, this);
+		note = new Note(327, 0, this);
+
         
 	}
 
@@ -197,19 +185,14 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 	private void tick() // everything in the game that updates
 	{
-		anote.tick();
+		note.tick();
 		//double eye = ButtonFlash.getI();
-		if(bnote.getY() < 374 && ButtonFlash.getI()>2)
+
+		if(note.getY() < 374 && ButtonFlash.getI()>2)
 			ButtonFlash.setI(0.0);
-		if (Physics.Collision(bnote, ButtonFlash) && bnote.getY() > 380 && ButtonFlash.getI() < 2.0) {
+		if (Physics.Collision(note, ButtonFlash) && note.getY() > 380 && ButtonFlash.getI() < 2.0) {
 			a= a+1;
-			anote.setY(0);
-		}
-		if(anote.getY() < 374 && ButtonFlash.getI()>2)
-			ButtonFlash.setI(0.0);
-		if (Physics.Collision(anote, ButtonFlash) && anote.getY() > 380 && ButtonFlash.getI() < 2.0) {
-			a= a+1;
-			anote.setY(0);
+			note.setY(0);
 			// System.out.println(score);
 		}
 		
@@ -244,7 +227,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		ButtonFlash.render(g);
 
-		anote.render(g);
+		note.render(g);
 		
 		//////////////////////////////////// where we can draw images ^^^^^
 
@@ -265,7 +248,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	public double getDistance()
 	{
 		
-		return anote.getY() - ButtonFlash.getY();
+		return note.getY() - ButtonFlash.getY();
 	}
 	// This class is used for the ButtonFlash class, enabling communication with the
 	// keyboard and the class
@@ -273,7 +256,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		@Override
 		public void keyPressed(KeyEvent e) {
 			ButtonFlash.keyPressed(e);
-			anote.keyPressed(e); //no released because it is unecessary for something you press to pause and unpause
+			note.keyPressed(e); //no released because it is necessary for something you press to pause and unpause
 		
 		}
 
