@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 
 public class Note extends GameObject implements EntityA {
 
-	private String type;
+	private String str;
 	GameWindow g;
 	BufferedImage A;
 	BufferedImage B;
@@ -18,11 +18,11 @@ public class Note extends GameObject implements EntityA {
 	BufferedImage stickUp;
 	private boolean falling = true;
 
-	public Note(int x, int y, GameWindow g) {
+	public Note(String str, int x, int y, GameWindow g) {
 
 		super(x, y);
 		this.g = g;
-
+        this.str = str;
 		// this.type = type;
 		SpriteSheet ss = new SpriteSheet(g.getSpriteSheet());
 		A = ss.grabImage(1, 1, 32, 32);
@@ -37,12 +37,12 @@ public class Note extends GameObject implements EntityA {
 
 	public void tick() // update method
 	{
-	 if (falling == true) {
+		if (falling == true) {
 			if (y < 460)
-				y=y+3;
+				y = y + 3;
 			else {
-				y = 0;
-				y=y+3;  
+				y = -20;
+				y = y + 3;
 			}
 		}
 		// note is entity a, checks to see if collision is true for colliding with a
@@ -51,14 +51,32 @@ public class Note extends GameObject implements EntityA {
 
 	public void render(Graphics g) // draws out image
 	{
-		//g.drawImage(A, 327, (int) y, null);
-		//g.drawImage(B, 313, (int) y, null);
-		g.drawImage(X, 339, (int) y, null);
-		//g.drawImage(Y, 319, (int) y, null);
-		//g.drawImage(L, 238, (int) y, null);
-		g.drawImage(R, 327, (int) y, null);
-		//g.drawImage(Z, 327, (int) y, null);
-		g.drawImage(stickUp, 244, 28, null);
+		
+		if (x == 327 && str == "a") {
+
+			g.drawImage(A, 327, (int) y, null);
+		}
+		if (x == 313 && str == "b") {
+			g.drawImage(B, 313, (int) y, null);
+		}
+		if (x == 339 && str == "x") {
+			g.drawImage(X, 339, (int) y, null);
+		}
+		if (x == 319 && str == "y") {
+			g.drawImage(Y, 319, (int) y, null);
+		}
+		if (x == 238 && str == "l") {
+			g.drawImage(L, 238, (int) y, null);
+		}
+		if (x == 327 && str == "r") {
+			g.drawImage(R, 327, (int) y, null);
+		}
+		if (x == 327 && str == "z") {
+			g.drawImage(Z, 327, (int) y, null);
+		}
+		if (x == 244 && str == "stickUp") {
+			g.drawImage(stickUp, 244, (int) y, null);
+		}
 	}
 
 	@Override
@@ -85,6 +103,7 @@ public class Note extends GameObject implements EntityA {
 	public void setFalling(boolean x) {
 		falling = x;
 	}
+
 	public void setY(int y) {
 		this.y = y;
 	}
