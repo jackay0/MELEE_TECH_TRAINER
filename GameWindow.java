@@ -1,15 +1,14 @@
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
-
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 
 public class GameWindow extends Canvas implements Runnable { // This interface is useful when utilizing multiple threads
@@ -22,6 +21,9 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 	private boolean running = false;
 	private Thread thread;
+
+	// sound files
+	private File pp = new File("/D://eclipse//eclipse_workspace//MeleeTechTrainer//src//pp.wav");
 
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private BufferedImage spriteSheet = null;
@@ -46,13 +48,20 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private BufferedImage stickDLeft;
 	private BufferedImage cstick;
 	private BufferedImage controllerr;
-	//private int score;
-	//vars dealing specifically with scoring
+	// private int score;
+	// vars dealing specifically with scoring
 	private int a;
 
 	private ButtonFlash ButtonFlash;
 
-	private Note note;
+	private Note Anote;
+	private Note Bnote;
+	private Note Xnote;
+	private Note Ynote;
+	private Note Lnote;
+	private Note Rnote;
+	private Note Znote;
+	private Note stickUpnote;
 
 	public void init() {
 
@@ -93,9 +102,15 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		cstick = ss.grabImage(2, 4, 32, 32);
 		controllerr = gcc.grabImage(1, 1, 200, 100);
 
-		note = new Note(327, 0, this);
-        
-        
+		Anote = new Note("a", 327, -20, this);
+		Bnote = new Note("b", 313, -20, this);
+		Xnote = new Note("x", 339, -20, this);
+		Ynote = new Note("y", 319, -20, this);
+		Lnote = new Note("l", 238, -20, this);
+		Rnote = new Note("r", 327, -20, this);
+		Znote = new Note("z", 327, -20, this);
+		stickUpnote = new Note("stickUp", 244, -20, this);
+
 	}
 
 	private synchronized void start() { // synchronization is an important thing when dealing with multiple Threads
@@ -185,17 +200,18 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 	private void tick() // everything in the game that updates
 	{
-		note.tick();
-		//double eye = ButtonFlash.getI();
+		Anote.tick();
+		Bnote.tick();
+		// double eye = ButtonFlash.getI();
 
-		if(note.getY() < 374 && ButtonFlash.getI()>2)
+		if (Anote.getY() < 374 && ButtonFlash.getI() > 2)
 			ButtonFlash.setI(0.0);
-		if (Physics.Collision(note, ButtonFlash) && note.getY() > 380 && ButtonFlash.getI() < 2.0) {
-			a= a+1;
-			note.setY(0);
+		if (Physics.Collision(Anote, ButtonFlash) && Anote.getY() > 380 && ButtonFlash.getI() < 2.0) {
+			a = a + 1;
+			Anote.setY(0);
+			PlaySound(pp);
 			// System.out.println(score);
 		}
-		
 
 	}
 
@@ -227,8 +243,14 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		ButtonFlash.render(g);
 
-		note.render(g);
-		
+		Anote.render(g);
+		Bnote.render(g);
+		Xnote.render(g);
+		Ynote.render(g);
+		Lnote.render(g);
+		Rnote.render(g);
+		Znote.render(g);
+		stickUpnote.render(g);
 		//////////////////////////////////// where we can draw images ^^^^^
 
 		g.dispose();
@@ -245,19 +267,27 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	public ButtonFlash getButtonFlash() {
 		return ButtonFlash;
 	}
-	public double getDistance()
-	{
-		
-		return note.getY() - ButtonFlash.getY();
+
+	public double getDistance() {
+
+		return Anote.getY() - ButtonFlash.getY();
 	}
+
 	// This class is used for the ButtonFlash class, enabling communication with the
 	// keyboard and the class
 	public class AL extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			ButtonFlash.keyPressed(e);
-			note.keyPressed(e); //no released because it is necessary for something you press to pause and unpause
-		
+			Anote.keyPressed(e); // no released because it is necessary for something you press to pause and
+									// unpause
+			Bnote.keyPressed(e);
+			Xnote.keyPressed(e);
+			Ynote.keyPressed(e);
+			Lnote.keyPressed(e);
+			Rnote.keyPressed(e);
+			Znote.keyPressed(e);
+			stickUpnote.keyPressed(e);
 		}
 
 		@Override
@@ -267,5 +297,18 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			// anote.setFalling(false);
 		}
 
+	}
+
+	static void PlaySound(File sound) {
+		try {
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(sound));
+			clip.start();
+
+			// Thread.sleep(1000);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
