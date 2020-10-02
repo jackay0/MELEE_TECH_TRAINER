@@ -23,7 +23,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private Thread thread;
 
 	// sound files
-	private File pp = new File("/D://eclipse//eclipse_workspace//MeleeTechTrainer//src//pp.wav");
+	private File pp = new File("C://Users//0001083093//workspace//MeleeTechTrainer//src//pp.wav");
 
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private BufferedImage spriteSheet = null;
@@ -53,7 +53,31 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private int a;
 
 	private ButtonFlash ButtonFlash;
-
+	private ButtonFlash abutton2; // sprite for white a button
+	private ButtonFlash bbutton2;
+	private ButtonFlash xbutton2;
+	private ButtonFlash ybutton2;
+	private ButtonFlash lbutton2;
+	private ButtonFlash rbutton2;
+	private ButtonFlash startbutton2;
+	private ButtonFlash zbutton2;
+	private ButtonFlash stickUp2;
+	private ButtonFlash stickDown2;
+	private ButtonFlash stickLeft2;
+	private ButtonFlash stickRight2;
+	private ButtonFlash stickURight2;
+	private ButtonFlash stickULeft2;
+	private ButtonFlash stickDRight2;
+	private ButtonFlash stickDLeft2;
+	private ButtonFlash cUp2;
+	private ButtonFlash cDown2;
+	private ButtonFlash cLeft2;
+	private ButtonFlash cRight2;
+	private ButtonFlash cURight2;
+	private ButtonFlash cULeft2;
+	private ButtonFlash cDRight2;
+	private ButtonFlash cDLeft2;
+    
 	private Note Anote;
 	private Note Bnote;
 	private Note Xnote;
@@ -76,7 +100,30 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		// Below are the buttonflash objects, which are the white button sprites. They
 		// are off screen until a button press
-		ButtonFlash = new ButtonFlash(-100, -100, this);
+	    abutton2 = new ButtonFlash(-100, -100, this);
+		bbutton2 = new ButtonFlash(-100, -100, this);
+		xbutton2 = new ButtonFlash(-100, -100, this);
+		ybutton2 = new ButtonFlash(-100, -100, this);
+		lbutton2 = new ButtonFlash(-100, -100, this);
+		rbutton2 = new ButtonFlash(-100, -100, this);
+		startbutton2 = new ButtonFlash(-100, -100, this);
+		zbutton2 = new ButtonFlash(-100, -100, this);
+		stickUp2 = new ButtonFlash(-100, -100, this);
+		stickDown2 = new ButtonFlash(-100, -100, this);
+		stickLeft2 = new ButtonFlash(-100, -100, this);
+		stickRight2 = new ButtonFlash(-100, -100, this);
+		stickURight2 = new ButtonFlash(-100, -100, this);
+		stickULeft2 = new ButtonFlash(-100, -100, this);
+		stickDRight2 = new ButtonFlash(-100, -100, this);
+		stickDLeft2 = new ButtonFlash(-100, -100, this);
+		cUp2 = new ButtonFlash(-100, -100, this);
+		cDown2 = new ButtonFlash(-100, -100, this);
+		cLeft2 = new ButtonFlash(-100, -100, this);
+		cRight2 = new ButtonFlash(-100, -100, this);
+		cURight2 = new ButtonFlash(-100, -100, this);
+		cULeft2 = new ButtonFlash(-100, -100, this);
+		cDRight2 = new ButtonFlash(-100, -100, this);
+		cDLeft2 = new ButtonFlash(-100, -100, this);
 
 		// These are the images for the regular buttons, not objects because their
 		// locations aren't manipulated.
@@ -101,7 +148,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickDLeft = ss.grabImage(1, 2, 32, 32);
 		cstick = ss.grabImage(2, 4, 32, 32);
 		controllerr = gcc.grabImage(1, 1, 200, 100);
-
+		
 		Anote = new Note("a", 327, -20, this);
 		Bnote = new Note("b", 313, -20, this);
 		Xnote = new Note("x", 339, -20, this);
@@ -203,12 +250,19 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		Anote.tick();
 		Bnote.tick();
 		// double eye = ButtonFlash.getI();
-
-		if (Anote.getY() < 374 && ButtonFlash.getI() > 2)
-			ButtonFlash.setI(0.0);
-		if (Physics.Collision(Anote, ButtonFlash) && Anote.getY() > 380 && ButtonFlash.getI() < 2.0) {
+		if (Bnote.getY() < 370 && bbutton2.getI() > 2)
+			bbutton2.setI(0.0);
+		if (Physics.Collision(Bnote, bbutton2) && Bnote.getY() > 372 && bbutton2.getI() < 2.0 && bbutton2.getX()==313) {
 			a = a + 1;
-			Anote.setY(0);
+			Bnote.setY(-20);
+			PlaySound(pp);
+			// System.out.println(score);
+		}
+		if (Anote.getY() < 365 && abutton2.getI() > 2)
+			abutton2.setI(0.0);
+		if (Physics.Collision(Anote, abutton2) && Anote.getY() > 367 && abutton2.getI() < 2.0 && abutton2.getX()==327) {
+			a = a + 1;
+			Anote.setY(-20);
 			PlaySound(pp);
 			// System.out.println(score);
 		}
@@ -241,7 +295,15 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		g.drawString("Score:" + score, 10, 10);
 
-		ButtonFlash.render(g);
+		abutton2.render(g);
+		bbutton2.render(g);
+		xbutton2.render(g);
+		ybutton2.render(g);
+		lbutton2.render(g);
+		rbutton2.render(g);
+		startbutton2.render(g);
+		zbutton2.render(g);
+		
 
 		Anote.render(g);
 		Bnote.render(g);
@@ -278,9 +340,16 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	public class AL extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
-			ButtonFlash.keyPressed(e);
-			Anote.keyPressed(e); // no released because it is necessary for something you press to pause and
-									// unpause
+			abutton2.keyPressed(e);
+			bbutton2.keyPressed(e);
+			xbutton2.keyPressed(e);
+			ybutton2.keyPressed(e);
+			lbutton2.keyPressed(e);
+			rbutton2.keyPressed(e);
+			startbutton2.keyPressed(e);
+			zbutton2.keyPressed(e);
+			
+			Anote.keyPressed(e); // no released because it is necessary for something you press to pause and unpause
 			Bnote.keyPressed(e);
 			Xnote.keyPressed(e);
 			Ynote.keyPressed(e);
@@ -292,7 +361,14 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			ButtonFlash.keyReleased(e);
+			abutton2.keyReleased(e);
+			bbutton2.keyReleased(e);
+			xbutton2.keyReleased(e);
+			ybutton2.keyReleased(e);
+			lbutton2.keyReleased(e);
+			rbutton2.keyReleased(e);
+			startbutton2.keyReleased(e);
+			zbutton2.keyReleased(e);
 			// anote.keyReleased(e);
 			// anote.setFalling(false);
 		}
