@@ -15,14 +15,16 @@ public class Note extends GameObject implements EntityA {
 	BufferedImage L;
 	BufferedImage R;
 	BufferedImage Z;
+	BufferedImage cUp;
 	BufferedImage stickUp;
+	BufferedImage stickDLeft;
 	private boolean falling = true;
 
 	public Note(String str, int x, int y, GameWindow g) {
 
 		super(x, y);
 		this.g = g;
-        this.str = str;
+		this.str = str;
 		// this.type = type;
 		SpriteSheet ss = new SpriteSheet(g.getSpriteSheet());
 		A = ss.grabImage(1, 1, 32, 32);
@@ -32,7 +34,9 @@ public class Note extends GameObject implements EntityA {
 		L = ss.grabImage(5, 1, 32, 32);
 		R = ss.grabImage(6, 1, 32, 32);
 		Z = ss.grabImage(7, 1, 32, 32);
+		cUp = ss.grabImage(1, 7, 32, 32);
 		stickUp = ss.grabImage(5, 2, 32, 32);
+		stickDLeft = ss.grabImage(4, 5, 32, 32);
 	}
 
 	public void tick() // update method
@@ -51,7 +55,7 @@ public class Note extends GameObject implements EntityA {
 
 	public void render(Graphics g) // draws out image
 	{
-		
+
 		if (x == 327 && str == "a") {
 
 			g.drawImage(A, 327, (int) y, null);
@@ -74,8 +78,14 @@ public class Note extends GameObject implements EntityA {
 		if (x == 327 && str == "z") {
 			g.drawImage(Z, 327, (int) y, null);
 		}
+		if (x == 307 && str == "cUp") {
+			g.drawImage(cUp, 307, (int) y, null);
+		}
 		if (x == 244 && str == "stickUp") {
 			g.drawImage(stickUp, 244, (int) y, null);
+		}
+		if (x == 244 && str == "stickDLeft") {
+			g.drawImage(stickDLeft, 244, (int) y, null);
 		}
 	}
 
