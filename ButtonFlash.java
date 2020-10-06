@@ -76,6 +76,7 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 			x = 327;
 			y = 367;
 			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_B) {
 			x = 313;
