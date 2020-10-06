@@ -78,7 +78,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private ButtonFlash cULeft2;
 	private ButtonFlash cDRight2;
 	private ButtonFlash cDLeft2;
-    
+	
 	private Note Anote;
 	private Note Bnote;
 	private Note Xnote;
@@ -87,9 +87,9 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private Note Rnote;
 	private Note Znote;
 	private Note stickUpnote;
-    private Note cUp;
-    private Note stickDLeftnote; 
-	
+	private Note cUpnote;
+	private Note stickDLeftnote;
+
 	public void init() {
 
 		BufferedImageLoader loader = new BufferedImageLoader();
@@ -103,7 +103,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		// Below are the buttonflash objects, which are the white button sprites. They
 		// are off screen until a button press
-	    abutton2 = new ButtonFlash(-100, -100, this);
+		abutton2 = new ButtonFlash(-100, -100, this);
 		bbutton2 = new ButtonFlash(-100, -100, this);
 		xbutton2 = new ButtonFlash(-100, -100, this);
 		ybutton2 = new ButtonFlash(-100, -100, this);
@@ -151,7 +151,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickDLeft = ss.grabImage(1, 2, 32, 32);
 		cstick = ss.grabImage(2, 4, 32, 32);
 		controllerr = gcc.grabImage(1, 1, 200, 100);
-		
+
 		Anote = new Note("a", 327, -40, this);
 		Bnote = new Note("b", 313, -35, this);
 		Xnote = new Note("x", 339, -51, this);
@@ -159,7 +159,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		Lnote = new Note("l", 238, -71, this);
 		Rnote = new Note("r", 327, -71, this);
 		Znote = new Note("z", 327, -62, this);
-        cUp = new Note("cUp", 307, -10, this);
+		cUpnote = new Note("cUp", 307, -10, this);
 		stickUpnote = new Note("stickUp", 244, -43, this);
 		stickDLeftnote = new Note("stickDLeft", 244, -43, this);
 
@@ -252,15 +252,20 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 	private void tick() // everything in the game that updates
 	{
-		//Anote.tick();
+	    //Anote.tick();
 		//Bnote.tick();
-		Rnote.tick();
+		//Xnote.tick();
 		Ynote.tick();
+		//Lnote.tick();
+		Rnote.tick();
+		//Znote.tick();
+		//cUpnote.tick();
 		stickDLeftnote.tick();
-		// double eye = ButtonFlash.getI();
+
 		if (Bnote.getY() < 370 && bbutton2.getI() > 2)
 			bbutton2.setI(0.0);
-		if (Physics.Collision(Bnote, bbutton2) && Bnote.getY() > 372 && bbutton2.getI() < 2.0 && bbutton2.getX()==313) {
+		if (Physics.Collision(Bnote, bbutton2) && Bnote.getY() > 372 && bbutton2.getI() < 2.0
+				&& bbutton2.getX() == 313) {
 			a = a + 1;
 			Bnote.setY(-35);
 			PlaySound(pp);
@@ -268,7 +273,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		}
 		if (Anote.getY() < 365 && abutton2.getI() > 2)
 			abutton2.setI(0.0);
-		if (Physics.Collision(Anote, abutton2) && Anote.getY() > 367 && abutton2.getI() < 2.0 && abutton2.getX()==327) {
+		if (Physics.Collision(Anote, abutton2) && Anote.getY() > 367 && abutton2.getI() < 2.0
+				&& abutton2.getX() == 327) {
 			a = a + 1;
 			Anote.setY(-40);
 			PlaySound(pp);
@@ -276,7 +282,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		}
 		if (Ynote.getY() < 351 && ybutton2.getI() > 2)
 			ybutton2.setI(0.0);
-		if (Physics.Collision(Ynote, ybutton2) && Ynote.getY() > 353 && ybutton2.getI() < 2.0 && ybutton2.getX()==319) {
+		if (Physics.Collision(Ynote, ybutton2) && Ynote.getY() > 353 && ybutton2.getI() < 2.0
+				&& ybutton2.getX() == 319) {
 			a = a + 1;
 			Ynote.setY(-54);
 			PlaySound(pp);
@@ -284,7 +291,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		}
 		if (Rnote.getY() < 334 && rbutton2.getI() > 2)
 			rbutton2.setI(0.0);
-		if (Physics.Collision(Rnote, rbutton2) && Rnote.getY() > 336 && rbutton2.getI() < 2.0 && rbutton2.getX()==336) {
+		if (Physics.Collision(Rnote, rbutton2) && Rnote.getY() > 336 && rbutton2.getI() < 2.0
+				&& rbutton2.getX() == 327) {
 			a = a + 1;
 			Rnote.setY(-71);
 			PlaySound(pp);
@@ -292,7 +300,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		}
 		if (stickDLeftnote.getY() < 362 && stickDLeft2.getI() > 2)
 			stickDLeft2.setI(0.0);
-		if (Physics.Collision(stickDLeftnote, stickDLeft2) && stickDLeftnote.getY() > 364 && stickDLeft2.getI() < 2.0 && stickDLeft2.getX()==244) {
+		if (Physics.Collision(stickDLeftnote, stickDLeft2) && stickDLeftnote.getY() > 364 && stickDLeft2.getI() < 2.0
+				&& stickDLeft2.getX() == 244) {
 			a = a + 1;
 			stickDLeftnote.setY(-43);
 			PlaySound(pp);
@@ -344,6 +353,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		Lnote.render(g);
 		Rnote.render(g);
 		Znote.render(g);
+		cUpnote.render(g);
 		stickUpnote.render(g);
 		stickDLeftnote.render(g);
 		//////////////////////////////////// where we can draw images ^^^^^
@@ -381,7 +391,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			rbutton2.keyPressed(e);
 			startbutton2.keyPressed(e);
 			zbutton2.keyPressed(e);
-			
+			stickDLeft2.keyPressed(e);
+
 			Anote.keyPressed(e); // no released because it is necessary for something you press to pause and unpause
 			Bnote.keyPressed(e);
 			Xnote.keyPressed(e);
@@ -390,6 +401,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			Rnote.keyPressed(e);
 			Znote.keyPressed(e);
 			stickUpnote.keyPressed(e);
+			stickDLeftnote.keyPressed(e);
+			
 		}
 
 		@Override
@@ -402,13 +415,26 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			rbutton2.keyReleased(e);
 			startbutton2.keyReleased(e);
 			zbutton2.keyReleased(e);
+			stickDLeft2.keyReleased(e);
 			// anote.keyReleased(e);
 			// anote.setFalling(false);
 		}
 
 	}
 
-	static void PlaySound(File sound) {
+	
+		public void delayFalling() {
+			if(Ynote.getFalling() == false && Rnote.getFalling() ==false && stickDLeftnote.getFalling()== false)
+			{
+				Ynote.setFalling(true);
+				Rnote.setFalling(true);
+				stickDLeftnote.setFalling(true);
+			}
+			
+		}
+	
+		
+		static void PlaySound(File sound) {
 		try {
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(sound));
@@ -420,4 +446,5 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			e.printStackTrace();
 		}
 	}
+	
 }
