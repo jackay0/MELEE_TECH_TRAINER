@@ -9,7 +9,7 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 	// this is not to be confused with the NOTE class which will be the moving notes
 	// that fall on screen
 
-    private double i;
+	private double i;
 	private int z;
 	GameWindow g;
 	private BufferedImage abutton2; // sprite for white a button
@@ -72,123 +72,146 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 
 	public void keyPressed(KeyEvent e) {
 
-    	if (e.getKeyCode() == KeyEvent.VK_A) {
-            x = 327;
-            y = 367;
-            i++;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_B) {
-            x = 313;
-            y = 372;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_X) {
-            x = 339;
-            y = 356;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_Y) {
-            x = 319;
-            y = 353;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_L) {
-            x = 238;
-            y = 336;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_R) {
-            x = 327;
-            y = 336;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_S) {
-            x = 282;
-            y = 375;
-        
-        }
-        if (e.getKeyCode() == KeyEvent.VK_Z) {
-            x = 327;
-            y = 345;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_UP) { 
-            x = 244;
-            y = 364;
-            z=1;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-        	x = 244;
-            y = 364;
-            z=2;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-        	x = 244;
-            y = 364;
-            z=3;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-        	x = 244;
-            y = 364;
-            z=4;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_1) {
-        	x = 244;
-            y = 364;
-            z=5;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_2) {
-        	x = 244;
-            y = 364;
-            z=6;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_3) {
-        	x = 244;
-            y = 364;
-            z=7;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_4) {
-        	x = 244;
-            y = 364;
-            z=8;
-        }
-      //c stick (needs a z coord simply because there are so many sprites going into 390, 440)
-        if (e.getKeyCode() == KeyEvent.VK_U) {
-            x = 307;
-            y = 397;
-            z=1;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_H) {
-        	x = 307;
-            y = 397;
-             z= 2;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_J) {
-        	x = 307;
-            y = 397;
-             z = 3;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_K) {
-        	x = 307;
-            y = 397;
-             z = 4;
-        }
-        
-        // c stick diagonal inputs
-        if (e.getKeyCode() == KeyEvent.VK_5) {
-        	x = 307;
-            y = 397;
-            z = 5;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_6) {
-        	x = 307;
-            y = 397;
-            z = 6;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_7) {
-        	x = 307;
-            y = 397;
-            z = 7;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_8) {
-        	x = 307;
-            y = 397;
-            z = 8;
-        }
+		if (e.getKeyCode() == KeyEvent.VK_A) {
+			x = 327;
+			y = 367;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_B) {
+			x = 313;
+			y = 372;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_X) {
+			x = 339;
+			y = 356;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_Y) {
+			x = 319;
+			y = 353;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_L) {
+			x = 238;
+			y = 336;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_R) {
+			x = 327;
+			y = 336;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_S) {
+			x = 282;
+			y = 375;
+
+		}
+		if (e.getKeyCode() == KeyEvent.VK_Z) {
+			x = 327;
+			y = 345;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			x = 244;
+			y = 364;
+			z = 1;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			x = 244;
+			y = 364;
+			z = 2;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			x = 244;
+			y = 364;
+			z = 3;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			x = 244;
+			y = 364;
+			z = 4;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_1) {
+			x = 244;
+			y = 364;
+			z = 5;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_2) {
+			x = 244;
+			y = 364;
+			z = 6;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_3) {
+			x = 244;
+			y = 364;
+			z = 7;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_4) {
+			x = 244;
+			y = 364;
+			z = 8;
+			i++;
+		}
+		// c stick (needs a z coord simply because there are so many sprites going into
+		// 390, 440)
+		if (e.getKeyCode() == KeyEvent.VK_U) {
+			x = 307;
+			y = 397;
+			z = 1;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_H) {
+			x = 307;
+			y = 397;
+			z = 2;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_J) {
+			x = 307;
+			y = 397;
+			z = 3;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_K) {
+			x = 307;
+			y = 397;
+			z = 4;
+			i++;
+		}
+
+		// c stick diagonal inputs
+		if (e.getKeyCode() == KeyEvent.VK_5) {
+			x = 307;
+			y = 397;
+			z = 5;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_6) {
+			x = 307;
+			y = 397;
+			z = 6;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_7) {
+			x = 307;
+			y = 397;
+			z = 7;
+			i++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_8) {
+			x = 307;
+			y = 397;
+			z = 8;
+			i++;
+		}
 
 	}
 
@@ -335,83 +358,83 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 	public void render(Graphics g) // draws out image
 	{
 		if (x == 327 && y == 367) {
-            g.drawImage(abutton2, (int) x, (int) y, null);
-        }
-        if (x == 313 && y == 372) {
-            g.drawImage(bbutton2, (int) x, (int) y, null);
-        }
-        if (x == 339 && y == 356) {
-            g.drawImage(xbutton2, (int) x, (int) y, null);
-        }
-        if (x == 319 && y == 353) {
-            g.drawImage(ybutton2, (int) x, (int) y, null);
-        }
-        if (x == 238 && y == 336) {
-            g.drawImage(lbutton2, (int) x, (int) y, null);
-        }
-        if (x == 282 && y == 375) {
-            g.drawImage(startbutton2, (int) x, (int) y, null);
-        }
-        if (x == 327 && y == 336) {
-            g.drawImage(rbutton2, (int) x, (int) y, null);
-        }
-        if (x == 327 && y == 345) {
-            g.drawImage(zbutton2, (int) x, (int) y, null);
-        }
-        if (x == 244 && y == 364 && z == 1) {
-            g.drawImage(stickUp2, (int) x, (int) y, null);
-        }
-        if (x == 244 && y == 364 && z == 2) {
-            g.drawImage(stickDown2, (int) x, (int) y, null);
-        }
-        if (x == 244 && y == 364 && z == 3) {
-            g.drawImage(stickLeft2, (int) x, (int) y, null);
-        }
+			g.drawImage(abutton2, (int) x, (int) y, null);
+		}
+		if (x == 313 && y == 372) {
+			g.drawImage(bbutton2, (int) x, (int) y, null);
+		}
+		if (x == 339 && y == 356) {
+			g.drawImage(xbutton2, (int) x, (int) y, null);
+		}
+		if (x == 319 && y == 353) {
+			g.drawImage(ybutton2, (int) x, (int) y, null);
+		}
+		if (x == 238 && y == 336) {
+			g.drawImage(lbutton2, (int) x, (int) y, null);
+		}
+		if (x == 282 && y == 375) {
+			g.drawImage(startbutton2, (int) x, (int) y, null);
+		}
+		if (x == 327 && y == 336) {
+			g.drawImage(rbutton2, (int) x, (int) y, null);
+		}
+		if (x == 327 && y == 345) {
+			g.drawImage(zbutton2, (int) x, (int) y, null);
+		}
+		if (x == 244 && y == 364 && z == 1) {
+			g.drawImage(stickUp2, (int) x, (int) y, null);
+		}
+		if (x == 244 && y == 364 && z == 2) {
+			g.drawImage(stickDown2, (int) x, (int) y, null);
+		}
+		if (x == 244 && y == 364 && z == 3) {
+			g.drawImage(stickLeft2, (int) x, (int) y, null);
+		}
 
-        if (x == 244 && y == 364 && z == 4) {
-            g.drawImage(stickRight2, (int) x, (int) y, null);
-        }
+		if (x == 244 && y == 364 && z == 4) {
+			g.drawImage(stickRight2, (int) x, (int) y, null);
+		}
 
-        if (x == 244 && y == 364 && z == 5) {
-            g.drawImage(stickURight2, (int) x, (int) y, null);
-        }
+		if (x == 244 && y == 364 && z == 5) {
+			g.drawImage(stickURight2, (int) x, (int) y, null);
+		}
 
-        if (x == 244 && y == 364 && z == 6) {
-            g.drawImage(stickULeft2, (int) x, (int) y, null);
-        }
+		if (x == 244 && y == 364 && z == 6) {
+			g.drawImage(stickULeft2, (int) x, (int) y, null);
+		}
 
-        if (x == 244 && y == 364 && z == 7) {
-            g.drawImage(stickDRight2, (int) x, (int) y, null);
-        }
+		if (x == 244 && y == 364 && z == 7) {
+			g.drawImage(stickDRight2, (int) x, (int) y, null);
+		}
 
-        if (x == 244 && y == 364 && z == 8) {
-            g.drawImage(stickDLeft2, (int) x, (int) y, null);
-        }
+		if (x == 244 && y == 364 && z == 8) {
+			g.drawImage(stickDLeft2, (int) x, (int) y, null);
+		}
 
-        if (x == 307 && y == 397 && z == 1) {
-            g.drawImage(cUp2, (int) x, (int) y, null);
-        }
-        if (x == 307 && y == 397 && z == 2) {
-            g.drawImage(cLeft2, (int) x, (int) y, null);
-        }
-        if (x == 307 && y == 397 && z == 3) {
-            g.drawImage(cDown2, (int) x, (int) y, null);
-        }
-        if (x == 307 && y == 397 && z == 4) {
-            g.drawImage(cRight2, (int) x, (int) y, null);
-        }
-        if (x == 307 && y == 397 && z == 5) {
-            g.drawImage(cURight2, (int) x, (int) y, null);
-        }
-        if (x == 307 && y == 397 && z == 6) {
-            g.drawImage(cULeft2, (int) x, (int) y, null);
-        }
-        if (x == 307 && y == 397 && z == 7) {
-            g.drawImage(cDRight2, (int) x, (int) y, null);
-        }
-        if (x == 307 && y == 397 && z == 8) {
-            g.drawImage(cDLeft2, (int) x, (int) y, null);
-        }
+		if (x == 307 && y == 397 && z == 1) {
+			g.drawImage(cUp2, (int) x, (int) y, null);
+		}
+		if (x == 307 && y == 397 && z == 2) {
+			g.drawImage(cLeft2, (int) x, (int) y, null);
+		}
+		if (x == 307 && y == 397 && z == 3) {
+			g.drawImage(cDown2, (int) x, (int) y, null);
+		}
+		if (x == 307 && y == 397 && z == 4) {
+			g.drawImage(cRight2, (int) x, (int) y, null);
+		}
+		if (x == 307 && y == 397 && z == 5) {
+			g.drawImage(cURight2, (int) x, (int) y, null);
+		}
+		if (x == 307 && y == 397 && z == 6) {
+			g.drawImage(cULeft2, (int) x, (int) y, null);
+		}
+		if (x == 307 && y == 397 && z == 7) {
+			g.drawImage(cDRight2, (int) x, (int) y, null);
+		}
+		if (x == 307 && y == 397 && z == 8) {
+			g.drawImage(cDLeft2, (int) x, (int) y, null);
+		}
 	}
 
 	@Override
@@ -429,9 +452,11 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 	public double getI() {
 		return i;
 	}
+
 	public void setI(double i) {
-	   this.i = i;
+		this.i = i;
 	}
+
 	public Rectangle getBounds() {
 
 		return new Rectangle((int) x, (int) y, 32, 32);
