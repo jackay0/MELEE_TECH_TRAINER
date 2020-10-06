@@ -1,3 +1,4 @@
+
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -23,7 +24,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private Thread thread;
 
 	// sound files
-	private File pp = new File("C://Users//0001083093//workspace//MeleeTechTrainer//src//pp.wav");
+	private File pp = new File("/D://eclipse//eclipse_workspace//MeleeTechTrainer//src//pp.wav");
 
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private BufferedImage spriteSheet = null;
@@ -86,7 +87,9 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private Note Rnote;
 	private Note Znote;
 	private Note stickUpnote;
-
+    private Note cUp;
+    private Note stickDLeftnote; 
+	
 	public void init() {
 
 		BufferedImageLoader loader = new BufferedImageLoader();
@@ -149,14 +152,16 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		cstick = ss.grabImage(2, 4, 32, 32);
 		controllerr = gcc.grabImage(1, 1, 200, 100);
 		
-		Anote = new Note("a", 327, -20, this);
-		Bnote = new Note("b", 313, -20, this);
-		Xnote = new Note("x", 339, -20, this);
-		Ynote = new Note("y", 319, -20, this);
-		Lnote = new Note("l", 238, -20, this);
-		Rnote = new Note("r", 327, -20, this);
-		Znote = new Note("z", 327, -20, this);
-		stickUpnote = new Note("stickUp", 244, -20, this);
+		Anote = new Note("a", 327, -40, this);
+		Bnote = new Note("b", 313, -35, this);
+		Xnote = new Note("x", 339, -51, this);
+		Ynote = new Note("y", 319, -54, this);
+		Lnote = new Note("l", 238, -71, this);
+		Rnote = new Note("r", 327, -71, this);
+		Znote = new Note("z", 327, -62, this);
+        cUp = new Note("cUp", 307, -10, this);
+		stickUpnote = new Note("stickUp", 244, -43, this);
+		stickDLeftnote = new Note("stickDLeft", 244, -43, this);
 
 	}
 
@@ -247,14 +252,17 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 	private void tick() // everything in the game that updates
 	{
-		Anote.tick();
-		Bnote.tick();
+		//Anote.tick();
+		//Bnote.tick();
+		Rnote.tick();
+		Ynote.tick();
+		stickDLeftnote.tick();
 		// double eye = ButtonFlash.getI();
 		if (Bnote.getY() < 370 && bbutton2.getI() > 2)
 			bbutton2.setI(0.0);
 		if (Physics.Collision(Bnote, bbutton2) && Bnote.getY() > 372 && bbutton2.getI() < 2.0 && bbutton2.getX()==313) {
 			a = a + 1;
-			Bnote.setY(-20);
+			Bnote.setY(-35);
 			PlaySound(pp);
 			// System.out.println(score);
 		}
@@ -262,7 +270,31 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			abutton2.setI(0.0);
 		if (Physics.Collision(Anote, abutton2) && Anote.getY() > 367 && abutton2.getI() < 2.0 && abutton2.getX()==327) {
 			a = a + 1;
-			Anote.setY(-20);
+			Anote.setY(-40);
+			PlaySound(pp);
+			// System.out.println(score);
+		}
+		if (Ynote.getY() < 351 && ybutton2.getI() > 2)
+			ybutton2.setI(0.0);
+		if (Physics.Collision(Ynote, ybutton2) && Ynote.getY() > 353 && ybutton2.getI() < 2.0 && ybutton2.getX()==319) {
+			a = a + 1;
+			Ynote.setY(-54);
+			PlaySound(pp);
+			// System.out.println(score);
+		}
+		if (Rnote.getY() < 334 && rbutton2.getI() > 2)
+			rbutton2.setI(0.0);
+		if (Physics.Collision(Rnote, rbutton2) && Rnote.getY() > 336 && rbutton2.getI() < 2.0 && rbutton2.getX()==336) {
+			a = a + 1;
+			Rnote.setY(-71);
+			PlaySound(pp);
+			// System.out.println(score);
+		}
+		if (stickDLeftnote.getY() < 362 && stickDLeft2.getI() > 2)
+			stickDLeft2.setI(0.0);
+		if (Physics.Collision(stickDLeftnote, stickDLeft2) && stickDLeftnote.getY() > 364 && stickDLeft2.getI() < 2.0 && stickDLeft2.getX()==244) {
+			a = a + 1;
+			stickDLeftnote.setY(-43);
 			PlaySound(pp);
 			// System.out.println(score);
 		}
@@ -303,7 +335,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		rbutton2.render(g);
 		startbutton2.render(g);
 		zbutton2.render(g);
-		
+		stickDLeft2.render(g);
 
 		Anote.render(g);
 		Bnote.render(g);
@@ -313,6 +345,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		Rnote.render(g);
 		Znote.render(g);
 		stickUpnote.render(g);
+		stickDLeftnote.render(g);
 		//////////////////////////////////// where we can draw images ^^^^^
 
 		g.dispose();
