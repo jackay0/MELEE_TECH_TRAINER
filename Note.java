@@ -19,10 +19,12 @@ public class Note extends GameObject implements EntityA {
 	BufferedImage stickUp;
 	BufferedImage stickDLeft;
 	private boolean falling = true;
+	private int initialY;
 
 	public Note(String str, int x, int y, GameWindow g) {
-
+        
 		super(x, y);
+		 initialY = y;
 		this.g = g;
 		this.str = str;
 		// this.type = type;
@@ -34,24 +36,27 @@ public class Note extends GameObject implements EntityA {
 		L = ss.grabImage(5, 1, 32, 32);
 		R = ss.grabImage(6, 1, 32, 32);
 		Z = ss.grabImage(7, 1, 32, 32);
-		cUp = ss.grabImage(1, 7, 32, 32);
+		cUp = ss.grabImage(6, 3, 32, 32);
 		stickUp = ss.grabImage(5, 2, 32, 32);
-		stickDLeft = ss.grabImage(4, 5, 32, 32);
+		stickDLeft = ss.grabImage(1, 2, 32, 32);
 	}
 
 	public void tick() // update method
 	{
+		
 		if (falling == true) {
 			if (y < 460)
 				y = y + 3;
-			else {
-				y = -20;
-				y = y + 3;
+		}
+	    if(y>460) {
+	    	falling = false;
+			y = initialY;
+				//y = y + 3;
 			}
 		}
 		// note is entity a, checks to see if collision is true for colliding with a
 		// buttonflash
-	}
+	
 
 	public void render(Graphics g) // draws out image
 	{
