@@ -99,7 +99,7 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 			i++;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_R) {
-			x = 327;
+			x = 328;
 			y = 336;
 			i++;
 		}
@@ -376,7 +376,7 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 		if (x == 282 && y == 375) {
 			g.drawImage(startbutton2, (int) x, (int) y, null);
 		}
-		if (x == 327 && y == 336) {
+		if (x == 328 && y == 336) {
 			g.drawImage(rbutton2, (int) x, (int) y, null);
 		}
 		if (x == 327 && y == 345) {
