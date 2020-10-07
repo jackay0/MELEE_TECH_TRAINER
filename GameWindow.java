@@ -157,7 +157,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		Xnote = new Note("x", 339, -51, this);
 		Ynote = new Note("y", 319, -54, this);
 		Lnote = new Note("l", 238, -71, this);
-		Rnote = new Note("r", 327, -71, this);
+		Rnote = new Note("r", 328, -71, this);
 		Znote = new Note("z", 327, -62, this);
 		cUpnote = new Note("cUp", 307, -10, this);
 		stickUpnote = new Note("stickUp", 244, -43, this);
@@ -249,9 +249,19 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		}
 		stop();
 	}
+	public void delayFalling() {
+		if(Ynote.getFalling() == false && Rnote.getFalling() ==false && stickDLeftnote.getFalling()== false)
+		{
+			Ynote.setFalling(true);
+			Rnote.setFalling(true);
+			stickDLeftnote.setFalling(true);
+		}
+		
+	}
 
 	private void tick() // everything in the game that updates
 	{
+		delayFalling();
 	    //Anote.tick();
 		//Bnote.tick();
 		//Xnote.tick();
@@ -267,16 +277,17 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		if (Physics.Collision(Bnote, bbutton2) && Bnote.getY() > 372 && bbutton2.getI() < 2.0
 				&& bbutton2.getX() == 313) {
 			a = a + 1;
-			Bnote.setY(-35);
+			//Bnote.setY(-35); //set falling to false
 			PlaySound(pp);
 			// System.out.println(score);
+			
 		}
 		if (Anote.getY() < 365 && abutton2.getI() > 2)
 			abutton2.setI(0.0);
 		if (Physics.Collision(Anote, abutton2) && Anote.getY() > 367 && abutton2.getI() < 2.0
 				&& abutton2.getX() == 327) {
 			a = a + 1;
-			Anote.setY(-40);
+			//Anote.setY(-40);
 			PlaySound(pp);
 			// System.out.println(score);
 		}
@@ -288,15 +299,17 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			Ynote.setY(-54);
 			PlaySound(pp);
 			// System.out.println(score);
+			Ynote.setFalling(false);
 		}
 		if (Rnote.getY() < 334 && rbutton2.getI() > 2)
 			rbutton2.setI(0.0);
 		if (Physics.Collision(Rnote, rbutton2) && Rnote.getY() > 336 && rbutton2.getI() < 2.0
-				&& rbutton2.getX() == 327) {
+				&& rbutton2.getX() == 328) {
 			a = a + 1;
 			Rnote.setY(-71);
 			PlaySound(pp);
 			// System.out.println(score);
+			Rnote.setFalling(false);
 		}
 		if (stickDLeftnote.getY() < 362 && stickDLeft2.getI() > 2)
 			stickDLeft2.setI(0.0);
@@ -306,6 +319,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			stickDLeftnote.setY(-43);
 			PlaySound(pp);
 			// System.out.println(score);
+			stickDLeftnote.setFalling(false);
 		}
 
 	}
@@ -328,7 +342,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		g.drawImage(xbutton, 339, 356, this);
 		g.drawImage(ybutton, 319, 353, this);
 		g.drawImage(lbutton, 238, 336, this);
-		g.drawImage(rbutton, 327, 336, this);
+		g.drawImage(rbutton, 328, 336, this);
 		g.drawImage(startbutton, 282, 375, this);
 		g.drawImage(zbutton, 327, 345, this);
 		g.drawImage(stick, 244, 364, this);
@@ -423,15 +437,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	}
 
 	
-		public void delayFalling() {
-			if(Ynote.getFalling() == false && Rnote.getFalling() ==false && stickDLeftnote.getFalling()== false)
-			{
-				Ynote.setFalling(true);
-				Rnote.setFalling(true);
-				stickDLeftnote.setFalling(true);
-			}
-			
-		}
+
 	
 		
 		static void PlaySound(File sound) {
