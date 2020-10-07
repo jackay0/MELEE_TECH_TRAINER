@@ -45,18 +45,21 @@ public class Note extends GameObject implements EntityA {
 	{
 		
 		if (falling == true) {
-			if (y < 460)
+			if (y < 461)
 				y = y + 3;
 		}
 	    if(y>460) {
 	    	falling = false;
 			y = initialY;
+			
 				//y = y + 3;
 			}
-		}
+	    System.out.println("y = " + y);
+	
+	}
 		// note is entity a, checks to see if collision is true for colliding with a
 		// buttonflash
-	
+		
 
 	public void render(Graphics g) // draws out image
 	{
@@ -77,8 +80,8 @@ public class Note extends GameObject implements EntityA {
 		if (x == 238 && str == "l") {
 			g.drawImage(L, 238, (int) y, null);
 		}
-		if (x == 327 && str == "r") {
-			g.drawImage(R, 327, (int) y, null);
+		if (x == 328 && str == "r") {
+			g.drawImage(R, 328, (int) y, null);
 		}
 		if (x == 327 && str == "z") {
 			g.drawImage(Z, 327, (int) y, null);
