@@ -52,7 +52,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	// private int score;
 	// vars dealing specifically with scoring
 	private int a;
-
+    private boolean allowTick = true;
+    
 	private ButtonFlash ButtonFlash;
 	private ButtonFlash abutton2; // sprite for white a button
 	private ButtonFlash bbutton2;
@@ -230,7 +231,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 												// don't want a small desync, the following
 			chng += (current - timerLast) / ns; // the difference is null and the game is caught up
 			timerLast = current;
-			if (chng >= 1) {
+			if (chng >= 1 && allowTick == true) {
 				tick();
 				updater++;
 				chng--;
@@ -417,7 +418,21 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			stickUpnote.keyPressed(e);
 			stickDLeftnote.keyPressed(e);
 			
+			/*if (e.getKeyCode() == KeyEvent.VK_S) {
+				if (Ynote.getFalling() == true || Rnote.getFalling() == true || stickDLeftnote.getFalling() == true) {
+					g.getYnote.setFalling(false);
+				    Rnote.setFalling(false);
+				    stickDLeftnote.setFalling(false);
+				    }
+				else if (Ynote.getFalling() == false)
+					Ynote.setFalling(false);
+				    Rnote.setFalling(false);
+				    stickDLeftnote.setFalling(false);
+			}*/
+
+			
 		}
+		
 
 		@Override
 		public void keyReleased(KeyEvent e) {
@@ -435,8 +450,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		}
 
 	}
-
-	
+   
 
 	
 		
@@ -452,5 +466,18 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			e.printStackTrace();
 		}
 	}
+		public Note getYnote() {
+			return Ynote;
+		}
+		public Note getRnote() {
+			return Rnote;
+		}
+		public Note getstickDLeftnote() {
+			return stickDLeftnote;
+		}
+		public void setTick(boolean x) {
+			allowTick = x;
+		}
+		
 	
 }
