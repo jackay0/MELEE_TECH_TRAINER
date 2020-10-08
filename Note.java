@@ -22,9 +22,9 @@ public class Note extends GameObject implements EntityA {
 	private int initialY;
 
 	public Note(String str, int x, int y, GameWindow g) {
-        
+
 		super(x, y);
-		 initialY = y;
+		initialY = y;
 		this.g = g;
 		this.str = str;
 		// this.type = type;
@@ -43,23 +43,22 @@ public class Note extends GameObject implements EntityA {
 
 	public void tick() // update method
 	{
-		
+
 		if (falling == true) {
 			if (y < 461)
 				y = y + 3;
 		}
-	    if(y>460) {
-	    	falling = false;
+		if (y > 460) {
+			falling = false;
 			y = initialY;
-			
-				//y = y + 3;
-			}
-	    System.out.println("y = " + y);
-	
+
+			// y = y + 3;
+		}
+		System.out.println("y = " + y);
+
 	}
-		// note is entity a, checks to see if collision is true for colliding with a
-		// buttonflash
-		
+	// note is entity a, checks to see if collision is true for colliding with a
+	// buttonflash
 
 	public void render(Graphics g) // draws out image
 	{
@@ -127,14 +126,28 @@ public class Note extends GameObject implements EntityA {
 	}
 
 	public void keyPressed(KeyEvent e) {
-
+		// TODO Auto-generated method stub
+		/*if (e.getKeyCode() == KeyEvent.VK_S) {
+			if (falling) {
+	              g.setTick(false);
+			    }
+			else if (!falling){
+				g.setTick(true);
+		}
+		
+		}*/
 		if (e.getKeyCode() == KeyEvent.VK_S) {
-			if (falling)
-				falling = false;
-			else if (!falling)
-				falling = true;
+			if (g.getYnote().getFalling() == true || g.getRnote().getFalling() == true || g.getstickDLeftnote().getFalling() == true) {
+				g.getYnote().setFalling(false);
+			    g.getRnote().setFalling(false);
+			    g.getstickDLeftnote().setFalling(false);
+			    }
+			else if (g.getYnote().getFalling() == false || g.getRnote().getFalling() == false || g.getstickDLeftnote().getFalling() == false ) {
+				g.getYnote().setFalling(true);
+			    g.getRnote().setFalling(true);
+			    g.getstickDLeftnote().setFalling(true);
 		}
 
 	}
-
+}
 }
