@@ -100,6 +100,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private Note stickUpnote;
 	private Note cUpnote;
 	private Note stickDLeftnote;
+	private Note stickDownnote;
 
 	// Fox Tech
 	JRadioButtonMenuItem FoxWavedash;
@@ -179,6 +180,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		cUpnote = new Note("cUp", 307, -10, this);
 		stickUpnote = new Note("stickUp", 244, -43, this);
 		stickDLeftnote = new Note("stickDLeft", 244, -43, this);
+		stickDownnote = new Note("stickDown", 244, -43, this);
 
 	}
 
@@ -286,7 +288,14 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				stickDLeftnote.setFalling(true);
 			}
 		}
-
+		// FOX WAVEDASH
+				if (multi.isSelected()) {
+					if (Bnote.getFalling() == false && Xnote.getFalling() == false && stickDownnote.getFalling() == false) {
+						Bnote.setFalling(true);
+						Xnote.setFalling(true);
+						stickDownnote.setFalling(true);
+					}
+				}
 	}
 
 	private void tick() // everything in the game that updates
@@ -362,6 +371,39 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			Xnote.tick();
 
 			Bnote.tick();
+			
+			stickDownnote.tick();
+			
+			if (Bnote.getY() < 370 && bbutton2.getI() > 2)
+				bbutton2.setI(0.0);
+			if (Physics.Collision(Bnote, bbutton2) && Bnote.getY() > 372 && bbutton2.getI() < 2.0
+					&& bbutton2.getX() == 313) {
+				a = a + 1;
+				// Bnote.setY(-35); //set falling to false
+				PlaySound(pp);
+				// System.out.println(score);
+
+			}
+			if (Xnote.getY() < 351 && xbutton2.getI() > 2)
+				xbutton2.setI(0.0);
+			if (Physics.Collision(Xnote, xbutton2) && Xnote.getY() > 353 && xbutton2.getI() < 2.0
+					&& xbutton2.getX() == 319) {
+				a = a + 1;
+				Xnote.setY(-54);
+				PlaySound(pp);
+				// System.out.println(score);
+				Xnote.setFalling(false);
+			}
+			if (stickDownnote.getY() < 362 && stickDLeft2.getI() > 2)
+				stickDown2.setI(0.0);
+			if (Physics.Collision(stickDownnote, stickDown2) && stickDownnote.getY() > 364
+					&& stickDown2.getI() < 2.0 && stickDown2.getX() == 244) {
+				a = a + 1;
+				stickDownnote.setY(-43);
+				PlaySound(pp);
+				// System.out.println(score);
+				stickDownnote.setFalling(false);
+			}
 
 		}
 
@@ -403,12 +445,12 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		startbutton2.render(g);
 		zbutton2.render(g);
 		stickDLeft2.render(g);
-
-		Anote.render(g);
+		//Anote.render(g);
 
 		if (multi.isSelected()) {
 			Bnote.render(g);
 			Xnote.render(g);
+			stickDownnote.render(g);
 		}
 
 		// We need to divide the buttons that comprise of each tech into this render, so
@@ -419,11 +461,10 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			stickDLeftnote.render(g);
 		}
 
-		Lnote.render(g);
-
-		Znote.render(g);
+		//Lnote.render(g);
+		//Znote.render(g);
 		// cUpnote.render(g);
-		stickUpnote.render(g);
+		//stickUpnote.render(g);
 
 		//////////////////////////////////// where we can draw images ^^^^^
 
@@ -472,6 +513,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			Znote.keyPressed(e);
 			stickUpnote.keyPressed(e);
 			stickDLeftnote.keyPressed(e);
+			stickDownnote.keyPressed(e);
 
 		}
 
