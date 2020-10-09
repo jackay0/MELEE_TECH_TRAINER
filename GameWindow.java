@@ -1,4 +1,5 @@
 
+import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -10,7 +11,14 @@ import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class GameWindow extends Canvas implements Runnable { // This interface is useful when utilizing multiple threads
 	// In this case, it ensures that just because one Thread has been executed,
@@ -24,11 +32,14 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private Thread thread;
 
 	// sound files
-	private File pp = new File("/D://eclipse//eclipse_workspace//MeleeTechTrainer//src//pp.wav");
+	private File pp = new File("/C://Users//0001081009//workspace//melee//src//pp.wav");
+
+	int pause;
 
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private BufferedImage spriteSheet = null;
 	private BufferedImage controller = null;
+
 	// sprites for buttons on screen
 	private BufferedImage abutton;
 	private BufferedImage bbutton;
@@ -49,11 +60,10 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private BufferedImage stickDLeft;
 	private BufferedImage cstick;
 	private BufferedImage controllerr;
-	// private int score;
+
 	// vars dealing specifically with scoring
 	private int a;
-    private boolean allowTick = true;
-    
+
 	private ButtonFlash ButtonFlash;
 	private ButtonFlash abutton2; // sprite for white a button
 	private ButtonFlash bbutton2;
@@ -79,7 +89,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private ButtonFlash cULeft2;
 	private ButtonFlash cDRight2;
 	private ButtonFlash cDLeft2;
-	
+
 	private Note Anote;
 	private Note Bnote;
 	private Note Xnote;
@@ -90,6 +100,12 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private Note stickUpnote;
 	private Note cUpnote;
 	private Note stickDLeftnote;
+
+	// Fox Tech
+	JRadioButtonMenuItem FoxWavedash;
+	JRadioButtonMenuItem multi;
+
+	JRadioButtonMenuItem MarthWavedash;
 
 	public void init() {
 
@@ -197,6 +213,11 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		game.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE)); // Dimension class: simply works with width
 																				// and height variables to size the
 																				// window
+		JTextArea output = new JTextArea(5, 45);
+		output.setEditable(false);
+		JScrollPane scrollPane = new JScrollPane(output); // and height variables to size the
+		JPanel contentPane = new JPanel(new BorderLayout());
+
 		game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setFocusable(false); // very important
@@ -208,6 +229,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		frame.setVisible(true);
 		frame.pack(); // not sure what this does, supposedly an optimization
 		frame.addKeyListener(game.new AL());
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		frame.setJMenuBar(game.createMenuBar());
 		game.start();
 
 	}
@@ -231,8 +254,10 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 												// don't want a small desync, the following
 			chng += (current - timerLast) / ns; // the difference is null and the game is caught up
 			timerLast = current;
-			if (chng >= 1 && allowTick == true) {
-				tick();
+			if (chng >= 1) {
+				if (pause == 0)
+					tick();
+
 				updater++;
 				chng--;
 			}
@@ -250,77 +275,94 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		}
 		stop();
 	}
+
 	public void delayFalling() {
-		if(Ynote.getFalling() == false && Rnote.getFalling() ==false && stickDLeftnote.getFalling()== false)
-		{
-			Ynote.setFalling(true);
-			Rnote.setFalling(true);
-			stickDLeftnote.setFalling(true);
+
+		// FOX WAVEDASH
+		if (FoxWavedash.isSelected()) {
+			if (Ynote.getFalling() == false && Rnote.getFalling() == false && stickDLeftnote.getFalling() == false) {
+				Ynote.setFalling(true);
+				Rnote.setFalling(true);
+				stickDLeftnote.setFalling(true);
+			}
 		}
-		
+
 	}
 
 	private void tick() // everything in the game that updates
 	{
-		delayFalling();
-	    //Anote.tick();
-		//Bnote.tick();
-		//Xnote.tick();
-		Ynote.tick();
-		//Lnote.tick();
-		Rnote.tick();
-		//Znote.tick();
-		//cUpnote.tick();
-		stickDLeftnote.tick();
 
-		if (Bnote.getY() < 370 && bbutton2.getI() > 2)
-			bbutton2.setI(0.0);
-		if (Physics.Collision(Bnote, bbutton2) && Bnote.getY() > 372 && bbutton2.getI() < 2.0
-				&& bbutton2.getX() == 313) {
-			a = a + 1;
-			//Bnote.setY(-35); //set falling to false
-			PlaySound(pp);
-			// System.out.println(score);
-			
+		// FOX WAVEDASH
+
+		if (FoxWavedash.isSelected()) {
+
+			delayFalling();
+
+			Ynote.tick();
+
+			Rnote.tick();
+
+			stickDLeftnote.tick();
+
+			if (Bnote.getY() < 370 && bbutton2.getI() > 2)
+				bbutton2.setI(0.0);
+			if (Physics.Collision(Bnote, bbutton2) && Bnote.getY() > 372 && bbutton2.getI() < 2.0
+					&& bbutton2.getX() == 313) {
+				a = a + 1;
+				// Bnote.setY(-35); //set falling to false
+				PlaySound(pp);
+				// System.out.println(score);
+
+			}
+			if (Anote.getY() < 365 && abutton2.getI() > 2)
+				abutton2.setI(0.0);
+			if (Physics.Collision(Anote, abutton2) && Anote.getY() > 367 && abutton2.getI() < 2.0
+					&& abutton2.getX() == 327) {
+				a = a + 1;
+				// Anote.setY(-40);
+				PlaySound(pp);
+				// System.out.println(score);
+			}
+			if (Ynote.getY() < 351 && ybutton2.getI() > 2)
+				ybutton2.setI(0.0);
+			if (Physics.Collision(Ynote, ybutton2) && Ynote.getY() > 353 && ybutton2.getI() < 2.0
+					&& ybutton2.getX() == 319) {
+				a = a + 1;
+				Ynote.setY(-54);
+				PlaySound(pp);
+				// System.out.println(score);
+				Ynote.setFalling(false);
+			}
+			if (Rnote.getY() < 334 && rbutton2.getI() > 2)
+				rbutton2.setI(0.0);
+			if (Physics.Collision(Rnote, rbutton2) && Rnote.getY() > 336 && rbutton2.getI() < 2.0
+					&& rbutton2.getX() == 328) {
+				a = a + 1;
+				Rnote.setY(-71);
+				PlaySound(pp);
+				// System.out.println(score);
+				Rnote.setFalling(false);
+			}
+			if (stickDLeftnote.getY() < 362 && stickDLeft2.getI() > 2)
+				stickDLeft2.setI(0.0);
+			if (Physics.Collision(stickDLeftnote, stickDLeft2) && stickDLeftnote.getY() > 364
+					&& stickDLeft2.getI() < 2.0 && stickDLeft2.getX() == 244) {
+				a = a + 1;
+				stickDLeftnote.setY(-43);
+				PlaySound(pp);
+				// System.out.println(score);
+				stickDLeftnote.setFalling(false);
+			}
 		}
-		if (Anote.getY() < 365 && abutton2.getI() > 2)
-			abutton2.setI(0.0);
-		if (Physics.Collision(Anote, abutton2) && Anote.getY() > 367 && abutton2.getI() < 2.0
-				&& abutton2.getX() == 327) {
-			a = a + 1;
-			//Anote.setY(-40);
-			PlaySound(pp);
-			// System.out.println(score);
-		}
-		if (Ynote.getY() < 351 && ybutton2.getI() > 2)
-			ybutton2.setI(0.0);
-		if (Physics.Collision(Ynote, ybutton2) && Ynote.getY() > 353 && ybutton2.getI() < 2.0
-				&& ybutton2.getX() == 319) {
-			a = a + 1;
-			Ynote.setY(-54);
-			PlaySound(pp);
-			// System.out.println(score);
-			Ynote.setFalling(false);
-		}
-		if (Rnote.getY() < 334 && rbutton2.getI() > 2)
-			rbutton2.setI(0.0);
-		if (Physics.Collision(Rnote, rbutton2) && Rnote.getY() > 336 && rbutton2.getI() < 2.0
-				&& rbutton2.getX() == 328) {
-			a = a + 1;
-			Rnote.setY(-71);
-			PlaySound(pp);
-			// System.out.println(score);
-			Rnote.setFalling(false);
-		}
-		if (stickDLeftnote.getY() < 362 && stickDLeft2.getI() > 2)
-			stickDLeft2.setI(0.0);
-		if (Physics.Collision(stickDLeftnote, stickDLeft2) && stickDLeftnote.getY() > 364 && stickDLeft2.getI() < 2.0
-				&& stickDLeft2.getX() == 244) {
-			a = a + 1;
-			stickDLeftnote.setY(-43);
-			PlaySound(pp);
-			// System.out.println(score);
-			stickDLeftnote.setFalling(false);
+
+		// MULTISHINE
+		if (multi.isSelected()) {
+			delayFalling();
+
+			Xnote.tick();
+
+			Bnote.tick();
+
 		}
 
 	}
@@ -351,6 +393,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		g.drawString("Score:" + score, 10, 10);
 
+		// Buttons on the controller
 		abutton2.render(g);
 		bbutton2.render(g);
 		xbutton2.render(g);
@@ -362,15 +405,26 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickDLeft2.render(g);
 
 		Anote.render(g);
-		Bnote.render(g);
-		Xnote.render(g);
-		Ynote.render(g);
+
+		if (multi.isSelected()) {
+			Bnote.render(g);
+			Xnote.render(g);
+		}
+
+		// We need to divide the buttons that comprise of each tech into this render, so
+		// that they only are on screen when selected
+		if (FoxWavedash.isSelected()) {
+			Ynote.render(g);
+			Rnote.render(g);
+			stickDLeftnote.render(g);
+		}
+
 		Lnote.render(g);
-		Rnote.render(g);
+
 		Znote.render(g);
-		cUpnote.render(g);
+		// cUpnote.render(g);
 		stickUpnote.render(g);
-		stickDLeftnote.render(g);
+
 		//////////////////////////////////// where we can draw images ^^^^^
 
 		g.dispose();
@@ -408,7 +462,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			zbutton2.keyPressed(e);
 			stickDLeft2.keyPressed(e);
 
-			Anote.keyPressed(e); // no released because it is necessary for something you press to pause and unpause
+			Anote.keyPressed(e); // no released because it is necessary for something you press to pause and
+									// unpause
 			Bnote.keyPressed(e);
 			Xnote.keyPressed(e);
 			Ynote.keyPressed(e);
@@ -417,22 +472,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			Znote.keyPressed(e);
 			stickUpnote.keyPressed(e);
 			stickDLeftnote.keyPressed(e);
-			
-			/*if (e.getKeyCode() == KeyEvent.VK_S) {
-				if (Ynote.getFalling() == true || Rnote.getFalling() == true || stickDLeftnote.getFalling() == true) {
-					g.getYnote.setFalling(false);
-				    Rnote.setFalling(false);
-				    stickDLeftnote.setFalling(false);
-				    }
-				else if (Ynote.getFalling() == false)
-					Ynote.setFalling(false);
-				    Rnote.setFalling(false);
-				    stickDLeftnote.setFalling(false);
-			}*/
 
-			
 		}
-		
 
 		@Override
 		public void keyReleased(KeyEvent e) {
@@ -443,6 +484,12 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			lbutton2.keyReleased(e);
 			rbutton2.keyReleased(e);
 			startbutton2.keyReleased(e);
+
+			if (e.getKeyCode() == KeyEvent.VK_S) {
+				pause = 1;
+			} else {
+				pause = 0;
+			}
 			zbutton2.keyReleased(e);
 			stickDLeft2.keyReleased(e);
 			// anote.keyReleased(e);
@@ -450,34 +497,52 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		}
 
 	}
-   
 
-	
-		
-		static void PlaySound(File sound) {
+	// plays the sound
+
+	static void PlaySound(File sound) {
 		try {
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(sound));
 			clip.start();
 
-			// Thread.sleep(1000);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-		public Note getYnote() {
-			return Ynote;
-		}
-		public Note getRnote() {
-			return Rnote;
-		}
-		public Note getstickDLeftnote() {
-			return stickDLeftnote;
-		}
-		public void setTick(boolean x) {
-			allowTick = x;
-		}
-		
-	
+
+	// Menu Bar at the top of the window
+
+	public JMenuBar createMenuBar() {
+		// Characters and main menus
+		JMenuBar menuBar;
+		JMenu menu;
+
+		// Create the menu bar.
+		menuBar = new JMenuBar();
+
+		// Menus
+		menu = new JMenu("MENU    	");
+
+		menuBar.add(menu);
+
+		// menu.addSeparator();
+
+		ButtonGroup group = new ButtonGroup();
+
+		FoxWavedash = new JRadioButtonMenuItem("Fox Wavedash");
+
+		FoxWavedash.setSelected(true);
+		group.add(FoxWavedash);
+		menu.add(FoxWavedash);
+
+		MarthWavedash = new JRadioButtonMenuItem("Marth Wavedash");
+
+		multi = new JRadioButtonMenuItem("Multishine");
+		group.add(multi);
+		menu.add(multi);
+
+		return menuBar;
+	}
+
 }
