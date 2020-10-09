@@ -125,31 +125,4 @@ public class Note extends GameObject implements EntityA {
 		this.y = y;
 	}
 
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		/*if (e.getKeyCode() == KeyEvent.VK_S) {
-			if (falling) {
-	              g.setTick(false);
-			    }
-			else if (!falling){
-				g.setTick(true);
-		}
-		
-		}
-		/*if (e.getKeyCode() == KeyEvent.VK_S) {
-			if (g.getYnote().getFalling() == true || g.getRnote().getFalling() == true || g.getstickDLeftnote().getFalling() == true) {
-				g.getYnote().setFalling(false);
-			    g.getRnote().setFalling(false);
-			    g.getstickDLeftnote().setFalling(false);
-			    }
-			else if (g.getYnote().getFalling() == false || g.getRnote().getFalling() == false || g.getstickDLeftnote().getFalling() == false ) {
-			    g.getYnote().setFalling(true);
-			    g.getRnote().setFalling(true);
-			    g.getstickDLeftnote().setFalling(true); 
-			    
-		}*/
-
-	}
 }
-
-
