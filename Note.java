@@ -18,6 +18,7 @@ public class Note extends GameObject implements EntityA {
 	BufferedImage cUp;
 	BufferedImage stickUp;
 	BufferedImage stickDLeft;
+	BufferedImage stickDown;
 	private boolean falling = true;
 	private int initialY;
 
@@ -39,6 +40,7 @@ public class Note extends GameObject implements EntityA {
 		cUp = ss.grabImage(6, 3, 32, 32);
 		stickUp = ss.grabImage(5, 2, 32, 32);
 		stickDLeft = ss.grabImage(1, 2, 32, 32);
+		stickDown = ss.grabImage(2, 2, 32, 32);
 	}
 
 	public void tick() // update method
@@ -93,6 +95,9 @@ public class Note extends GameObject implements EntityA {
 		}
 		if (x == 244 && str == "stickDLeft") {
 			g.drawImage(stickDLeft, 244, (int) y, null);
+		}
+		if (x == 244 && str == "stickDown") {
+			g.drawImage(stickDown, 244, (int) y, null);
 		}
 	}
 
