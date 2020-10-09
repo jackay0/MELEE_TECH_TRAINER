@@ -2,6 +2,12 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JRadioButtonMenuItem;
+
 import com.game.src.main.classes.EntityB;
 
 public class ButtonFlash extends GameObject implements EntityB { // this is not to be confused with the NOTE class which
@@ -462,5 +468,10 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 
 		return new Rectangle((int) x, (int) y, 32, 32);
 	}
+
+
+	
+
+
 
 }
