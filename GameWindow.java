@@ -288,7 +288,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				stickDLeftnote.setFalling(true);
 			}
 		}
-		// FOX WAVEDASH
+		// FOX MULTISHINE
 				if (multi.isSelected()) {
 					if (Bnote.getFalling() == false && Xnote.getFalling() == false && stickDownnote.getFalling() == false) {
 						Bnote.setFalling(true);
