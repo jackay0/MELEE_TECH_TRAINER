@@ -125,4 +125,9 @@ public class Note extends GameObject implements EntityA {
 		this.y = y;
 	}
 
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
