@@ -108,7 +108,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 	JRadioButtonMenuItem MarthWavedash;
 
-	public void init() {
+	public void init() { 
 
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try { // try catch means: try to do this, if it cant be done, then catch, in this case
@@ -313,16 +313,6 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 			stickDLeftnote.tick();
 
-			if (Bnote.getY() < 370 && bbutton2.getI() > 2)
-				bbutton2.setI(0.0);
-			if (Physics.Collision(Bnote, bbutton2) && Bnote.getY() > 372 && bbutton2.getI() < 2.0
-					&& bbutton2.getX() == 313) {
-				a = a + 1;
-				// Bnote.setY(-35); //set falling to false
-				PlaySound(pp);
-				// System.out.println(score);
-
-			}
 			if (Anote.getY() < 365 && abutton2.getI() > 2)
 				abutton2.setI(0.0);
 			if (Physics.Collision(Anote, abutton2) && Anote.getY() > 367 && abutton2.getI() < 2.0
@@ -332,7 +322,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				PlaySound(pp);
 				// System.out.println(score);
 			}
-			if (Ynote.getY() < 351 && ybutton2.getI() > 2)
+			if (Ynote.getY() < 352 && ybutton2.getI() > 2)
 				ybutton2.setI(0.0);
 			if (Physics.Collision(Ynote, ybutton2) && Ynote.getY() > 353 && ybutton2.getI() < 2.0
 					&& ybutton2.getX() == 319) {
@@ -342,7 +332,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				// System.out.println(score);
 				Ynote.setFalling(false);
 			}
-			if (Rnote.getY() < 334 && rbutton2.getI() > 2)
+			if (Rnote.getY() < 335 && rbutton2.getI() > 2)
 				rbutton2.setI(0.0);
 			if (Physics.Collision(Rnote, rbutton2) && Rnote.getY() > 336 && rbutton2.getI() < 2.0
 					&& rbutton2.getX() == 328) {
@@ -352,7 +342,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				// System.out.println(score);
 				Rnote.setFalling(false);
 			}
-			if (stickDLeftnote.getY() < 362 && stickDLeft2.getI() > 2)
+			if (stickDLeftnote.getY() < 363 && stickDLeft2.getI() > 2)
 				stickDLeft2.setI(0.0);
 			if (Physics.Collision(stickDLeftnote, stickDLeft2) && stickDLeftnote.getY() > 364
 					&& stickDLeft2.getI() < 2.0 && stickDLeft2.getX() == 244) {
@@ -373,35 +363,34 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			Bnote.tick();
 			
 			stickDownnote.tick();
-			
-			if (Bnote.getY() < 370 && bbutton2.getI() > 2)
+			if(bbutton2.getI()>2)
 				bbutton2.setI(0.0);
-			if (Physics.Collision(Bnote, bbutton2) && Bnote.getY() > 372 && bbutton2.getI() < 2.0
+			if (Bnote.getY() < 370 && bbutton2.getI() > 250)
+				bbutton2.setI(0.0);
+			if (Physics.Collision(Bnote, bbutton2) && Bnote.getY() > 370 && bbutton2.getI() < 3.0
 					&& bbutton2.getX() == 313) {
 				a = a + 1;
-				// Bnote.setY(-35); //set falling to false
+				Bnote.setY(-35); 
 				PlaySound(pp);
-				// System.out.println(score);
+				Bnote.setFalling(false);
 
 			}
-			if (Xnote.getY() < 351 && xbutton2.getI() > 2)
+			if (Xnote.getY() < 349 && xbutton2.getI() > 2)
 				xbutton2.setI(0.0);
-			if (Physics.Collision(Xnote, xbutton2) && Xnote.getY() > 353 && xbutton2.getI() < 2.0
-					&& xbutton2.getX() == 319) {
+			if (Physics.Collision(Xnote, xbutton2) && Xnote.getY() > 351 && xbutton2.getI() < 3
+					&& xbutton2.getX() == 339) {
 				a = a + 1;
 				Xnote.setY(-54);
 				PlaySound(pp);
-				// System.out.println(score);
 				Xnote.setFalling(false);
 			}
-			if (stickDownnote.getY() < 362 && stickDLeft2.getI() > 2)
+			if (stickDownnote.getY() < 360 && stickDown2.getI() > 2)
 				stickDown2.setI(0.0);
-			if (Physics.Collision(stickDownnote, stickDown2) && stickDownnote.getY() > 364
-					&& stickDown2.getI() < 2.0 && stickDown2.getX() == 244) {
+			if (Physics.Collision(stickDownnote, stickDown2) && stickDownnote.getY() > 362
+					&& stickDown2.getI() < 2 && stickDown2.getX() == 244) {
 				a = a + 1;
 				stickDownnote.setY(-43);
 				PlaySound(pp);
-				// System.out.println(score);
 				stickDownnote.setFalling(false);
 			}
 
@@ -581,6 +570,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		MarthWavedash = new JRadioButtonMenuItem("Marth Wavedash");
 
 		multi = new JRadioButtonMenuItem("Multishine");
+		
 		group.add(multi);
 		menu.add(multi);
 
