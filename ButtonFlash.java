@@ -15,7 +15,7 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 	// this is not to be confused with the NOTE class which will be the moving notes
 	// that fall on screen
 
-	private double i;
+	
 	private int z;
 	GameWindow g;
 	private BufferedImage abutton2; // sprite for white a button
@@ -81,33 +81,33 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 		if (e.getKeyCode() == KeyEvent.VK_A) {
 			x = 327;
 			y = 367;
-			i++;
+			
 			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_B) {
 			x = 313;
 			y = 372;
-			i=i+.5;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_X) {
 			x = 339;
 			y = 356;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_Y) {
 			x = 319;
 			y = 353;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_L) {
 			x = 238;
 			y = 336;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_R) {
 			x = 328;
 			y = 336;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_S) {
 			x = 282;
@@ -117,55 +117,55 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 		if (e.getKeyCode() == KeyEvent.VK_Z) {
 			x = 327;
 			y = 345;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			x = 244;
 			y = 364;
 			z = 1;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			x = 244;
 			y = 364;
 			z = 2;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			x = 244;
 			y = 364;
 			z = 3;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			x = 244;
 			y = 364;
 			z = 4;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_1) {
 			x = 244;
 			y = 364;
 			z = 5;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_2) {
 			x = 244;
 			y = 364;
 			z = 6;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_3) {
 			x = 244;
 			y = 364;
 			z = 7;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_4) {
 			x = 244;
 			y = 364;
 			z = 8;
-			i++;
+			
 		}
 		// c stick (needs a z coord simply because there are so many sprites going into
 		// 390, 440)
@@ -173,25 +173,25 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 			x = 307;
 			y = 397;
 			z = 1;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_H) {
 			x = 307;
 			y = 397;
 			z = 2;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_J) {
 			x = 307;
 			y = 397;
 			z = 3;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_K) {
 			x = 307;
 			y = 397;
 			z = 4;
-			i++;
+			
 		}
 
 		// c stick diagonal inputs
@@ -199,25 +199,25 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 			x = 307;
 			y = 397;
 			z = 5;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_6) {
 			x = 307;
 			y = 397;
 			z = 6;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_7) {
 			x = 307;
 			y = 397;
 			z = 7;
-			i++;
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_8) {
 			x = 307;
 			y = 397;
 			z = 8;
-			i++;
+			
 		}
 
 	}
@@ -454,14 +454,6 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 	public double getY() {
 		// TODO Auto-generated method stub
 		return y;
-	}
-
-	public double getI() {
-		return i;
-	}
-
-	public void setI(double i) {
-		this.i = i;
 	}
 
 	public Rectangle getBounds() {
