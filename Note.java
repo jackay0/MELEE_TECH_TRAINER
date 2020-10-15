@@ -53,7 +53,9 @@ public class Note extends GameObject implements EntityA {
 		if (y > 460) {
 			falling = false;
 			y = initialY;
-
+            g.setA(0);
+            g.setB(0);
+            g.setC(0);
 			// y = y + 3;
 		}
 		System.out.println("y = " + y);
