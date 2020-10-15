@@ -23,6 +23,7 @@ import javax.swing.JTextArea;
 public class GameWindow extends Canvas implements Runnable { // This interface is useful when utilizing multiple threads
 	// In this case, it ensures that just because one Thread has been executed,
 	// another won't simply stop its processes
+	// 320 x 240 pixels
 	public static final int WIDTH = 320;
 	public static final int HEIGHT = WIDTH / 12 * 9;
 	public static final int SCALE = 2;
@@ -64,6 +65,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 	// vars dealing specifically with scoring
 	private int a = 0;
+	private int b = 0;
+	private int c = 0;
 
 	private ButtonFlash ButtonFlash;
 	private ButtonFlash abutton2; // sprite for white a button
@@ -107,8 +110,6 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	JRadioButtonMenuItem FoxWavedash;
 	JRadioButtonMenuItem multi;
 	JRadioButtonMenuItem MarthWavedash;
-	
-	
 
 	public void init() {
 
@@ -323,7 +324,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			}
 
 			if (Physics.Collision(Ynote, ybutton2) && Ynote.getY() > 353 && ybutton2.getX() == 319) {
-				a = a + 1;
+				a = 1;
 				Ynote.setY(-54);
 				PlaySound(pp);
 				// System.out.println(score);
@@ -332,22 +333,23 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			}
 
 			if (Physics.Collision(Rnote, rbutton2) && Rnote.getY() > 336 && rbutton2.getX() == 328) {
-				a = a + 1;
+				b = 1;
+
 				Rnote.setY(-71);
 				PlaySound(pp);
-				// System.out.println(score);
 				Rnote.setFalling(false);
 			}
 
 			if (Physics.Collision(stickDLeftnote, stickDLeft2) && stickDLeftnote.getY() > 364
 					&& stickDLeft2.getX() == 244) {
-				a = a + 1;
+				c = 1;
 				stickDLeftnote.setY(-43);
 				PlaySound(pp);
 				// System.out.println(score);
 				stickDLeftnote.setFalling(false);
 
 			}
+
 		}
 
 		// MULTISHINE
@@ -397,9 +399,14 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			createBufferStrategy(3); // We are going to have 3 buffers which increases loading speed over time
 			return;
 		}
-		
-		if(a==3)
-			score=1;
+
+		if (a == 1 && b == 1 && c == 1) {
+			score++;
+			a = 0;
+			b = 0;
+			c = 0;
+		}
+
 		Graphics g = bs.getDrawGraphics();
 		/////////////////////////////////////
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
@@ -485,18 +492,6 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			zbutton2.keyPressed(e);
 			stickDLeft2.keyPressed(e);
 
-			Anote.keyPressed(e); // no released because it is necessary for something you press to pause and
-									// unpause
-			Bnote.keyPressed(e);
-			Xnote.keyPressed(e);
-			Ynote.keyPressed(e);
-			Lnote.keyPressed(e);
-			Rnote.keyPressed(e);
-			Znote.keyPressed(e);
-			stickUpnote.keyPressed(e);
-			stickDLeftnote.keyPressed(e);
-			stickDownnote.keyPressed(e);
-
 		}
 
 		@Override
@@ -523,6 +518,21 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	}
 
 	// plays the sound
+
+	public void setA(int x) {
+		a = x;
+
+	}
+
+	public void setB(int x) {
+		b = x;
+
+	}
+
+	public void setC(int x) {
+		c = x;
+
+	}
 
 	static void PlaySound(File sound) {
 		try {
