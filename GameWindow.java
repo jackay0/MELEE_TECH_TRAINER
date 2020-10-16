@@ -41,6 +41,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private BufferedImage spriteSheet = null;
 	private BufferedImage controller = null;
+	private BufferedImage FDbackground = null;
 
 	// sprites for buttons on screen
 	private BufferedImage abutton;
@@ -62,6 +63,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private BufferedImage stickDLeft;
 	private BufferedImage cstick;
 	private BufferedImage controllerr;
+	private BufferedImage FDCOCKY;
 
 	// vars dealing specifically with scoring
 	private int a = 0;
@@ -118,6 +120,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				// an error report
 			spriteSheet = loader.LoadImage("/Sprite_Sheet.png");
 			controller = loader.LoadImage("/GCC.png");
+			FDbackground = loader.LoadImage("/FD.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -153,6 +156,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		// locations aren't manipulated.
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
 		SpriteSheet gcc = new SpriteSheet(controller);
+		SpriteSheet fd = new SpriteSheet(FDbackground);
 		abutton = ss.grabImage(1, 1, 32, 32);
 		bbutton = ss.grabImage(2, 1, 32, 32);
 		xbutton = ss.grabImage(4, 1, 32, 32);
@@ -172,7 +176,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickDLeft = ss.grabImage(1, 2, 32, 32);
 		cstick = ss.grabImage(2, 4, 32, 32);
 		controllerr = gcc.grabImage(1, 1, 200, 100);
-
+        FDCOCKY = fd.grabImage(1,1,320,240);
+		
 		Anote = new Note("a", 327, -40, this);
 		Bnote = new Note("b", 313, -35, this);
 		Xnote = new Note("x", 339, -51, this);
@@ -409,7 +414,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		Graphics g = bs.getDrawGraphics();
 		/////////////////////////////////////
-		g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+		//g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+		g.drawImage(FDCOCKY,0,0,getWidth(),getHeight(),this);
 		g.drawImage(controllerr, 200, 350, this);
 		g.drawImage(abutton, 327, 367, this);
 		g.drawImage(bbutton, 313, 372, this);
