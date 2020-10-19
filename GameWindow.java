@@ -69,6 +69,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private int a = 0;
 	private int b = 0;
 	private int c = 0;
+	private int counter = 0;
 
 	private ButtonFlash ButtonFlash;
 	private ButtonFlash abutton2; // sprite for white a button
@@ -176,8 +177,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickDLeft = ss.grabImage(1, 2, 32, 32);
 		cstick = ss.grabImage(2, 4, 32, 32);
 		controllerr = gcc.grabImage(1, 1, 200, 100);
-        FDCOCKY = fd.grabImage(1,1,320,240);
-		
+		FDCOCKY = fd.grabImage(1, 1, 320, 240);
+
 		Anote = new Note("a", 327, -40, this);
 		Bnote = new Note("b", 313, -35, this);
 		Xnote = new Note("x", 339, -51, this);
@@ -354,7 +355,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				stickDLeftnote.setFalling(false);
 
 			}
-
+			counter++;
 		}
 
 		// MULTISHINE
@@ -391,6 +392,10 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				stickDownnote.setFalling(false);
 
 			}
+			if (counter == 20)
+				presentscore();
+			else
+				counter++;
 
 		}
 
@@ -414,8 +419,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		Graphics g = bs.getDrawGraphics();
 		/////////////////////////////////////
-		//g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-		g.drawImage(FDCOCKY,0,0,getWidth(),getHeight(),this);
+		// g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+		g.drawImage(FDCOCKY, 0, 0, getWidth(), getHeight(), this);
 		g.drawImage(controllerr, 200, 350, this);
 		g.drawImage(abutton, 327, 367, this);
 		g.drawImage(bbutton, 313, 372, this);
@@ -429,7 +434,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		g.drawImage(cstick, 307, 397, this); // UHJK
 
 		g.drawString("Score:" + score, 10, 10);
-
+        
 		// Buttons on the controller
 		abutton2.render(g);
 		bbutton2.render(g);
@@ -549,6 +554,12 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void presentScore();
+
+	{
+		
 	}
 
 	// Menu Bar at the top of the window
