@@ -1,7 +1,9 @@
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -41,6 +43,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private BufferedImage spriteSheet = null;
 	private BufferedImage controller = null;
+	private BufferedImage pauseSheet = null;
 	private BufferedImage FDbackground = null;
 
 	// sprites for buttons on screen
@@ -62,14 +65,18 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private BufferedImage stickDRight;
 	private BufferedImage stickDLeft;
 	private BufferedImage cstick;
+
+	// EXTRAS
 	private BufferedImage controllerr;
+	private BufferedImage pauseIcon;
+	private BufferedImage title;
 	private BufferedImage FDCOCKY;
 
 	// vars dealing specifically with scoring
 	private int a = 0;
 	private int b = 0;
 	private int c = 0;
-	private int counter = 0;
+	private int counter = 1;
 
 	private ButtonFlash ButtonFlash;
 	private ButtonFlash abutton2; // sprite for white a button
@@ -114,6 +121,12 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	JRadioButtonMenuItem multi;
 	JRadioButtonMenuItem MarthWavedash;
 
+	private enum STATE {
+		START, PLAY, PRESENTSCORE
+	};
+
+	private STATE state = STATE.START;
+
 	public void init() {
 
 		BufferedImageLoader loader = new BufferedImageLoader();
@@ -121,6 +134,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				// an error report
 			spriteSheet = loader.LoadImage("/Sprite_Sheet.png");
 			controller = loader.LoadImage("/GCC.png");
+			pauseSheet = loader.LoadImage("/pause.png");
+			title = loader.LoadImage("/title.png");
 			FDbackground = loader.LoadImage("/FD.png");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -157,6 +172,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		// locations aren't manipulated.
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
 		SpriteSheet gcc = new SpriteSheet(controller);
+		SpriteSheet p = new SpriteSheet(pauseSheet);
+		SpriteSheet t = new SpriteSheet(title);
 		SpriteSheet fd = new SpriteSheet(FDbackground);
 		abutton = ss.grabImage(1, 1, 32, 32);
 		bbutton = ss.grabImage(2, 1, 32, 32);
@@ -176,7 +193,11 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickDRight = ss.grabImage(3, 2, 32, 32);
 		stickDLeft = ss.grabImage(1, 2, 32, 32);
 		cstick = ss.grabImage(2, 4, 32, 32);
+
+		// EXTRAS
 		controllerr = gcc.grabImage(1, 1, 200, 100);
+		pauseIcon = p.grabImage(1, 1, 32, 32);
+		title = t.grabImage(1, 1, 32, 32);
 		FDCOCKY = fd.grabImage(1, 1, 320, 240);
 
 		Anote = new Note("a", 327, -40, this);
@@ -295,6 +316,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				Ynote.setFalling(true);
 				Rnote.setFalling(true);
 				stickDLeftnote.setFalling(true);
+				counter++;
 			}
 		}
 		// FOX MULTISHINE
@@ -303,100 +325,103 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				Bnote.setFalling(true);
 				Xnote.setFalling(true);
 				stickDownnote.setFalling(true);
+				counter++;
 			}
 		}
 	}
 
-	private void tick() // everything in the game that updates
+	private void tick() // everything in the game that updates AND COLLISION
+	// IMPORTANT FOR STICKS, Z VALUE FOR EACH: U: 1, D: 2, L: 3, R: 4, UL: 6, UR: 5,
+	// DL: 8, DR: 7
 	{
+       System.out.println("WIDTH: " + WIDTH);
+       
+		if (state == STATE.START) {
 
-		// FOX WAVEDASH
-
-		if (FoxWavedash.isSelected()) {
-
-			delayFalling();
-
-			Ynote.tick();
-
-			Rnote.tick();
-
-			stickDLeftnote.tick();
-
-			if (Physics.Collision(Anote, abutton2) && Anote.getY() > 367 && abutton2.getX() == 327) {
-				a = a + 1;
-				// Anote.setY(-40);
-				PlaySound(pp);
-				// System.out.println(score);
-			}
-
-			if (Physics.Collision(Ynote, ybutton2) && Ynote.getY() > 353 && ybutton2.getX() == 319) {
-				a = 1;
-				Ynote.setY(-54);
-				PlaySound(pp);
-				// System.out.println(score);
-				Ynote.setFalling(false);
-
-			}
-
-			if (Physics.Collision(Rnote, rbutton2) && Rnote.getY() > 336 && rbutton2.getX() == 328) {
-				b = 1;
-
-				Rnote.setY(-71);
-				PlaySound(pp);
-				Rnote.setFalling(false);
-			}
-
-			if (Physics.Collision(stickDLeftnote, stickDLeft2) && stickDLeftnote.getY() > 364
-					&& stickDLeft2.getX() == 244) {
-				c = 1;
-				stickDLeftnote.setY(-43);
-				PlaySound(pp);
-				// System.out.println(score);
-				stickDLeftnote.setFalling(false);
-
-			}
-			counter++;
 		}
 
-		// MULTISHINE
-		if (multi.isSelected()) {
-			delayFalling();
+		if (state == STATE.PLAY) {
+			// FOX WAVEDASH
 
-			Xnote.tick();
+			if (FoxWavedash.isSelected()) {
 
-			Bnote.tick();
+				delayFalling();
 
-			stickDownnote.tick();
+				Ynote.tick();
 
-			if (Physics.Collision(Bnote, bbutton2) && Bnote.getY() > 371 && bbutton2.getX() == 313) {
-				a = a + 1;
-				Bnote.setY(-35);
-				PlaySound(pp);
-				Bnote.setFalling(false);
+				Rnote.tick();
+
+				stickDLeftnote.tick();
+
+				if (Physics.Collision(Ynote, ybutton2) && Ynote.getY() > 353 && ybutton2.getX() == 319) {
+					a = 1;
+					Ynote.setY(-54);
+					PlaySound(pp);
+					// System.out.println(score);
+					Ynote.setFalling(false);
+
+				}
+
+				if (Physics.Collision(Rnote, rbutton2) && Rnote.getY() > 336 && rbutton2.getX() == 328) {
+					b = 1;
+
+					Rnote.setY(-71);
+					PlaySound(pp);
+					Rnote.setFalling(false);
+				}
+
+				if (Physics.Collision(stickDLeftnote, stickDLeft2) && stickDLeftnote.getY() > 364
+						&& stickDLeft2.getX() == 244 && stickDLeft2.getZ() == 8) {
+					c = 1;
+					stickDLeftnote.setY(-43);
+					PlaySound(pp);
+					// System.out.println(score);
+					stickDLeftnote.setFalling(false);
+
+				}
+				System.out.println("counter: " + counter);
+				
+				if (counter == 20)
+					state = STATE.PRESENTSCORE;
 
 			}
 
-			if (Physics.Collision(Xnote, xbutton2) && Xnote.getY() > 355 && xbutton2.getX() == 339) {
-				a = a + 1;
-				Xnote.setY(-54);
-				PlaySound(pp);
-				Xnote.setFalling(false);
+			// MULTISHINE
+			if (multi.isSelected()) {
+				delayFalling();
+
+				Xnote.tick();
+
+				Bnote.tick();
+
+				stickDownnote.tick();
+
+				if (Physics.Collision(Bnote, bbutton2) && Bnote.getY() > 371 && bbutton2.getX() == 313) {
+					a = a + 1;
+					Bnote.setY(-35);
+					PlaySound(pp);
+					Bnote.setFalling(false);
+
+				}
+
+				if (Physics.Collision(Xnote, xbutton2) && Xnote.getY() > 355 && xbutton2.getX() == 339) {
+					a = a + 1;
+					Xnote.setY(-54);
+					PlaySound(pp);
+					Xnote.setFalling(false);
+
+				}
+
+				if (Physics.Collision(stickDownnote, stickDown2) && stickDownnote.getY() > 360
+						&& stickDown2.getX() == 244) {
+					a = a + 1;
+					stickDownnote.setY(-43);
+					PlaySound(pp);
+					stickDownnote.setFalling(false);
+
+				}
 
 			}
-
-			if (Physics.Collision(stickDownnote, stickDown2) && stickDownnote.getY() > 360
-					&& stickDown2.getX() == 244) {
-				a = a + 1;
-				stickDownnote.setY(-43);
-				PlaySound(pp);
-				stickDownnote.setFalling(false);
-
-			}
-			if (counter == 20)
-				presentscore();
-			else
-				counter++;
-
 		}
 
 	}
@@ -419,54 +444,77 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		Graphics g = bs.getDrawGraphics();
 		/////////////////////////////////////
-		// g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-		g.drawImage(FDCOCKY, 0, 0, getWidth(), getHeight(), this);
-		g.drawImage(controllerr, 200, 350, this);
-		g.drawImage(abutton, 327, 367, this);
-		g.drawImage(bbutton, 313, 372, this);
-		g.drawImage(xbutton, 339, 356, this);
-		g.drawImage(ybutton, 319, 353, this);
-		g.drawImage(lbutton, 238, 336, this);
-		g.drawImage(rbutton, 328, 336, this);
-		g.drawImage(startbutton, 282, 375, this);
-		g.drawImage(zbutton, 327, 345, this);
-		g.drawImage(stick, 244, 364, this);
-		g.drawImage(cstick, 307, 397, this); // UHJK
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
 
-		g.drawString("Score:" + score, 10, 10);
-        
-		// Buttons on the controller
-		abutton2.render(g);
-		bbutton2.render(g);
-		xbutton2.render(g);
-		ybutton2.render(g);
-		lbutton2.render(g);
-		rbutton2.render(g);
-		startbutton2.render(g);
-		zbutton2.render(g);
-		stickDLeft2.render(g);
-		// Anote.render(g);
+		if (state == STATE.START) {
+			g.drawImage(title, 290, 200, this);
+			g.setFont(new Font("Arial", Font.BOLD, 10));
+			g.setColor(Color.WHITE);
+			g.drawString("Press A", 285, 280);
 
-		if (multi.isSelected()) {
-			Bnote.render(g);
-			Xnote.render(g);
-			stickDownnote.render(g);
 		}
 
-		// We need to divide the buttons that comprise of each tech into this render, so
-		// that they only are on screen when selected
-		if (FoxWavedash.isSelected()) {
-			Ynote.render(g);
-			Rnote.render(g);
-			stickDLeftnote.render(g);
+		if (state == STATE.PLAY) {
+			g.drawImage(FDCOCKY, 0, 0, getWidth(), getHeight(), this);
+			g.drawImage(controllerr, 200, 350, this);
+			g.drawImage(abutton, 327, 367, this);
+			g.drawImage(bbutton, 313, 372, this);
+			g.drawImage(xbutton, 339, 356, this);
+			g.drawImage(ybutton, 319, 353, this);
+			g.drawImage(lbutton, 238, 336, this);
+			g.drawImage(rbutton, 328, 336, this);
+			g.drawImage(startbutton, 282, 375, this);
+			g.drawImage(zbutton, 327, 345, this);
+			g.drawImage(stick, 244, 364, this);
+			g.drawImage(cstick, 307, 397, this); // UHJK
+			if (pause == 1) {
+				g.drawImage(pauseIcon, 290, 200, this);
+			}
+
+			// Scoring letters
+			g.setFont(new Font("Arial", Font.BOLD, 30));
+			g.setColor(Color.WHITE);
+			g.drawString("SCORE:" + score, 20, 25);
+
+			// Buttons on the controller
+			abutton2.render(g);
+			bbutton2.render(g);
+			xbutton2.render(g);
+			ybutton2.render(g);
+			lbutton2.render(g);
+			rbutton2.render(g);
+			startbutton2.render(g);
+			zbutton2.render(g);
+			stickDLeft2.render(g);
+			// Anote.render(g);
+
+			if (multi.isSelected()) {
+				Bnote.render(g);
+				Xnote.render(g);
+				stickDownnote.render(g);
+			}
+
+			// We need to divide the buttons that comprise of each tech into this render, so
+			// that they only are on screen when selected
+			if (FoxWavedash.isSelected()) {
+				Ynote.render(g);
+				Rnote.render(g);
+				stickDLeftnote.render(g);
+			}
+
+			// Lnote.render(g);
+			// Znote.render(g);
+			// cUpnote.render(g);
+			// stickUpnote.render(g);
+
+			//////////////////////////////////// where we can draw images ^^^^^
 		}
-
-		// Lnote.render(g);
-		// Znote.render(g);
-		// cUpnote.render(g);
-		// stickUpnote.render(g);
-
-		//////////////////////////////////// where we can draw images ^^^^^
+		if (state == STATE.PRESENTSCORE) {
+			g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+			g.setFont(new Font("Arial", Font.BOLD, 30));
+			g.setColor(Color.WHITE);
+			g.drawString("YOUR SCORE: " + score, 200, 200);
+		}
 
 		g.dispose();
 		bs.show();
@@ -500,6 +548,9 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			lbutton2.keyPressed(e);
 			rbutton2.keyPressed(e);
 			startbutton2.keyPressed(e);
+			if (e.getKeyCode() == KeyEvent.VK_A && state == STATE.START) {
+				state = STATE.PLAY;
+			}
 			zbutton2.keyPressed(e);
 			stickDLeft2.keyPressed(e);
 
@@ -514,12 +565,12 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			lbutton2.keyReleased(e);
 			rbutton2.keyReleased(e);
 			startbutton2.keyReleased(e);
-
 			if (e.getKeyCode() == KeyEvent.VK_S) {
 				pause = 1;
 			} else {
 				pause = 0;
 			}
+
 			zbutton2.keyReleased(e);
 			stickDLeft2.keyReleased(e);
 			// anote.keyReleased(e);
@@ -554,12 +605,6 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void presentScore();
-
-	{
-		
 	}
 
 	// Menu Bar at the top of the window
