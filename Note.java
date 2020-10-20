@@ -67,39 +67,39 @@ public class Note extends GameObject implements EntityA {
 	public void render(Graphics g) // draws out image
 	{
 
-		if (x == 327 && str == "a") {
+		if (x == 347 && str == "a") {
 
-			g.drawImage(A, 327, (int) y, null);
+			g.drawImage(A, 367, (int) y, null);
 		}
-		if (x == 313 && str == "b") {
-			g.drawImage(B, 313, (int) y, null);
+		if (x == 333 && str == "b") {
+			g.drawImage(B, 333, (int) y, null);
 		}
-		if (x == 339 && str == "x") {
-			g.drawImage(X, 339, (int) y, null);
+		if (x == 359 && str == "x") {
+			g.drawImage(X, 359, (int) y, null);
 		}
-		if (x == 319 && str == "y") {
-			g.drawImage(Y, 319, (int) y, null);
+		if (x == 339 && str == "y") {
+			g.drawImage(Y, 339, (int) y, null);
 		}
-		if (x == 238 && str == "l") {
-			g.drawImage(L, 238, (int) y, null);
+		if (x == 258 && str == "l") {
+			g.drawImage(L, 258, (int) y, null);
 		}
-		if (x == 328 && str == "r") {
-			g.drawImage(R, 328, (int) y, null);
+		if (x == 348 && str == "r") {
+			g.drawImage(R, 348, (int) y, null);
 		}
-		if (x == 327 && str == "z") {
-			g.drawImage(Z, 327, (int) y, null);
+		if (x == 367 && str == "z") {
+			g.drawImage(Z, 367, (int) y, null);
 		}
-		if (x == 307 && str == "cUp") {
-			g.drawImage(cUp, 307, (int) y, null);
+		if (x == 327 && str == "cUp") {
+			g.drawImage(cUp, 327, (int) y, null);
 		}
-		if (x == 244 && str == "stickUp") {
-			g.drawImage(stickUp, 244, (int) y, null);
+		if (x == 264 && str == "stickUp") {
+			g.drawImage(stickUp, 264, (int) y, null);
 		}
-		if (x == 244 && str == "stickDLeft") {
-			g.drawImage(stickDLeft, 244, (int) y, null);
+		if (x == 264 && str == "stickDLeft") {
+			g.drawImage(stickDLeft, 264, (int) y, null);
 		}
-		if (x == 244 && str == "stickDown") {
-			g.drawImage(stickDown, 244, (int) y, null);
+		if (x == 264 && str == "stickDown") {
+			g.drawImage(stickDown, 264, (int) y, null);
 		}
 	}
 
