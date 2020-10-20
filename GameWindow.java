@@ -70,7 +70,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private BufferedImage controllerr;
 	private BufferedImage pauseIcon;
 	private BufferedImage title;
-	private BufferedImage FDCOCKY;
+	private BufferedImage FDBackground;
 
 	// vars dealing specifically with scoring
 	private int a = 0;
@@ -198,19 +198,19 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		controllerr = gcc.grabImage(1, 1, 200, 100);
 		pauseIcon = p.grabImage(1, 1, 32, 32);
 		title = t.grabImage(1, 1, 32, 32);
-		FDCOCKY = fd.grabImage(1, 1, 320, 240);
+		FDBackground = fd.grabImage(1, 1, 320, 240);
 
-		Anote = new Note("a", 327, -40, this);
-		Bnote = new Note("b", 313, -35, this);
-		Xnote = new Note("x", 339, -51, this);
-		Ynote = new Note("y", 319, -54, this);
-		Lnote = new Note("l", 238, -71, this);
-		Rnote = new Note("r", 328, -71, this);
-		Znote = new Note("z", 327, -62, this);
-		cUpnote = new Note("cUp", 307, -10, this);
-		stickUpnote = new Note("stickUp", 244, -43, this);
-		stickDLeftnote = new Note("stickDLeft", 244, -43, this);
-		stickDownnote = new Note("stickDown", 244, -43, this);
+		Anote = new Note("a", 347, -40, this);
+		Bnote = new Note("b", 333, -35, this);
+		Xnote = new Note("x", 359, -51, this);
+		Ynote = new Note("y", 339, -54, this);
+		Lnote = new Note("l", 258, -71, this);
+		Rnote = new Note("r", 348, -71, this);
+		Znote = new Note("z", 367, -62, this);
+		cUpnote = new Note("cUp", 327, -10, this);
+		stickUpnote = new Note("stickUp", 264, -43, this);
+		stickDLeftnote = new Note("stickDLeft", 264, -43, this);
+		stickDownnote = new Note("stickDown", 264, -43, this);
 
 	}
 
@@ -249,14 +249,14 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		output.setEditable(false);
 		JScrollPane scrollPane = new JScrollPane(output); // and height variables to size the
 		JPanel contentPane = new JPanel(new BorderLayout());
-
+        
 		game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setFocusable(false); // very important
 		JFrame frame = new JFrame(game.TITLE);
 		frame.add(game);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
+		frame.setResizable(true);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.pack(); // not sure what this does, supposedly an optimization
@@ -334,7 +334,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	// IMPORTANT FOR STICKS, Z VALUE FOR EACH: U: 1, D: 2, L: 3, R: 4, UL: 6, UR: 5,
 	// DL: 8, DR: 7
 	{
-       System.out.println("WIDTH: " + WIDTH);
+       //System.out.println("WIDTH: " + WIDTH );
        
 		if (state == STATE.START) {
 
@@ -353,7 +353,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				stickDLeftnote.tick();
 
-				if (Physics.Collision(Ynote, ybutton2) && Ynote.getY() > 353 && ybutton2.getX() == 319) {
+				if (Physics.Collision(Ynote, ybutton2) && Ynote.getY() > 353 && ybutton2.getX() == 339) {
 					a = 1;
 					Ynote.setY(-54);
 					PlaySound(pp);
@@ -362,7 +362,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				}
 
-				if (Physics.Collision(Rnote, rbutton2) && Rnote.getY() > 336 && rbutton2.getX() == 328) {
+				if (Physics.Collision(Rnote, rbutton2) && Rnote.getY() > 336 && rbutton2.getX() == 348) {
 					b = 1;
 
 					Rnote.setY(-71);
@@ -371,7 +371,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				}
 
 				if (Physics.Collision(stickDLeftnote, stickDLeft2) && stickDLeftnote.getY() > 364
-						&& stickDLeft2.getX() == 244 && stickDLeft2.getZ() == 8) {
+						&& stickDLeft2.getX() == 264 && stickDLeft2.getZ() == 8) {
 					c = 1;
 					stickDLeftnote.setY(-43);
 					PlaySound(pp);
@@ -396,7 +396,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				stickDownnote.tick();
 
-				if (Physics.Collision(Bnote, bbutton2) && Bnote.getY() > 371 && bbutton2.getX() == 313) {
+				if (Physics.Collision(Bnote, bbutton2) && Bnote.getY() > 371 && bbutton2.getX() == 333) {
 					a = a + 1;
 					Bnote.setY(-35);
 					PlaySound(pp);
@@ -404,7 +404,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				}
 
-				if (Physics.Collision(Xnote, xbutton2) && Xnote.getY() > 355 && xbutton2.getX() == 339) {
+				if (Physics.Collision(Xnote, xbutton2) && Xnote.getY() > 355 && xbutton2.getX() == 359) {
 					a = a + 1;
 					Xnote.setY(-54);
 					PlaySound(pp);
@@ -413,13 +413,17 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				}
 
 				if (Physics.Collision(stickDownnote, stickDown2) && stickDownnote.getY() > 360
-						&& stickDown2.getX() == 244) {
+						&& stickDown2.getX() == 264) {
 					a = a + 1;
 					stickDownnote.setY(-43);
 					PlaySound(pp);
 					stickDownnote.setFalling(false);
 
 				}
+				
+				if (counter == 20)
+					state = STATE.PRESENTSCORE;
+
 
 			}
 		}
@@ -450,25 +454,25 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			g.drawImage(title, 290, 200, this);
 			g.setFont(new Font("Arial", Font.BOLD, 10));
 			g.setColor(Color.WHITE);
-			g.drawString("Press A", 285, 280);
+			g.drawString("Press A to start", 267, 280);
 
 		}
 
 		if (state == STATE.PLAY) {
-			g.drawImage(FDCOCKY, 0, 0, getWidth(), getHeight(), this);
-			g.drawImage(controllerr, 200, 350, this);
-			g.drawImage(abutton, 327, 367, this);
-			g.drawImage(bbutton, 313, 372, this);
-			g.drawImage(xbutton, 339, 356, this);
-			g.drawImage(ybutton, 319, 353, this);
-			g.drawImage(lbutton, 238, 336, this);
-			g.drawImage(rbutton, 328, 336, this);
-			g.drawImage(startbutton, 282, 375, this);
-			g.drawImage(zbutton, 327, 345, this);
-			g.drawImage(stick, 244, 364, this);
-			g.drawImage(cstick, 307, 397, this); // UHJK
+			g.drawImage(FDBackground, 0, 0, getWidth(), getHeight(), this);
+			g.drawImage(controllerr, 220, 350, this);
+			g.drawImage(abutton, 347, 367, this);
+			g.drawImage(bbutton, 333, 372, this);
+			g.drawImage(xbutton, 359, 356, this);
+			g.drawImage(ybutton, 339, 353, this);
+			g.drawImage(lbutton, 258, 336, this);
+			g.drawImage(rbutton, 348, 336, this);
+			g.drawImage(startbutton, 302, 375, this);
+			g.drawImage(zbutton, 347, 345, this);
+			g.drawImage(stick, 264, 364, this);
+			g.drawImage(cstick, 347, 397, this); // UHJK
 			if (pause == 1) {
-				g.drawImage(pauseIcon, 290, 200, this);
+				g.drawImage(pauseIcon, 300, 200, this);
 			}
 
 			// Scoring letters
@@ -514,6 +518,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			g.setFont(new Font("Arial", Font.BOLD, 30));
 			g.setColor(Color.WHITE);
 			g.drawString("YOUR SCORE: " + score, 200, 200);
+			g.setFont(new Font("Arial", Font.BOLD, 15));
+			g.drawString("Press A to restart", 257, 280);
 		}
 
 		g.dispose();
@@ -548,11 +554,15 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			lbutton2.keyPressed(e);
 			rbutton2.keyPressed(e);
 			startbutton2.keyPressed(e);
+			zbutton2.keyPressed(e);
+			stickDLeft2.keyPressed(e);
+			
 			if (e.getKeyCode() == KeyEvent.VK_A && state == STATE.START) {
 				state = STATE.PLAY;
 			}
-			zbutton2.keyPressed(e);
-			stickDLeft2.keyPressed(e);
+			if (e.getKeyCode() == KeyEvent.VK_A && state == STATE.PRESENTSCORE) {
+				state = STATE.PLAY;
+			}
 
 		}
 
