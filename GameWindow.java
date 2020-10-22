@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -120,9 +122,11 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	JRadioButtonMenuItem FoxWavedash;
 	JRadioButtonMenuItem multi;
 	JRadioButtonMenuItem MarthWavedash;
+	JRadioButtonMenuItem start;
+	JRadioButtonMenuItem stage;
 
 	private enum STATE {
-		START, PLAY, PRESENTSCORE
+		START, PLAY, PRESENTSCORE, BACKGROUNDS
 	};
 
 	private STATE state = STATE.START;
@@ -249,7 +253,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		output.setEditable(false);
 		JScrollPane scrollPane = new JScrollPane(output); // and height variables to size the
 		JPanel contentPane = new JPanel(new BorderLayout());
-        
+
 		game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setFocusable(false); // very important
@@ -261,6 +265,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		frame.setVisible(true);
 		frame.pack(); // not sure what this does, supposedly an optimization
 		frame.addKeyListener(game.new AL());
+		// frame.addMouseListener(game.new AL());
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		frame.setJMenuBar(game.createMenuBar());
 		game.start();
@@ -334,8 +339,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	// IMPORTANT FOR STICKS, Z VALUE FOR EACH: U: 1, D: 2, L: 3, R: 4, UL: 6, UR: 5,
 	// DL: 8, DR: 7
 	{
-       //System.out.println("WIDTH: " + WIDTH );
-       
+		// System.out.println("WIDTH: " + WIDTH );
+
 		if (state == STATE.START) {
 
 		}
@@ -380,7 +385,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				}
 				System.out.println("counter: " + counter);
-				
+
 				if (counter == 20)
 					state = STATE.PRESENTSCORE;
 
@@ -420,10 +425,9 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 					stickDownnote.setFalling(false);
 
 				}
-				
+
 				if (counter == 20)
 					state = STATE.PRESENTSCORE;
-
 
 			}
 		}
@@ -451,10 +455,19 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
 
 		if (state == STATE.START) {
-			g.drawImage(title, 290, 200, this);
+			g.drawImage(title, 303, 200, this);
 			g.setFont(new Font("Arial", Font.BOLD, 10));
 			g.setColor(Color.WHITE);
-			g.drawString("Press A to start", 267, 280);
+			g.drawRect(258, 280, 125, 20);
+
+			g.drawString("PLAY", 305, 294);
+
+		}
+		if (state == STATE.BACKGROUNDS) {
+			g.setFont(new Font("Arial", Font.BOLD, 10));
+			g.setColor(Color.WHITE);
+			g.drawString("Choose a stage", 267, 280);
+			// g.drawString, arg1, arg2, arg3, arg4);
 
 		}
 
@@ -514,6 +527,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			//////////////////////////////////// where we can draw images ^^^^^
 		}
 		if (state == STATE.PRESENTSCORE) {
+			counter = 1;
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
 			g.setFont(new Font("Arial", Font.BOLD, 30));
 			g.setColor(Color.WHITE);
@@ -556,12 +570,13 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			startbutton2.keyPressed(e);
 			zbutton2.keyPressed(e);
 			stickDLeft2.keyPressed(e);
-			
+
 			if (e.getKeyCode() == KeyEvent.VK_A && state == STATE.START) {
 				state = STATE.PLAY;
 			}
 			if (e.getKeyCode() == KeyEvent.VK_A && state == STATE.PRESENTSCORE) {
 				state = STATE.PLAY;
+
 			}
 
 		}
@@ -587,6 +602,20 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			// anote.setFalling(false);
 		}
 
+	}
+
+	public void mousePressed(MouseEvent e) {
+		int mx = e.getX();
+		int my = e.getY();
+
+		if (mx >= 258 && my <= 383) {
+			if (my >= 280 && my <= 300) {
+				if (((KeyEvent) e).getKeyCode() == KeyEvent.VK_A && state == STATE.START) {
+					state = STATE.PLAY;
+
+				}
+			}
+		}
 	}
 
 	// plays the sound
@@ -622,32 +651,44 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	public JMenuBar createMenuBar() {
 		// Characters and main menus
 		JMenuBar menuBar;
+		JMenu fox;
 		JMenu menu;
-
 		// Create the menu bar.
+
 		menuBar = new JMenuBar();
 
 		// Menus
-		menu = new JMenu("MENU    	");
-
+		fox = new JMenu("    Fox    ");
+		menu = new JMenu("    MENU    ");
 		menuBar.add(menu);
+		menuBar.add(fox);
 
 		// menu.addSeparator();
-
-		ButtonGroup group = new ButtonGroup();
+		ButtonGroup menugroup = new ButtonGroup();
+		ButtonGroup foxgroup = new ButtonGroup();
 
 		FoxWavedash = new JRadioButtonMenuItem("Fox Wavedash");
 
 		FoxWavedash.setSelected(true);
-		group.add(FoxWavedash);
-		menu.add(FoxWavedash);
+		foxgroup.add(FoxWavedash);
+		fox.add(FoxWavedash);
 
 		MarthWavedash = new JRadioButtonMenuItem("Marth Wavedash");
 
 		multi = new JRadioButtonMenuItem("Multishine");
+		foxgroup.add(multi);
+		fox.add(multi);
 
-		group.add(multi);
-		menu.add(multi);
+		// START UP SCREEN
+		start = new JRadioButtonMenuItem("Start Screen");
+		start.setSelected(true);
+		menugroup.add(start);
+		menu.add(start);
+
+		// STAGE SELECT SCREEN
+		stage = new JRadioButtonMenuItem("Stage Select");
+		menugroup.add(stage);
+		menu.add(stage);
 
 		return menuBar;
 	}
