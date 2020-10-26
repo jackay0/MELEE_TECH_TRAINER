@@ -265,6 +265,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		frame.setVisible(true);
 		frame.pack(); // not sure what this does, supposedly an optimization
 		frame.addKeyListener(game.new AL());
+		frame.addMouseListener((MouseListener) game.new LA());
 		// frame.addMouseListener(game.new AL());
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		frame.setJMenuBar(game.createMenuBar());
@@ -558,6 +559,49 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 	// This class is used for the ButtonFlash class, enabling communication with the
 	// keyboard and the class
+	public class LA implements MouseListener {
+
+		public void mouseClicked(MouseEvent e) {
+			int mx = e.getX();
+			int my = e.getY();
+
+			if (state == STATE.START) {
+				if (mx >= 258 && mx <= 383) {
+					if (my >= 280 && my <= 300) {
+
+						state = STATE.PLAY;
+
+					}
+				}
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+	}
+
 	public class AL extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -571,7 +615,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			zbutton2.keyPressed(e);
 			stickDLeft2.keyPressed(e);
 
-			if (e.getKeyCode() == KeyEvent.VK_A && state == STATE.START) {
+		 if (e.getKeyCode() == KeyEvent.VK_A && state == STATE.START) {
 				state = STATE.PLAY;
 			}
 			if (e.getKeyCode() == KeyEvent.VK_A && state == STATE.PRESENTSCORE) {
@@ -602,20 +646,6 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			// anote.setFalling(false);
 		}
 
-	}
-
-	public void mousePressed(MouseEvent e) {
-		int mx = e.getX();
-		int my = e.getY();
-
-		if (mx >= 258 && my <= 383) {
-			if (my >= 280 && my <= 300) {
-				if (((KeyEvent) e).getKeyCode() == KeyEvent.VK_A && state == STATE.START) {
-					state = STATE.PLAY;
-
-				}
-			}
-		}
 	}
 
 	// plays the sound
