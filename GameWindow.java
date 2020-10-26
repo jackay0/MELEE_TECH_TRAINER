@@ -41,6 +41,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 	private int pause;
 	private int score = 0;
+	int mx = 0;
+	int my = 0;
 
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private BufferedImage spriteSheet = null;
@@ -265,7 +267,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		frame.setVisible(true);
 		frame.pack(); // not sure what this does, supposedly an optimization
 		frame.addKeyListener(game.new AL());
-		frame.addMouseListener((MouseListener) game.new LA());
+		frame.addMouseListener(game.new LA());
 		// frame.addMouseListener(game.new AL());
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		frame.setJMenuBar(game.createMenuBar());
@@ -560,10 +562,13 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	// This class is used for the ButtonFlash class, enabling communication with the
 	// keyboard and the class
 	public class LA implements MouseListener {
+		boolean mouseDown;
 
 		public void mouseClicked(MouseEvent e) {
-			int mx = e.getX();
-			int my = e.getY();
+		/*	mx = e.getX();
+			my = e.getY();
+			System.out.println("mx: " + mx);
+			System.out.println("my: " + my);
 
 			if (state == STATE.START) {
 				if (mx >= 258 && mx <= 383) {
@@ -573,12 +578,26 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 					}
 				}
-			}
+			}*/
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
+			mx = e.getX();
+			my = e.getY();
+			if (e.getButton() == MouseEvent.BUTTON1) {
+				
+				if (state == STATE.START) {
+					if (mx >= 258 && mx <= 383) {
+						if (my >= 280 && my <= 300) {
+							state = STATE.PLAY;
+							System.out.println("mx: " + mx);
+							System.out.println("my: " + my);
+						}
+					}
+				}
+			}
 
 		}
 
@@ -596,10 +615,11 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
+			if (e.getButton() == MouseEvent.BUTTON1) {
+				mouseDown = false;
+			}
 
 		}
-
 	}
 
 	public class AL extends KeyAdapter {
@@ -615,7 +635,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			zbutton2.keyPressed(e);
 			stickDLeft2.keyPressed(e);
 
-		 if (e.getKeyCode() == KeyEvent.VK_A && state == STATE.START) {
+			if (e.getKeyCode() == KeyEvent.VK_A && state == STATE.START) {
 				state = STATE.PLAY;
 			}
 			if (e.getKeyCode() == KeyEvent.VK_A && state == STATE.PRESENTSCORE) {
