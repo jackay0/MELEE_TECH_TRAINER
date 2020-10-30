@@ -41,9 +41,10 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 	private int pause;
 	private int score = 0;
-	int mx = 0;
-	int my = 0;
+	// int mx = 0;
+	// int my = 0;
 
+	private BufferedImage currentBackground = null;
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private BufferedImage spriteSheet = null;
 	private BufferedImage controller = null;
@@ -267,7 +268,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		frame.setVisible(true);
 		frame.pack(); // not sure what this does, supposedly an optimization
 		frame.addKeyListener(game.new AL());
-		frame.addMouseListener(game.new LA());
+		game.addMouseListener(game.new LA());
 		// frame.addMouseListener(game.new AL());
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		frame.setJMenuBar(game.createMenuBar());
@@ -430,6 +431,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				}
 
 				if (counter == 20)
+					//currentBackground = image;
 					state = STATE.PRESENTSCORE;
 
 			}
@@ -458,24 +460,47 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
 
 		if (state == STATE.START) {
-			g.drawImage(title, 303, 200, this);
+			// g.drawImage(title, 303, 200, this);
 			g.setFont(new Font("Arial", Font.BOLD, 10));
 			g.setColor(Color.WHITE);
 			g.drawRect(258, 280, 125, 20);
-
 			g.drawString("PLAY", 305, 294);
-
+			g.setColor(Color.CYAN);
+			g.setFont(new Font("Arial", Font.BOLD, 70));
+			g.drawString("Melee Tech Trainer", 0, 200);
 		}
 		if (state == STATE.BACKGROUNDS) {
-			g.setFont(new Font("Arial", Font.BOLD, 10));
+			g.setColor(Color.CYAN);
+			g.drawRect(0, 0, 50, 50);
+			g.setFont(new Font("Arial", Font.BOLD, 20));
+			g.drawString("ESC", 5, 32);
+			g.setFont(new Font("Arial", Font.BOLD, 70));
+			g.drawString("Choose a Stage", 55, 85);
+			g.setFont(new Font("Arial", Font.BOLD, 70));
+			g.drawRect(32, 130, 185, 70);
+			g.drawRect(32, 210, 185, 70);
+			g.drawRect(227, 130, 185, 70);
+			g.drawRect(227, 210, 185, 70);
+			g.drawRect(422, 130, 185, 70);
+			g.drawRect(422, 210, 185, 70);
+			g.setFont(new Font("Arial", Font.BOLD, 15));
 			g.setColor(Color.WHITE);
-			g.drawString("Choose a stage", 267, 280);
-			// g.drawString, arg1, arg2, arg3, arg4);
+			g.drawString("Final Destination", 64, 169);
+			g.drawString("Battlefield", 281, 169);
+			g.drawString("Dreamland", 474, 169);
+			g.drawString("Yoshi's Story", 76, 247);
+			g.drawString("Fountain of Dreams", 250, 247);
+			g.drawString("Pokemon Stadium", 450, 247);
 
 		}
 
 		if (state == STATE.PLAY) {
-			g.drawImage(FDBackground, 0, 0, getWidth(), getHeight(), this);
+
+			g.drawImage(currentBackground, 0, 0, getWidth(), getHeight(), this);
+			g.setColor(Color.CYAN);
+			g.drawRect(0, 0, 50, 50);
+			g.setFont(new Font("Arial", Font.BOLD, 20));
+			g.drawString("ESC", 5, 32);
 			g.drawImage(controllerr, 220, 350, this);
 			g.drawImage(abutton, 347, 367, this);
 			g.drawImage(bbutton, 333, 372, this);
@@ -494,7 +519,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			// Scoring letters
 			g.setFont(new Font("Arial", Font.BOLD, 30));
 			g.setColor(Color.WHITE);
-			g.drawString("SCORE:" + score, 20, 25);
+			g.drawString("SCORE:" + score, 500, 25);
 
 			// Buttons on the controller
 			abutton2.render(g);
@@ -529,14 +554,18 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 			//////////////////////////////////// where we can draw images ^^^^^
 		}
+
 		if (state == STATE.PRESENTSCORE) {
 			counter = 1;
-			g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+			currentBackground = image;
+			g.drawImage(currentBackground, 0, 0, getWidth(), getHeight(), this);
 			g.setFont(new Font("Arial", Font.BOLD, 30));
 			g.setColor(Color.WHITE);
-			g.drawString("YOUR SCORE: " + score, 200, 200);
+			g.drawString("YOUR SCORE: " + score, 200, 210);
 			g.setFont(new Font("Arial", Font.BOLD, 15));
-			g.drawString("Press A to restart", 257, 280);
+			g.drawRect(256, 240, 125, 20);
+			g.drawString("RESTART", 282, 255);
+			// g.drawString("Press A to restart", 257, 280);
 		}
 
 		g.dispose();
@@ -562,44 +591,70 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	// This class is used for the ButtonFlash class, enabling communication with the
 	// keyboard and the class
 	public class LA implements MouseListener {
-		boolean mouseDown;
 
 		public void mouseClicked(MouseEvent e) {
-		/*	mx = e.getX();
-			my = e.getY();
-			System.out.println("mx: " + mx);
-			System.out.println("my: " + my);
-
-			if (state == STATE.START) {
-				if (mx >= 258 && mx <= 383) {
-					if (my >= 280 && my <= 300) {
-
-						state = STATE.PLAY;
-
-					}
-				}
-			}*/
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
+			int mx = e.getX();
+			int my = e.getY();
+
 			// TODO Auto-generated method stub
-			mx = e.getX();
-			my = e.getY();
+
 			if (e.getButton() == MouseEvent.BUTTON1) {
-				
 				if (state == STATE.START) {
 					if (mx >= 258 && mx <= 383) {
 						if (my >= 280 && my <= 300) {
-							state = STATE.PLAY;
-							System.out.println("mx: " + mx);
-							System.out.println("my: " + my);
+							state = STATE.BACKGROUNDS;
+
 						}
 					}
 				}
 			}
 
-		}
+			if (state == STATE.BACKGROUNDS) {
+				if (mx >= 32 && mx <= 217) {
+					if (my >= 130 && my <= 200) {
+						currentBackground = FDBackground;
+						state = STATE.PLAY;
+
+					}
+				}
+
+				if (mx >= 0 && mx <= 50) {
+					if (my >= 0 && my <= 50) {
+						state = STATE.START;
+					}
+				}
+			}
+			if (state == STATE.PLAY) {
+				if (mx >= 0 && mx <= 50) {
+					if (my >= 0 && my <= 50) {
+						state = STATE.BACKGROUNDS;
+					}
+				}
+			}
+				
+			if(state == STATE.PRESENTSCORE) {
+				if (mx >= 256 && mx <= 381) {
+					if (my >= 240 && my <= 260) {
+						//currentBackground = image;
+						state = STATE.PLAY;
+					}
+				}
+				
+				
+				
+			}
+			
+			}
+		
+			
+			
+	
+
+		
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
@@ -615,11 +670,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			if (e.getButton() == MouseEvent.BUTTON1) {
-				mouseDown = false;
-			}
-
 		}
+
 	}
 
 	public class AL extends KeyAdapter {
@@ -635,13 +687,10 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			zbutton2.keyPressed(e);
 			stickDLeft2.keyPressed(e);
 
-			if (e.getKeyCode() == KeyEvent.VK_A && state == STATE.START) {
-				state = STATE.PLAY;
-			}
-			if (e.getKeyCode() == KeyEvent.VK_A && state == STATE.PRESENTSCORE) {
-				state = STATE.PLAY;
+			// if (e.getKeyCode() == KeyEvent.VK_A && state == STATE.PRESENTSCORE) {
+			// state = STATE.PLAY;
 
-			}
+			// }
 
 		}
 
@@ -669,6 +718,15 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	}
 
 	// plays the sound
+	public void setState(STATE state) {
+		this.state = state;
+
+	}
+
+	public void setBackground(BufferedImage img) {
+		currentBackground = img;
+
+	}
 
 	public void setA(int x) {
 		a = x;
@@ -702,19 +760,18 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		// Characters and main menus
 		JMenuBar menuBar;
 		JMenu fox;
-		JMenu menu;
+		
 		// Create the menu bar.
 
 		menuBar = new JMenuBar();
 
 		// Menus
 		fox = new JMenu("    Fox    ");
-		menu = new JMenu("    MENU    ");
-		menuBar.add(menu);
+
 		menuBar.add(fox);
 
 		// menu.addSeparator();
-		ButtonGroup menugroup = new ButtonGroup();
+		
 		ButtonGroup foxgroup = new ButtonGroup();
 
 		FoxWavedash = new JRadioButtonMenuItem("Fox Wavedash");
@@ -728,17 +785,6 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		multi = new JRadioButtonMenuItem("Multishine");
 		foxgroup.add(multi);
 		fox.add(multi);
-
-		// START UP SCREEN
-		start = new JRadioButtonMenuItem("Start Screen");
-		start.setSelected(true);
-		menugroup.add(start);
-		menu.add(start);
-
-		// STAGE SELECT SCREEN
-		stage = new JRadioButtonMenuItem("Stage Select");
-		menugroup.add(stage);
-		menu.add(stage);
 
 		return menuBar;
 	}
