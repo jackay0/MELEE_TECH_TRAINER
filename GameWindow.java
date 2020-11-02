@@ -127,6 +127,11 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	JRadioButtonMenuItem MarthWavedash;
 	JRadioButtonMenuItem start;
 	JRadioButtonMenuItem stage;
+	
+	//difficulties
+	JRadioButtonMenuItem EasyMode;
+	JRadioButtonMenuItem MediumMode;
+	JRadioButtonMenuItem HardMode;
 
 	private enum STATE {
 		START, PLAY, PRESENTSCORE, BACKGROUNDS
@@ -557,7 +562,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		if (state == STATE.PRESENTSCORE) {
 			counter = 1;
-			currentBackground = image;
+			//currentBackground = image;
 			g.drawImage(currentBackground, 0, 0, getWidth(), getHeight(), this);
 			g.setFont(new Font("Arial", Font.BOLD, 30));
 			g.setColor(Color.WHITE);
@@ -760,6 +765,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		// Characters and main menus
 		JMenuBar menuBar;
 		JMenu fox;
+		JMenu difficulties;
 		
 		// Create the menu bar.
 
@@ -767,25 +773,36 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		// Menus
 		fox = new JMenu("    Fox    ");
-
-		menuBar.add(fox);
+        difficulties = new JMenu("    Difficulties    ");
+        menuBar.add(difficulties);
+        menuBar.add(fox);
+		
 
 		// menu.addSeparator();
 		
+        ButtonGroup difficultygroup = new ButtonGroup();
 		ButtonGroup foxgroup = new ButtonGroup();
-
+        
+		EasyMode = new JRadioButtonMenuItem("Beginner (.25x speed)");
+		MediumMode = new JRadioButtonMenuItem("Intermediate (.5x speed)");
+		HardMode = new JRadioButtonMenuItem("Advanced (1x speed)");
+		difficultygroup.add(EasyMode);
+		difficultygroup.add(MediumMode);
+		difficultygroup.add(HardMode);
+		difficulties.add(EasyMode);
+		difficulties.add(MediumMode);
+		difficulties.add(HardMode);
+		
 		FoxWavedash = new JRadioButtonMenuItem("Fox Wavedash");
-
 		FoxWavedash.setSelected(true);
 		foxgroup.add(FoxWavedash);
 		fox.add(FoxWavedash);
-
-		MarthWavedash = new JRadioButtonMenuItem("Marth Wavedash");
-
-		multi = new JRadioButtonMenuItem("Multishine");
+		multi = new JRadioButtonMenuItem("Fox Multishine");
 		foxgroup.add(multi);
 		fox.add(multi);
 
+		MarthWavedash = new JRadioButtonMenuItem("Marth Wavedash");
+		
 		return menuBar;
 	}
 
