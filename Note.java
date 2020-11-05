@@ -41,6 +41,7 @@ public class Note extends GameObject implements EntityA {
 		stickUp = ss.grabImage(5, 2, 32, 32);
 		stickDLeft = ss.grabImage(1, 2, 32, 32);
 		stickDown = ss.grabImage(2, 2, 32, 32);
+		//stickLeft = ss.grabImage();
 	}
 
 	public void tick() // update method
@@ -58,7 +59,7 @@ public class Note extends GameObject implements EntityA {
             g.setC(0);
 			// y = y + 3;
 		}
-		System.out.println("y = " + y);
+		//System.out.println("y = " + y);
 
 	}
 	// note is entity a, checks to see if collision is true for colliding with a
@@ -66,6 +67,7 @@ public class Note extends GameObject implements EntityA {
 
 	public void render(Graphics g) // draws out image
 	{
+		System.out.println("R is DRAWN");
 
 		if (x == 347 && str == "a") {
 
@@ -84,6 +86,7 @@ public class Note extends GameObject implements EntityA {
 			g.drawImage(L, 258, (int) y, null);
 		}
 		if (x == 348 && str == "r") {
+			System.out.println("R is DRAWN");
 			g.drawImage(R, 348, (int) y, null);
 		}
 		if (x == 367 && str == "z") {
