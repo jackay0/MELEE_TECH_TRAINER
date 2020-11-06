@@ -509,8 +509,9 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				RnoteFW.tick();
 
 				stickDLeftnoteFW.tick();
-
-				if (Physics.Collision(YnoteFW, ybutton2) && YnoteFW.getY() > 353 && ybutton2.getX() == 339) {
+				
+				
+				if (Physics.Collision(YnoteFW, ybutton2) && YnoteFW.getY() == 353 && ybutton2.getX() == 339) {
 					a = 1;
 					YnoteFW.setY(-54);
 					PlaySound(cSound);
@@ -518,7 +519,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				}
 
-				if (Physics.Collision(RnoteFW, rbutton2) && RnoteFW.getY() > 336 && rbutton2.getX() == 348) {
+				if (Physics.Collision(RnoteFW, rbutton2) && RnoteFW.getY() == 336 && rbutton2.getX() == 348) {
 					b = 1;
 
 					RnoteFW.setY(-71);
@@ -526,7 +527,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 					RnoteFW.setFalling(false);
 				}
 
-				if (Physics.Collision(stickDLeftnoteFW, stickDLeft2) && stickDLeftnoteFW.getY() > 364
+				if (Physics.Collision(stickDLeftnoteFW, stickDLeft2) && stickDLeftnoteFW.getY() == 364
 						&& stickDLeft2.getX() == 264 && stickDLeft2.getZ() == 8) {
 					c = 1;
 					stickDLeftnoteFW.setY(-74);
@@ -686,7 +687,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			g.drawImage(startbutton, 302, 375, this);
 			g.drawImage(zbutton, 347, 345, this);
 			g.drawImage(stick, 264, 364, this);
-			g.drawImage(cstick, 347, 397, this); // UHJK
+			g.drawImage(cstick, 327, 397, this); // UHJK
 			if (pause == 1) {
 				g.drawImage(pauseIcon, 300, 200, this);
 			}
