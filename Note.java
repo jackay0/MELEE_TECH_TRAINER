@@ -21,6 +21,7 @@ public class Note extends GameObject implements EntityA {
 	BufferedImage stickDown;
 	private boolean falling = true;
 	private int initialY;
+	
 
 	public Note(String str, int x, int y, GameWindow g) {
 
@@ -46,14 +47,18 @@ public class Note extends GameObject implements EntityA {
 
 	public void tick() // update method
 	{
-
+		
+      
 		if (falling == true) {
+		
 			if (y < 461)
-				y = y + 3;
+				
+				y = y + 5.5;
 		}
 		if (y > 460) {
 			falling = false;
 			y = initialY;
+			
             g.setA(0);
             g.setB(0);
             g.setC(0);
