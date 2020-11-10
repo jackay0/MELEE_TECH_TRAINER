@@ -47,7 +47,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private File cSound = new File("./Notes/C.wav");
 
 	private int pause;
-	private int score = 0;
+	private int score;
 	// int mx = 0;
 	// int my = 0;
 
@@ -90,6 +90,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private int c = 0;
 	private int counter = 1;
 	private int highscore;
+	
 
 	int c1 = 0;
 	int c2 = 0;
@@ -297,7 +298,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		// 16, add 4?20?
 		RnoteFW = new Note("r", 348, -74, this);
 		YnoteFW = new Note("y", 339, -54, this);
-		stickDLeftnoteFW = new Note("stickDLeft", 264, -74, this);
+		stickDLeftnoteFW = new Note("stickDLeft", 264, -76, this);
 
 		// MULTISHINE
 		BnoteMS = new Note("b", 333, -35, this);
@@ -496,9 +497,23 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		if (state == STATE.PLAY) {
 			// FOX WAVEDASH
-
+			if(HardMode.isSelected() && FoxWavedash.isSelected()) {
+				YnoteFW.setFallSpeed(5.5);
+				RnoteFW.setFallSpeed(5.5);
+				stickDLeftnoteFW.setFallSpeed(5.5);
+			}
+			if(MediumMode.isSelected() && FoxWavedash.isSelected()) {
+				YnoteFW.setFallSpeed(2.75);
+				RnoteFW.setFallSpeed(2.75);
+				stickDLeftnoteFW.setFallSpeed(2.75);
+			}
+			if(EasyMode.isSelected() && FoxWavedash.isSelected()) {
+				YnoteFW.setFallSpeed(1.375);
+				RnoteFW.setFallSpeed(1.375);
+				stickDLeftnoteFW.setFallSpeed(1.375);
+			}
 			if (FoxWavedash.isSelected()) {
-
+               
 				// sets highscore for fox wavedash
 				highscore = hs.hScore(0);
                 System.out.println("Y: "+YnoteFW.getY());
@@ -511,7 +526,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				stickDLeftnoteFW.tick();
 				
 				
-				if (Physics.Collision(YnoteFW, ybutton2) && YnoteFW.getY() == 353 && ybutton2.getX() == 339) {
+				if (Physics.Collision(YnoteFW, ybutton2) && YnoteFW.getY() > 352 && YnoteFW.getY() < 360 && ybutton2.getX() == 339) {
 					a = 1;
 					YnoteFW.setY(-54);
 					PlaySound(cSound);
@@ -519,18 +534,18 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				}
 
-				if (Physics.Collision(RnoteFW, rbutton2) && RnoteFW.getY() == 336 && rbutton2.getX() == 348) {
+				if (Physics.Collision(RnoteFW, rbutton2) && RnoteFW.getY() > 335 && RnoteFW.getY() < 343 && rbutton2.getX() == 348) {
 					b = 1;
 
-					RnoteFW.setY(-71);
+					RnoteFW.setY(-74);
 					PlaySound(aSound);
 					RnoteFW.setFalling(false);
 				}
 
-				if (Physics.Collision(stickDLeftnoteFW, stickDLeft2) && stickDLeftnoteFW.getY() == 364
+				if (Physics.Collision(stickDLeftnoteFW, stickDLeft2) && stickDLeftnoteFW.getY() > 364 && stickDLeftnoteFW.getY() < 371
 						&& stickDLeft2.getX() == 264 && stickDLeft2.getZ() == 8) {
 					c = 1;
-					stickDLeftnoteFW.setY(-74);
+					stickDLeftnoteFW.setY(-76);
 
 					// System.out.println(score);
 					stickDLeftnoteFW.setFalling(false);
@@ -539,8 +554,11 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				System.out.println("counter: " + counter);
 
-				if (counter == 20)
+				if (counter == 2)
+				{
+					
 					state = STATE.PRESENTSCORE;
+				}
 
 			}
 
@@ -554,7 +572,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				stickDownnoteMS2.tick();
 				stickDownnoteMS3.tick();
 
-				if (Physics.Collision(BnoteMS, bbutton2) && BnoteMS.getY() > 371 && bbutton2.getX() == 333) {
+				if (Physics.Collision(BnoteMS, bbutton2) && BnoteMS.getY() > 371 && BnoteMS.getY() < 378 && bbutton2.getX() == 333) {
 					a = 1;
 					BnoteMS.setY(-35);
 
@@ -562,7 +580,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				}
 
-				if (Physics.Collision(XnoteMS, xbutton2) && XnoteMS.getY() > 355 && xbutton2.getX() == 359) {
+				if (Physics.Collision(XnoteMS, xbutton2) && XnoteMS.getY() > 355 && XnoteMS.getY() < 362 && xbutton2.getX() == 359) {
 					b = 1;
 					XnoteMS.setY(-54);
 
@@ -741,6 +759,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				}
 				g.drawString(" HIGH SCORE:" + highscore, 399, 50);
 			}
+			//System.out.println(score);
 
 			if (nair.isSelected()) {
 				AnoteN.render(g);
@@ -756,10 +775,10 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 			//////////////////////////////////// where we can draw images ^^^^^
 		}
-
+		//System.out.println(score);
 		if (state == STATE.PRESENTSCORE) {
 			counter = 1;
-			score = 0;
+			System.out.println(score);
 			// currentBackground = image;
 			g.drawImage(currentBackground, 0, 0, getWidth(), getHeight(), this);
 			g.setFont(new Font("Arial", Font.BOLD, 30));
@@ -769,6 +788,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			g.drawRect(256, 240, 125, 20);
 			g.drawString("RESTART", 282, 255);
 			// g.drawString("Press A to restart", 257, 280);
+			score = 0;
 		}
 
 		g.dispose();
