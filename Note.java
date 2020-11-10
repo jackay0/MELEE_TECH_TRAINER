@@ -21,7 +21,7 @@ public class Note extends GameObject implements EntityA {
 	BufferedImage stickDown;
 	private boolean falling = true;
 	private int initialY;
-	
+	private double fallSpeed;
 
 	public Note(String str, int x, int y, GameWindow g) {
 
@@ -53,7 +53,7 @@ public class Note extends GameObject implements EntityA {
 		
 			if (y < 461)
 				
-				y = y + 5.5;
+				y = y + fallSpeed;
 		}
 		if (y > 460) {
 			falling = false;
@@ -72,7 +72,7 @@ public class Note extends GameObject implements EntityA {
 
 	public void render(Graphics g) // draws out image
 	{
-		System.out.println("R is DRAWN");
+		//System.out.println("R is DRAWN");
 
 		if (x == 347 && str == "a") {
 
@@ -91,7 +91,7 @@ public class Note extends GameObject implements EntityA {
 			g.drawImage(L, 258, (int) y, null);
 		}
 		if (x == 348 && str == "r") {
-			System.out.println("R is DRAWN");
+			//System.out.println("R is DRAWN");
 			g.drawImage(R, 348, (int) y, null);
 		}
 		if (x == 367 && str == "z") {
@@ -143,6 +143,14 @@ public class Note extends GameObject implements EntityA {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public double getFallSpeed() {
+		return fallSpeed;
+	}
+
+	public void setFallSpeed(double fallSpeed) {
+		this.fallSpeed = fallSpeed;
 	}
 
 }
