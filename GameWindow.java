@@ -301,7 +301,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickDLeftnoteFW = new Note("stickDLeft", 264, -76, this);
 
 		// MULTISHINE
-		BnoteMS = new Note("b", 333, -35, this);
+		BnoteMS = new Note("b", 333, -37, this);
 		XnoteMS = new Note("x", 359, -51, this);
 		stickDownnoteMS = new Note("stickDown", 264, -40, this);
 		stickDownnoteMS2 = new Note("stickDown", 264, -55, this);
@@ -512,6 +512,27 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				RnoteFW.setFallSpeed(1.375);
 				stickDLeftnoteFW.setFallSpeed(1.375);
 			}
+			if(HardMode.isSelected() && multi.isSelected()) {
+				XnoteMS.setFallSpeed(7);
+				BnoteMS.setFallSpeed(7);
+				stickDownnoteMS.setFallSpeed(7);
+				stickDownnoteMS2.setFallSpeed(7);
+				stickDownnoteMS3.setFallSpeed(7);
+			}
+			if(MediumMode.isSelected() && multi.isSelected()) {
+				XnoteMS.setFallSpeed(3.5);
+				BnoteMS.setFallSpeed(3.5);
+				stickDownnoteMS.setFallSpeed(3.5);
+				stickDownnoteMS2.setFallSpeed(3.5);
+				stickDownnoteMS3.setFallSpeed(3.5);
+			}
+			if(EasyMode.isSelected() && multi.isSelected()) {
+				XnoteMS.setFallSpeed(1.75);
+				BnoteMS.setFallSpeed(1.75);
+				stickDownnoteMS.setFallSpeed(1.75);
+				stickDownnoteMS2.setFallSpeed(1.75);
+				stickDownnoteMS3.setFallSpeed(1.75);
+			}
 			if (FoxWavedash.isSelected()) {
                
 				// sets highscore for fox wavedash
@@ -552,7 +573,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				}
 
-				System.out.println("counter: " + counter);
+				//System.out.println("counter: " + counter);
 
 				if (counter == 2)
 				{
@@ -573,16 +594,18 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				stickDownnoteMS3.tick();
 
 				if (Physics.Collision(BnoteMS, bbutton2) && BnoteMS.getY() > 371 && BnoteMS.getY() < 378 && bbutton2.getX() == 333) {
+				
 					a = 1;
-					BnoteMS.setY(-35);
+					//System.out.println(Bnote.getY());
+					BnoteMS.setY(-37);
 
 					BnoteMS.setFalling(false);
 
 				}
 
-				if (Physics.Collision(XnoteMS, xbutton2) && XnoteMS.getY() > 355 && XnoteMS.getY() < 362 && xbutton2.getX() == 359) {
+				if (Physics.Collision(XnoteMS, xbutton2) && XnoteMS.getY() > 354 && XnoteMS.getY() < 361 && xbutton2.getX() == 359) {
 					b = 1;
-					XnoteMS.setY(-54);
+					XnoteMS.setY(-51);
 
 					XnoteMS.setFalling(false);
 
@@ -778,7 +801,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		//System.out.println(score);
 		if (state == STATE.PRESENTSCORE) {
 			counter = 1;
-			System.out.println(score);
+			//System.out.println(score);
 			// currentBackground = image;
 			g.drawImage(currentBackground, 0, 0, getWidth(), getHeight(), this);
 			g.setFont(new Font("Arial", Font.BOLD, 30));
