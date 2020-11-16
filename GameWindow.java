@@ -301,11 +301,11 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickDLeftnoteFW = new Note("stickDLeft", 264, -76, this);
 
 		// MULTISHINE
-		BnoteMS = new Note("b", 333, -37, this);
-		XnoteMS = new Note("x", 359, -51, this);
-		stickDownnoteMS = new Note("stickDown", 264, -40, this);
-		stickDownnoteMS2 = new Note("stickDown", 264, -55, this);
-		stickDownnoteMS3 = new Note("stickDown", 264, -70, this);
+		BnoteMS = new Note("b", 333, -35, this);
+		XnoteMS = new Note("x", 359, -54, this);
+		stickDownnoteMS = new Note("stickDown", 264, -33, this);
+		stickDownnoteMS2 = new Note("stickDown", 264, -48, this);
+		stickDownnoteMS3 = new Note("stickDown", 264, -63, this);
 
 		// NAIR
 		AnoteN = new Note("a", 347, -40, this);
@@ -513,25 +513,25 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				stickDLeftnoteFW.setFallSpeed(1.375);
 			}
 			if(HardMode.isSelected() && multi.isSelected()) {
-				XnoteMS.setFallSpeed(7);
-				BnoteMS.setFallSpeed(7);
-				stickDownnoteMS.setFallSpeed(7);
-				stickDownnoteMS2.setFallSpeed(7);
-				stickDownnoteMS3.setFallSpeed(7);
+				XnoteMS.setFallSpeed(6);
+				BnoteMS.setFallSpeed(6);
+				stickDownnoteMS.setFallSpeed(6);
+				stickDownnoteMS2.setFallSpeed(6);
+				stickDownnoteMS3.setFallSpeed(6);
 			}
 			if(MediumMode.isSelected() && multi.isSelected()) {
-				XnoteMS.setFallSpeed(3.5);
-				BnoteMS.setFallSpeed(3.5);
-				stickDownnoteMS.setFallSpeed(3.5);
-				stickDownnoteMS2.setFallSpeed(3.5);
-				stickDownnoteMS3.setFallSpeed(3.5);
+				XnoteMS.setFallSpeed(3);
+				BnoteMS.setFallSpeed(3);
+				stickDownnoteMS.setFallSpeed(3);
+				stickDownnoteMS2.setFallSpeed(3);
+				stickDownnoteMS3.setFallSpeed(3);
 			}
 			if(EasyMode.isSelected() && multi.isSelected()) {
-				XnoteMS.setFallSpeed(1.75);
-				BnoteMS.setFallSpeed(1.75);
-				stickDownnoteMS.setFallSpeed(1.75);
-				stickDownnoteMS2.setFallSpeed(1.75);
-				stickDownnoteMS3.setFallSpeed(1.75);
+				XnoteMS.setFallSpeed(1.5);
+				BnoteMS.setFallSpeed(1.5);
+				stickDownnoteMS.setFallSpeed(1.5);
+				stickDownnoteMS2.setFallSpeed(1.5);
+				stickDownnoteMS3.setFallSpeed(1.5);
 			}
 			if (FoxWavedash.isSelected()) {
                
@@ -575,7 +575,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				//System.out.println("counter: " + counter);
 
-				if (counter == 2)
+				if (counter == 20)
 				{
 					
 					state = STATE.PRESENTSCORE;
@@ -597,7 +597,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				
 					a = 1;
 					//System.out.println(Bnote.getY());
-					BnoteMS.setY(-37);
+					BnoteMS.setY(-35);
 
 					BnoteMS.setFalling(false);
 
@@ -605,7 +605,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				if (Physics.Collision(XnoteMS, xbutton2) && XnoteMS.getY() > 354 && XnoteMS.getY() < 361 && xbutton2.getX() == 359) {
 					b = 1;
-					XnoteMS.setY(-51);
+					XnoteMS.setY(-54);
 
 					XnoteMS.setFalling(false);
 
@@ -614,7 +614,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				if (Physics.Collision(stickDownnoteMS, stickDown3) && stickDownnoteMS.getY() > 360
 						&& stickDown3.getX() == 264) {
 					c1 = 1;
-					stickDownnoteMS.setY(-40);
+					stickDownnoteMS.setY(-33);
 
 					stickDownnoteMS.setFalling(false);
 
@@ -622,7 +622,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				if (Physics.Collision(stickDownnoteMS2, stickDown3) && stickDownnoteMS2.getY() > 360
 						&& stickDown3.getX() == 264) {
 					c2 = 1;
-					stickDownnoteMS2.setY(-55);
+					stickDownnoteMS2.setY(-48);
 
 					stickDownnoteMS2.setFalling(false);
 
@@ -630,7 +630,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				if (Physics.Collision(stickDownnoteMS3, stickDown3) && stickDownnoteMS3.getY() > 360
 						&& stickDown3.getX() == 264) {
 					c3 = 1;
-					stickDownnoteMS3.setY(-70);
+					stickDownnoteMS3.setY(-63);
 
 					stickDownnoteMS3.setFalling(false);
 
