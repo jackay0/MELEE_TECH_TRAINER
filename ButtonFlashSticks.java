@@ -354,5 +354,8 @@ public class ButtonFlashSticks extends GameObject implements EntityB { // this i
 
 		return new Rectangle((int) x, (int) y, 32, 32);
 	}
+	public int getZ() {
+		return z;
+	}
 
 }
