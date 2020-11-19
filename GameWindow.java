@@ -54,6 +54,9 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	
 	// button file map
 	private static final Map<String, ButtonFlash> buttonflashes = new HashMap<>();
+	private static final Map<String, ButtonFlashSticks> buttonflashsticks = new HashMap<>();
+	private Note[] technique = new Note[5];
+	
 	private int pause;
 	private int score;
     
@@ -105,7 +108,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	int c2 = 0;
 	int c3 = 0;
 
-	private ButtonFlash ButtonFlash;
+	/*private ButtonFlash ButtonFlash;
 	private ButtonFlash abutton2; // sprite for white a button
 	private ButtonFlash bbutton2;
 	private ButtonFlash xbutton2;
@@ -114,7 +117,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private ButtonFlash rbutton2;
 	private ButtonFlash startbutton2;
 	private ButtonFlash zbutton2;
-	/*private ButtonFlash stickUp2;
+	private ButtonFlash stickUp2;
 	private ButtonFlash stickDown2;
 	private ButtonFlash stickLeft2;
 	private ButtonFlash stickRight2;
@@ -132,7 +135,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private ButtonFlash cDLeft2;*/
 
 	// ButtonFlashSticks
-	private ButtonFlashSticks stickUp3;
+	/*private ButtonFlashSticks stickUp3;
 	private ButtonFlashSticks stickDown3;
 	private ButtonFlashSticks stickLeft3;
 	private ButtonFlashSticks stickRight3;
@@ -147,7 +150,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private ButtonFlashSticks cURight3;
 	private ButtonFlashSticks cULeft3;
 	private ButtonFlashSticks cDRight3;
-	private ButtonFlashSticks cDLeft3;
+	private ButtonFlashSticks cDLeft3;*/
 
 	private Note Anote;
 	private Note Bnote;
@@ -160,6 +163,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private Note cUpnote;
 	private Note stickDLeftnote;
 	private Note stickDownnote;
+	
 
 	// Fox Tech
 	JRadioButtonMenuItem FoxWavedash;
@@ -169,7 +173,12 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	JRadioButtonMenuItem FoxWavedashOOS;
 	JRadioButtonMenuItem shortHopDL;
 	JRadioButtonMenuItem ledgeDash;
-
+// NOTES
+	//INITIALIZE NOTE MAP
+ //   notes.put("Y_FWD", new Note("y", 339, -54, this));
+  
+	
+	
 	// WAVEDASH
 
 	private Note YnoteFW;
@@ -227,6 +236,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		// Below are the buttonflash objects, which are the white button sprites. They
 		// are off screen until a button press
+		/*
 		abutton2 = new ButtonFlash(-100, -100, this);
 		bbutton2 = new ButtonFlash(-100, -100, this);
 		xbutton2 = new ButtonFlash(-100, -100, this);
@@ -235,35 +245,34 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		rbutton2 = new ButtonFlash(-100, -100, this);
 		startbutton2 = new ButtonFlash(-100, -100, this);
         zbutton2 = new ButtonFlash(-100, -100, this);
-        
-		//stickUp2 = new ButtonFlash(-100, -100, this);
-		//stickDown2 = new ButtonFlash(-100, -100, this);
-		//stickLeft2 = new ButtonFlash(-100, -100, this);
-		//stickRight2 = new ButtonFlash(-100, -100, this);
-		//stickURight2 = new ButtonFlash(-100, -100, this);
-		//stickULeft2 = new ButtonFlash(-100, -100, this);
-		//stickDRight2 = new ButtonFlash(-100, -100, this);
-		//stickDLeft2 = new ButtonFlash(-100, -100, this);
-		//cUp2 = new ButtonFlash(-100, -100, this);
-		//cDown2 = new ButtonFlash(-100, -100, this);
-		//cLeft2 = new ButtonFlash(-100, -100, this);
-		//cRight2 = new ButtonFlash(-100, -100, this);
-		//cURight2 = new ButtonFlash(-100, -100, this);
-		//cULeft2 = new ButtonFlash(-100, -100, this);
-		//cDRight2 = new ButtonFlash(-100, -100, this);
-		//cDLeft2 = new ButtonFlash(-100, -100, this);
+		stickUp2 = new ButtonFlash(-100, -100, this);
+		stickDown2 = new ButtonFlash(-100, -100, this);
+		stickLeft2 = new ButtonFlash(-100, -100, this);
+		stickRight2 = new ButtonFlash(-100, -100, this);
+		stickURight2 = new ButtonFlash(-100, -100, this);
+		stickULeft2 = new ButtonFlash(-100, -100, this);
+		stickDRight2 = new ButtonFlash(-100, -100, this);
+		stickDLeft2 = new ButtonFlash(-100, -100, this);
+		cUp2 = new ButtonFlash(-100, -100, this);
+		cDown2 = new ButtonFlash(-100, -100, this);
+		cLeft2 = new ButtonFlash(-100, -100, this);
+		cRight2 = new ButtonFlash(-100, -100, this);
+		cURight2 = new ButtonFlash(-100, -100, this);
+		cULeft2 = new ButtonFlash(-100, -100, this);
+		cDRight2 = new ButtonFlash(-100, -100, this);
+		cDLeft2 = new ButtonFlash(-100, -100, this);*/
 		
 		
 
 		// ButtonFlashSticks
-		stickUp3 = new ButtonFlashSticks(-100, -100, this);
+		/*stickUp3 = new ButtonFlashSticks(-100, -100, this);
 		stickDown3 = new ButtonFlashSticks(-100, -100, this);
 		stickLeft3 = new ButtonFlashSticks(-100, -100, this);
 		stickRight3 = new ButtonFlashSticks(-100, -100, this);
 		stickURight3 = new ButtonFlashSticks(-100, -100, this);
 		stickULeft3 = new ButtonFlashSticks(-100, -100, this);
 		stickDRight3 = new ButtonFlashSticks(-100, -100, this);
-		stickDLeft3 = new ButtonFlashSticks(-100, -100, this);
+		stickDLeft3 = new ButtonFlashSticks(-100, -100, this);*/
 
 		// These are the images for the regular buttons, not objects because their
 		// locations aren't manipulated.
@@ -342,8 +351,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		cUpnote = new Note("cUp", 327, -10, this);
 		stickUpnote = new Note("stickUp", 264, -43, this);
 		stickDLeftnote = new Note("stickDLeft", 264, -43, this);
-		stickDownnote = new Note("stickDown", 264, -43, this);
-*/
+		stickDownnote = new Note("stickDown", 264, -43, this);*/
+
 		// INITIALIZE BUTTONFLASH MAP
 		buttonflashes.put("A", new ButtonFlash(-100, -100, this));
 		buttonflashes.put("B", new ButtonFlash(-100, -100, this));
@@ -353,7 +362,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		buttonflashes.put("R", new ButtonFlash(-100, -100, this));
 		buttonflashes.put("Start", new ButtonFlash(-100, -100, this));
 		buttonflashes.put("Z", new ButtonFlash(-100, -100, this));
-		buttonflashes.put("StickUp", new ButtonFlash(-100, -100, this));
+		/*buttonflashes.put("StickUp", new ButtonFlash(-100, -100, this));
 		buttonflashes.put("StickDown", new ButtonFlash(-100, -100, this));
 		buttonflashes.put("StickLeft", new ButtonFlash(-100, -100, this));
 		buttonflashes.put("StickRight", new ButtonFlash(-100, -100, this));
@@ -368,7 +377,27 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		buttonflashes.put("CStickURight", new ButtonFlash(-100, -100, this));
 		buttonflashes.put("CStickULeft", new ButtonFlash(-100, -100, this));
 		buttonflashes.put("CStickDRight", new ButtonFlash(-100, -100, this));
-		buttonflashes.put("CStickDLeft", new ButtonFlash(-100, -100, this));
+		buttonflashes.put("CStickDLeft", new ButtonFlash(-100, -100, this));*/
+		
+		//INITIALIZE BUTTONFLASHSTICKS MAP
+		buttonflashsticks.put("stickUp", new ButtonFlashSticks(-100,-100,this));
+		buttonflashsticks.put("stickDown", new ButtonFlashSticks(-100,-100,this));
+		buttonflashsticks.put("stickLeft", new ButtonFlashSticks(-100,-100,this));
+		buttonflashsticks.put("stickRight", new ButtonFlashSticks(-100,-100,this));
+		buttonflashsticks.put("stickURight", new ButtonFlashSticks(-100,-100,this));
+		buttonflashsticks.put("stickULeft", new ButtonFlashSticks(-100,-100,this));
+		buttonflashsticks.put("stickDRight", new ButtonFlashSticks(-100,-100,this));
+		buttonflashsticks.put("stickDLeft", new ButtonFlashSticks(-100,-100,this));
+		buttonflashsticks.put("CsUp", new ButtonFlashSticks(-100,-100,this));
+		buttonflashsticks.put("cStickUp", new ButtonFlashSticks(-100, -100, this));
+		buttonflashsticks.put("cStickDown", new ButtonFlashSticks(-100, -100, this));
+		buttonflashsticks.put("cStickLeft", new ButtonFlashSticks(-100, -100, this));
+		buttonflashsticks.put("cStickRight", new ButtonFlashSticks(-100, -100, this));
+		buttonflashsticks.put("cStickURight", new ButtonFlashSticks(-100, -100, this));
+		buttonflashsticks.put("cStickULeft", new ButtonFlashSticks(-100, -100, this));
+		buttonflashsticks.put("cStickDRight", new ButtonFlashSticks(-100, -100, this));
+		buttonflashsticks.put("cStickDLeft", new ButtonFlashSticks(-100, -100, this));
+		// INITIALIZE NOTE MAP
 
 		// INITIALIZE SOUND MAP
 		 sounds.put("A", new File("./Notes/A.wav"));
@@ -512,6 +541,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		// FOX L CANCEL NAIR
 		if (nair.isSelected()) {
+
 			if (YnoteN.getFalling() == false && stickDownnoteN.getFalling() == false && AnoteN.getFalling() == false
 					&& RnoteN.getFalling() == false) {
 				AnoteN.setFalling(true);
@@ -573,8 +603,10 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				stickDownnoteMS2.setFallSpeed(1.5);
 				stickDownnoteMS3.setFallSpeed(1.5);
 			}
-			if (FoxWavedash.isSelected()) {
-               
+			if (FoxWavedash.isSelected()) {  // should be able to get rid of this method entirely with a technique array
+               //if(technique[] == "FWD") {
+            		   
+               //}
 				// sets highscore for fox wavedash
 				highscore = hs.hScore(0);
                 System.out.println("Y: "+YnoteFW.getY());
@@ -587,7 +619,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				stickDLeftnoteFW.tick();
 				
 				
-				if (Physics.Collision(YnoteFW, ybutton2) && YnoteFW.getY() > 352 && YnoteFW.getY() < 360 && ybutton2.getX() == 339) {
+				if (Physics.Collision(YnoteFW, buttonflashes.get("Y")) && YnoteFW.getY() > 352 && YnoteFW.getY() < 360 && buttonflashes.get("Y").getX() == 339) {
 					a = 1;
 					YnoteFW.setY(-54);
 					PlaySound(sounds.get("C"));
@@ -595,7 +627,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				}
 
-				if (Physics.Collision(RnoteFW, rbutton2) && RnoteFW.getY() > 335 && RnoteFW.getY() < 343 && rbutton2.getX() == 348) {
+				if (Physics.Collision(RnoteFW, buttonflashes.get("R")) && RnoteFW.getY() > 335 && RnoteFW.getY() < 343 && buttonflashes.get("R").getX() == 348) {
 					b = 1;
 
 					RnoteFW.setY(-74);
@@ -603,8 +635,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 					RnoteFW.setFalling(false);
 				}
 
-				if (Physics.Collision(stickDLeftnoteFW, stickDLeft3) && stickDLeftnoteFW.getY() > 364 && stickDLeftnoteFW.getY() < 371
-						&& stickDLeft3.getX() == 264 && stickDLeft3.getZ() == 8) {
+				if (Physics.Collision(stickDLeftnoteFW, buttonflashsticks.get("stickDLeft")) && stickDLeftnoteFW.getY() > 364 && stickDLeftnoteFW.getY() < 371
+						&& buttonflashsticks.get("stickDLeft").getX() == 264 && buttonflashsticks.get("stickDLeft").getZ() == 8) {
 					c = 1;
 					stickDLeftnoteFW.setY(-76);
 
@@ -633,7 +665,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				stickDownnoteMS2.tick();
 				stickDownnoteMS3.tick();
 
-				if (Physics.Collision(BnoteMS, bbutton2) && BnoteMS.getY() > 371 && BnoteMS.getY() < 378 && bbutton2.getX() == 333) {
+				if (Physics.Collision(BnoteMS, buttonflashes.get("B")) && BnoteMS.getY() > 371 && BnoteMS.getY() < 378 && buttonflashes.get("B").getX() == 333) {
 				
 					a = 1;
 					//System.out.println(Bnote.getY());
@@ -643,7 +675,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				}
 
-				if (Physics.Collision(XnoteMS, xbutton2) && XnoteMS.getY() > 354 && XnoteMS.getY() < 361 && xbutton2.getX() == 359) {
+				if (Physics.Collision(XnoteMS, buttonflashes.get("X")) && XnoteMS.getY() > 354 && XnoteMS.getY() < 361 && buttonflashes.get("X").getX() == 359) {
 					b = 1;
 					XnoteMS.setY(-54);
 
@@ -651,24 +683,24 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				}
 
-				if (Physics.Collision(stickDownnoteMS, stickDown3) && stickDownnoteMS.getY() > 360
-						&& stickDown3.getX() == 264) {
+				if (Physics.Collision(stickDownnoteMS, buttonflashsticks.get("stickDown")) && stickDownnoteMS.getY() > 360
+						&& buttonflashsticks.get("stickDown").getX() == 264) {
 					c1 = 1;
 					stickDownnoteMS.setY(-33);
 
 					stickDownnoteMS.setFalling(false);
 
 				}
-				if (Physics.Collision(stickDownnoteMS2, stickDown3) && stickDownnoteMS2.getY() > 360
-						&& stickDown3.getX() == 264) {
+				if (Physics.Collision(stickDownnoteMS2, buttonflashsticks.get("stickDown")) && stickDownnoteMS2.getY() > 360
+						&& buttonflashsticks.get("stickDown").getX() == 264) {
 					c2 = 1;
 					stickDownnoteMS2.setY(-48);
 
 					stickDownnoteMS2.setFalling(false);
 
 				}
-				if (Physics.Collision(stickDownnoteMS3, stickDown3) && stickDownnoteMS3.getY() > 360
-						&& stickDown3.getX() == 264) {
+				if (Physics.Collision(stickDownnoteMS3, buttonflashsticks.get("stickDown")) && stickDownnoteMS3.getY() > 360
+						&& buttonflashsticks.get("stickDown").getX() == 264) {
 					c3 = 1;
 					stickDownnoteMS3.setY(-63);
 
@@ -690,8 +722,10 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 			}
 		}
-
 	}
+		
+
+	
 
 	private void render() // everything in the game that renders
 	{
@@ -781,7 +815,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			buttonflashes.get("R").render(g);
 			buttonflashes.get("Start").render(g);
 			buttonflashes.get("Z").render(g);
-			buttonflashes.get("StickDown").render(g);
+			buttonflashsticks.get("StickDown").render(g);
+			buttonflashsticks.get("StickDLeft").render(g);
 			
 			// Scoring letters
 			g.setFont(new Font("Arial", Font.BOLD, 30));
@@ -863,9 +898,9 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		return spriteSheet;
 	}
 
-	public ButtonFlash getButtonFlash() {
-		return ButtonFlash;
-	}
+	//public ButtonFlash getButtonFlash() {
+	//	return ButtonFlash;
+	//}
 
 	// This class is used for the ButtonFlash class, enabling communication with the
 	// keyboard and the class
