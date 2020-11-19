@@ -1,4 +1,3 @@
-
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
@@ -27,6 +26,8 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import com.game.src.main.classes.SaveFile;
+import java.util.Map;
+import java.util.HashMap;
 
 public class GameWindow extends Canvas implements Runnable { // This interface is useful when utilizing multiple threads
 	// In this case, it ensures that just because one Thread has been executed,
@@ -50,6 +51,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private int score;
 	// int mx = 0;
 	// int my = 0;
+	
+	private static final Map<String, File> sounds = new HashMap<>();
 
 	private BufferedImage currentBackground = null;
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -333,6 +336,9 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickDLeftnote = new Note("stickDLeft", 264, -43, this);
 		stickDownnote = new Note("stickDown", 264, -43, this);
 */
+		// INITIALIZE SOUND MAP
+				 sounds.put("A", new File("./Notes/A.wav"));
+				 sounds.put("C", new File("./Notes/C.wav"));
 	}
 
 
@@ -563,8 +569,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 					RnoteFW.setFalling(false);
 				}
 
-				if (Physics.Collision(stickDLeftnoteFW, stickDLeft2) && stickDLeftnoteFW.getY() > 364 && stickDLeftnoteFW.getY() < 371
-						&& stickDLeft2.getX() == 264 && stickDLeft2.getZ() == 8) {
+				if (Physics.Collision(stickDLeftnoteFW, stickDLeft3) && stickDLeftnoteFW.getY() > 364 && stickDLeftnoteFW.getY() < 371
+						&& stickDLeft3.getX() == 264 && stickDLeft3.getZ() == 8) {
 					c = 1;
 					stickDLeftnoteFW.setY(-76);
 
