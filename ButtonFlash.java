@@ -462,9 +462,9 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 	}
 
 
-	//public int getZ() {
-	//	return z;
-	//}
+	public int getZ() {
+		return z;
+	}
 
 
 
