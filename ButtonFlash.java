@@ -10,6 +10,13 @@ import javax.swing.JRadioButtonMenuItem;
 
 import com.game.src.main.classes.EntityB;
 
+import net.java.games.input.Component;
+import net.java.games.input.Component.Identifier;
+import net.java.games.input.Controller;
+import net.java.games.input.ControllerEnvironment;
+import net.java.games.input.Event;
+import net.java.games.input.EventQueue;
+
 public class ButtonFlash extends GameObject implements EntityB { // this is not to be confused with the NOTE class which
 																	// will be the moving notes that fall on screen
 	// this is not to be confused with the NOTE class which will be the moving notes
@@ -42,7 +49,10 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 	private BufferedImage cULeft2;
 	private BufferedImage cDRight2;
 	private BufferedImage cDLeft2;
-
+	
+	
+	
+	
 	public ButtonFlash(double x, double y, GameWindow g) {
 		super(x, y);
 		this.g = g;
@@ -73,297 +83,64 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 		cULeft2 = ss.grabImage(6, 6, 32, 32);
 		cDLeft2 = ss.grabImage(3, 6, 32, 32);
 		cDRight2 = ss.grabImage(5, 6, 32, 32);
+		
+	
+		
+	}
+	
+	
 
+	@Override
+	public double getX() {
+		// TODO Auto-generated method stub
+		return x;
 	}
 
-	public void keyPressed(KeyEvent e) {
+	@Override
+	public double getY() {
+		// TODO Auto-generated method stub
+		return y;
+	}
 
-		if (e.getKeyCode() == KeyEvent.VK_A) {
-			x = 347;
-			y = 367;
-			
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_B) {
-			x = 333;
-			y = 372;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_X) {
+	public Rectangle getBounds() {
+
+		return new Rectangle((int) x, (int) y, 32, 32);
+	}
+
+
+	public int getZ() {
+		return z;
+	}
+
+
+	
+
+	@Override
+	public void tick() {
+	
+		
+	}
+
+	public void setPos(Component.Identifier identifier,boolean pressed) {
+		System.out.println(identifier);
+		
+		if(identifier.equals(Component.Identifier.Button._0)) {
+			if(pressed==true) {
 			x = 359;
 			y = 356;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_Y) {
-			x = 339;
-			y = 353;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_L) {
-			x = 258;
-			y = 336;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_R) {
-			x = 348;
-			y = 336;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_S) {
-			x = 302;
-			y = 375;
-
-		}
-		if (e.getKeyCode() == KeyEvent.VK_Z) {
-			x = 347;
-			y = 345;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			x = 264;
-			y = 364;
-			z = 1;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			x = 264;
-			y = 364;
-			z = 2;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			x = 264;
-			y = 364;
-			z = 3;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			x = 264;
-			y = 364;
-			z = 4;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_1) {
-			x = 264;
-			y = 364;
-			z = 5;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_2) {
-			x = 264;
-			y = 364;
-			z = 6;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_3) {
-			x = 264;
-			y = 364;
-			z = 7;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_4) {
-			x = 264;
-			y = 364;
-			z = 8;
-			
-		}
-		// c stick (needs a z coord simply because there are so many sprites going into
-		// 390, 440)
-		if (e.getKeyCode() == KeyEvent.VK_U) {
-			x = 327;
-			y = 397;
-			z = 1;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_H) {
-			x = 327;
-			y = 397;
-			z = 2;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_J) {
-			x = 327;
-			y = 397;
-			z = 3;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_K) {
-			x = 327;
-			y = 397;
-			z = 4;
-			
-		}
-
-		// c stick diagonal inputs
-		if (e.getKeyCode() == KeyEvent.VK_5) {
-			x = 327;
-			y = 397;
-			z = 5;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_6) {
-			x = 327;
-			y = 397;
-			z = 6;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_7) {
-			x = 327;
-			y = 397;
-			z = 7;
-			
-		}
-		if (e.getKeyCode() == KeyEvent.VK_8) {
-			x = 327;
-			y = 397;
-			z = 8;
-			
-		}
-
-	}
-
-	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_A) {
-			// System.out.println("a");
-			x = -100;
-			y = -100;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_B) {
-			x = -100;
-			y = -100;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_X) {
-
-			x = -100;
-			y = -100;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_Y) {
-
-			x = -100;
-			y = -100;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_L) {
-
-			x = -100;
-			y = -100;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_R) {
-
-			x = -100;
-			y = -100;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_S) {
-
-			x = -100;
-			y = -100;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_Z) {
-
-			x = -100;
-			y = -100;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP) {
-
-			x = -100;
-			y = -100;
-			z = 0;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-
-			x = -100;
-			y = -100;
-			z = 0;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-
-			x = -100;
-			y = -100;
-			z = 0;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-
-			x = -100;
-			y = -100;
-			z = 0;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_1) {
-
-			x = -100;
-			y = -100;
-			z = 0;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_2) {
-
-			x = -100;
-			y = -100;
-			z = 0;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_3) {
-
-			x = -100;
-			y = -100;
-			z = 0;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_4) {
-
-			x = -100;
-			y = -100;
-			z = 0;
-		}
-		// c stick diagonals: // try an if statement within an if statement? instead of
-		// the and?
-		if (e.getKeyCode() == KeyEvent.VK_5) {
-			x = -100;
-			y = -100;
-			z = 0;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_6) {
-			x = -100;
-			y = -100;
-			z = 0;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_7) {
-			x = -100;
-			y = -100;
-			z = 0;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_8) {
-			x = -100;
-			y = -100;
-			z = 0;
-		}
-
-		// c stick
-		if (e.getKeyCode() == KeyEvent.VK_U) {
-			x = -100;
-			y = -100;
-			z = 0;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_H) {
-			x = -100;
-			y = -100;
-			z = 0;
-		}
-
-		if (e.getKeyCode() == KeyEvent.VK_J) {
-			x = -100;
-			y = -100;
-			z = 0;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_K) {
-			x = -100;
-			y = -100;
-			z = 0;
+			//pressed = false;
+			}
+			if(pressed==false) {
+			x = 0;
+			y = 0;
+			//pressed = true;	
+			}
 		}
 	}
 
-	public void tick() // update method
-	{
 
-	}
-
-	public void render(Graphics g) // draws out image
-	{
+	@Override
+	public void render(Graphics g) {
 		if (x == 347 && y == 367) {
 			g.drawImage(abutton2, (int) x, (int) y, null);
 		}
@@ -442,31 +219,5 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 		if (x == 327 && y == 397 && z == 8) {
 			g.drawImage(cDLeft2, (int) x, (int) y, null);
 		}
-	}
-
-	@Override
-	public double getX() {
-		// TODO Auto-generated method stub
-		return x;
-	}
-
-	@Override
-	public double getY() {
-		// TODO Auto-generated method stub
-		return y;
-	}
-
-	public Rectangle getBounds() {
-
-		return new Rectangle((int) x, (int) y, 32, 32);
-	}
-
-
-	public int getZ() {
-		return z;
-	}
-
-
-
-
-}
+		
+	}}
