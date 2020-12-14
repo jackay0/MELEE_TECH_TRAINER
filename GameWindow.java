@@ -115,7 +115,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private ButtonFlash stickURight2;
 	private ButtonFlash stickULeft2;
 	private ButtonFlash stickDRight2;
-	private ButtonFlash stickDLeft2;
+	//private ButtonFlash stickDLeft2;
 	private ButtonFlash cUp2;
 	private ButtonFlash cDown2;
 	private ButtonFlash cLeft2;
@@ -237,7 +237,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickURight2 = new ButtonFlash(-100, -100, this);
 		stickULeft2 = new ButtonFlash(-100, -100, this);
 		stickDRight2 = new ButtonFlash(-100, -100, this);
-		stickDLeft2 = new ButtonFlash(-100, -100, this);
+		//stickDLeft2 = new ButtonFlash(-100, -100, this);
 		cUp2 = new ButtonFlash(-100, -100, this);
 		cDown2 = new ButtonFlash(-100, -100, this);
 		cLeft2 = new ButtonFlash(-100, -100, this);
@@ -747,7 +747,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			rbutton2.render(g);
 			startbutton2.render(g);
 			zbutton2.render(g);
-			stickDLeft2.render(g);
+			//stickDLeft2.render(g);
 			stickDown3.render(g);
 			// Anote.render(g)'
 
@@ -924,16 +924,17 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			rbutton2.keyPressed(e);
 			startbutton2.keyPressed(e);
 			zbutton2.keyPressed(e);
-			stickDLeft2.keyPressed(e);
+		//	stickDLeft2.keyPressed(e);
 
 			// if (e.getKeyCode() == KeyEvent.VK_A && state == STATE.PRESENTSCORE) {
 			// state = STATE.PLAY;
 
 			// }
 			zbutton2.keyPressed(e);
-			stickDLeft2.keyPressed(e);
+		//	stickDLeft2.keyPressed(e);
 
 			stickDown3.keyPressed(e);
+			stickDLeft3.keyPressed(e);
 
 		}
 
@@ -953,10 +954,11 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			}
 
 			zbutton2.keyReleased(e);
-			stickDLeft2.keyReleased(e);
+		//	stickDLeft2.keyReleased(e);
 			// anote.keyReleased(e);
 			// anote.setFalling(false);
 			stickDown3.keyReleased(e);
+			stickDLeft3.keyReleased(e);
 		}
 
 	}
