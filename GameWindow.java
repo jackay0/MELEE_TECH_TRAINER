@@ -60,7 +60,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private BufferedImage controller = null;
 	private BufferedImage pauseSheet = null;
 	private BufferedImage FDbackground = null;
-
+	private BufferedImage dreamlandbackground = null;
 	// sprites for buttons on screen
 	private BufferedImage abutton;
 	private BufferedImage bbutton;
@@ -86,6 +86,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private BufferedImage pauseIcon;
 	private BufferedImage title;
 	private BufferedImage FDBackground;
+	private BufferedImage dreamlandBackground;
 
 	// vars dealing specifically with scoring
 	private int a = 0;
@@ -214,7 +215,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			controller = loader.LoadImage("/GCC.png");
 			pauseSheet = loader.LoadImage("/pause.png");
 			title = loader.LoadImage("/title.png");
-			FDbackground = loader.LoadImage("./FD.png"); ///
+			FDbackground = loader.LoadImage("/FD.png"); ///
+			dreamlandbackground = loader.LoadImage("/dreamland.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -264,6 +266,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		SpriteSheet p = new SpriteSheet(pauseSheet);
 		SpriteSheet t = new SpriteSheet(title);
 		SpriteSheet fd = new SpriteSheet(FDbackground);
+		SpriteSheet dl = new SpriteSheet(FDbackground);
 		abutton = ss.grabImage(1, 1, 32, 32);
 		bbutton = ss.grabImage(2, 1, 32, 32);
 		xbutton = ss.grabImage(4, 1, 32, 32);
@@ -288,6 +291,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		pauseIcon = p.grabImage(1, 1, 32, 32);
 		title = t.grabImage(1, 1, 32, 32);
 		FDBackground = fd.grabImage(1, 1, 320, 240);
+		//dreamlandBackground = dl.grabImage(1,1,800,450);
 
 		// INITIALIZES notes for each tech, varies in position depending on the
 		// technique
@@ -718,7 +722,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		}
 
 		if (state == STATE.PLAY) {
-
+			//g.drawImage(dreamlandbackground, 0, 0, getWidth(), getHeight(), this);
 			g.drawImage(currentBackground, 0, 0, getWidth(), getHeight(), this);
 			g.setColor(Color.CYAN);
 			g.drawRect(0, 0, 50, 50);
@@ -868,6 +872,17 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 					}
 				}
+	
+				if (state == STATE.BACKGROUNDS) {
+					if (mx >= 350 && mx <= 440) {
+						if (my >= 130 && my <= 200) {
+							currentBackground = dreamlandBackground;
+							state = STATE.PLAY;
+
+						}
+					}
+				}
+
 
 				if (mx >= 0 && mx <= 50) {
 					if (my >= 0 && my <= 50) {
