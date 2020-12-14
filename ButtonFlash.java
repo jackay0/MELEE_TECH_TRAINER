@@ -119,6 +119,7 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 			y = 345;
 			
 		}
+	/*
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			x = 264;
 			y = 364;
@@ -167,6 +168,7 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 			z = 8;
 			
 		}
+		*/
 		// c stick (needs a z coord simply because there are so many sprites going into
 		// 390, 440)
 		if (e.getKeyCode() == KeyEvent.VK_U) {
@@ -262,6 +264,7 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 			x = -100;
 			y = -100;
 		}
+	/*
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 
 			x = -100;
@@ -310,6 +313,7 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 			y = -100;
 			z = 0;
 		}
+		*/
 		// c stick diagonals: // try an if statement within an if statement? instead of
 		// the and?
 		if (e.getKeyCode() == KeyEvent.VK_5) {
