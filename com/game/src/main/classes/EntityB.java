@@ -14,6 +14,6 @@ public interface EntityB {
 
 	public double getX();
 	public double getY();
-
+	
 
 }

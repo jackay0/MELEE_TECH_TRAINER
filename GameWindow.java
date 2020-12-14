@@ -62,7 +62,11 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private int pause;
 	private int score;
 	
-	private int press;
+	private int xpress;
+	private int ypress;
+	private int rpress;
+	private int xaxis;
+	
 	// int mx = 0;
 	// int my = 0;
 	
@@ -566,29 +570,37 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				float data = component.getPollData();
 				if(identifier == Component.Identifier.Button._0)
 				{
+					xpress++;
+					System.out.println(xpress);
 					
-					if(pressed == false) {
-						xbutton2.setPos(identifier,pressed);
-						pressed = true;
-					}
-					if(pressed == true) {
-						if(pressed==true) {
-							xbutton2.setPos(identifier,pressed);
-							pressed = false;
-							}
-						
-					}
+					xbutton2.setPos(identifier,xpress);	
 					
-					
-				}
-				if(identifier == Component.Identifier.Button._1)
+				}	
+				if(identifier == Component.Identifier.Button._5)
 				{
-						
-					//abutton2.setPos(identifier);
+					rpress++;
+					
+					
+					rbutton2.setPos(identifier,rpress);	
+					
 				}
+				if(identifier == Component.Identifier.Button._3)
+				{
+					ypress++;
+					ybutton2.setPos(identifier,ypress);
+				}
+				
 				else if(identifier == Component.Identifier.Axis.X) 
 				{
+					System.out.println(data); //-.789
+												//.0159
+					float d1 = -.4f;
+					float d2 = -.6f;
 					
+					if(data > d1 && data < d2) {
+						xaxis++;
+						stickDLeft3.setPos(identifier,ypress);
+					}
 				}
 			}
 			

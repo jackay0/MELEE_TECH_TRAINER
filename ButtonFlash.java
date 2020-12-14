@@ -121,21 +121,43 @@ public class ButtonFlash extends GameObject implements EntityB { // this is not 
 		
 	}
 
-	public void setPos(Component.Identifier identifier,boolean pressed) {
-		System.out.println(identifier);
+	public void setPos(Component.Identifier identifier, int r) {
+		//System.out.println(identifier);
 		
-		if(identifier.equals(Component.Identifier.Button._0)) {
-			if(pressed==true) {
-			x = 359;
-			y = 356;
-			//pressed = false;
+		if(identifier.equals(Component.Identifier.Button._0 )) {
+			if(r%2!=0) {
+				x = 359;
+				y = 356;
 			}
-			if(pressed==false) {
-			x = 0;
-			y = 0;
-			//pressed = true;	
+			else {
+				x = -100;
+				y = -100;
 			}
 		}
+		if(identifier.equals(Component.Identifier.Button._3 )) {
+				if(r%2!=0) {
+					x = 339;
+					y = 353;
+				}
+				else {
+					x = -100;
+					y = -100;
+				}	
+			
+		}
+		if(identifier.equals(Component.Identifier.Button._5)) {
+			if(r%2!=0) {
+				x = 348;
+				y = 336;
+			}
+			else {
+				x = -100;
+				y = -100;
+			}	
+		
+	}
+		
+	
 	}
 
 
