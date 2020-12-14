@@ -26,13 +26,6 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import com.game.src.main.classes.SaveFile;
-
-import net.java.games.input.Component;
-import net.java.games.input.Controller;
-import net.java.games.input.ControllerEnvironment;
-import net.java.games.input.Event;
-import net.java.games.input.EventQueue;
-
 import java.util.Map;
 import java.util.HashMap;
 
@@ -58,18 +51,9 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private int score;
 	// int mx = 0;
 	// int my = 0;
-
+	
 	private static final Map<String, File> sounds = new HashMap<>();
 
-	// Controller
-	Controller[] controllers = ControllerEnvironment.getDefaultEnvironment().getControllers();
-	Controller controls = controllers[controllers.length - 1];
-	EventQueue eventQueue = controls.getEventQueue();
-	Event event = new Event();
-	Boolean stopped = false;
-	private boolean pressed = false;
-
-	private BufferedImage checkMark = null;
 	private BufferedImage currentBackground = null;
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private BufferedImage spriteSheet = null;
@@ -77,9 +61,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private BufferedImage pauseSheet = null;
 	private BufferedImage FDbackground = null;
 
-	int xpress = 0;
 	// sprites for buttons on screen
-
 	private BufferedImage abutton;
 	private BufferedImage bbutton;
 	private BufferedImage xbutton;
@@ -100,7 +82,6 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private BufferedImage cstick;
 
 	// EXTRAS
-	private BufferedImage checkMarkk;
 	private BufferedImage controllerr;
 	private BufferedImage pauseIcon;
 	private BufferedImage title;
@@ -112,6 +93,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private int c = 0;
 	private int counter = 1;
 	private int highscore;
+	
 
 	int c1 = 0;
 	int c2 = 0;
@@ -133,7 +115,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	private ButtonFlash stickURight2;
 	private ButtonFlash stickULeft2;
 	private ButtonFlash stickDRight2;
-	private ButtonFlash stickDLeft2;
+	//private ButtonFlash stickDLeft2;
 	private ButtonFlash cUp2;
 	private ButtonFlash cDown2;
 	private ButtonFlash cLeft2;
@@ -232,9 +214,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			controller = loader.LoadImage("/GCC.png");
 			pauseSheet = loader.LoadImage("/pause.png");
 			title = loader.LoadImage("/title.png");
-			FDbackground = loader.LoadImage("./FD.png");
-			checkMark = loader.LoadImage("./checkMark.png");
-			///
+			FDbackground = loader.LoadImage("./FD.png"); ///
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -257,7 +237,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		stickURight2 = new ButtonFlash(-100, -100, this);
 		stickULeft2 = new ButtonFlash(-100, -100, this);
 		stickDRight2 = new ButtonFlash(-100, -100, this);
-		stickDLeft2 = new ButtonFlash(-100, -100, this);
+		//stickDLeft2 = new ButtonFlash(-100, -100, this);
 		cUp2 = new ButtonFlash(-100, -100, this);
 		cDown2 = new ButtonFlash(-100, -100, this);
 		cLeft2 = new ButtonFlash(-100, -100, this);
@@ -279,7 +259,6 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		// These are the images for the regular buttons, not objects because their
 		// locations aren't manipulated.
-		SpriteSheet check = new SpriteSheet(checkMark);
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
 		SpriteSheet gcc = new SpriteSheet(controller);
 		SpriteSheet p = new SpriteSheet(pauseSheet);
@@ -305,7 +284,6 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		cstick = ss.grabImage(2, 4, 32, 32);
 
 		// EXTRAS
-		checkMarkk = check.grabImage(1, 1, 96, 96);
 		controllerr = gcc.grabImage(1, 1, 200, 100);
 		pauseIcon = p.grabImage(1, 1, 32, 32);
 		title = t.grabImage(1, 1, 32, 32);
@@ -346,19 +324,25 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		// Short hop double laser
 
-		/*
-		 * Anote = new Note("a", 347, -40, this); Bnote = new Note("b", 333, -35, this);
-		 * Xnote = new Note("x", 359, -51, this); Ynote = new Note("y", 339, -54, this);
-		 * Lnote = new Note("l", 258, -71, this); Rnote = new Note("r", 348, -71, this);
-		 * Znote = new Note("z", 367, -62, this); cUpnote = new Note("cUp", 327, -10,
-		 * this); stickUpnote = new Note("stickUp", 264, -43, this); stickDLeftnote =
-		 * new Note("stickDLeft", 264, -43, this); stickDownnote = new Note("stickDown",
-		 * 264, -43, this);
-		 */
+	/*	Anote = new Note("a", 347, -40, this);
+		Bnote = new Note("b", 333, -35, this);
+		Xnote = new Note("x", 359, -51, this);
+		Ynote = new Note("y", 339, -54, this);
+		Lnote = new Note("l", 258, -71, this);
+		Rnote = new Note("r", 348, -71, this);
+		Znote = new Note("z", 367, -62, this);
+		cUpnote = new Note("cUp", 327, -10, this);
+		stickUpnote = new Note("stickUp", 264, -43, this);
+		stickDLeftnote = new Note("stickDLeft", 264, -43, this);
+		stickDownnote = new Note("stickDown", 264, -43, this);
+*/
 		// INITIALIZE SOUND MAP
-		sounds.put("A", new File("./Notes/A.wav"));
-		sounds.put("C", new File("./Notes/C.wav"));
+				 sounds.put("A", new File("./Notes/A.wav"));
+				 sounds.put("C", new File("./Notes/C.wav"));
 	}
+
+
+
 
 	private synchronized void start() { // synchronization is an important thing when dealing with multiple Threads
 		if (running) { // It defeats the purpose of working with multiple threads and errors occur
@@ -406,7 +390,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.pack(); // not sure what this does, supposedly an optimization
-		// frame.addKeyListener(game.new AL());
+		frame.addKeyListener(game.new AL());
 		game.addMouseListener(game.new LA());
 		// frame.addMouseListener(game.new AL());
 		contentPane.add(scrollPane, BorderLayout.CENTER);
@@ -421,24 +405,6 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// Controller
-		Controller[] controllers = ControllerEnvironment.getDefaultEnvironment().getControllers();
-		Controller controller = null;
-
-		for (int i = 0; i < controllers.length; i++) {
-			if (controllers[i].getType() == Controller.Type.STICK) {
-				controller = controllers[i];
-
-			}
-			// System.out.println(controller);
-
-		}
-
-		Component[] components = controller.getComponents();
-		for (int i = 0; i < components.length; i++) {
-			System.out.println(components[i]);
-		}
-
 	}
 
 	public void run() { // it is necessary to check if the program is 'running' or not because we
@@ -529,51 +495,44 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 	// IMPORTANT FOR STICKS, Z VALUE FOR EACH: U: 1, D: 2, L: 3, R: 4, UL: 6, UR: 5,
 	// DL: 8, DR: 7
 	{
+		
 
 		if (state == STATE.START) {
 
 		}
 
 		if (state == STATE.PLAY) {
-			// System.out.println(xbutton2.getX());
-
 			// FOX WAVEDASH
-			if (HardMode.isSelected() && FoxWavedash.isSelected()) {
-
+			if(HardMode.isSelected() && FoxWavedash.isSelected()) {
 				YnoteFW.setFallSpeed(5.5);
 				RnoteFW.setFallSpeed(5.5);
 				stickDLeftnoteFW.setFallSpeed(5.5);
 			}
-			if (MediumMode.isSelected() && FoxWavedash.isSelected()) {
-
+			if(MediumMode.isSelected() && FoxWavedash.isSelected()) {
 				YnoteFW.setFallSpeed(2.75);
 				RnoteFW.setFallSpeed(2.75);
 				stickDLeftnoteFW.setFallSpeed(2.75);
 			}
-			if (EasyMode.isSelected() && FoxWavedash.isSelected()) {
-
+			if(EasyMode.isSelected() && FoxWavedash.isSelected()) {
 				YnoteFW.setFallSpeed(1.375);
 				RnoteFW.setFallSpeed(1.375);
 				stickDLeftnoteFW.setFallSpeed(1.375);
 			}
-			if (HardMode.isSelected() && multi.isSelected()) {
-
+			if(HardMode.isSelected() && multi.isSelected()) {
 				XnoteMS.setFallSpeed(6);
 				BnoteMS.setFallSpeed(6);
 				stickDownnoteMS.setFallSpeed(6);
 				stickDownnoteMS2.setFallSpeed(6);
 				stickDownnoteMS3.setFallSpeed(6);
 			}
-			if (MediumMode.isSelected() && multi.isSelected()) {
-
+			if(MediumMode.isSelected() && multi.isSelected()) {
 				XnoteMS.setFallSpeed(3);
 				BnoteMS.setFallSpeed(3);
 				stickDownnoteMS.setFallSpeed(3);
 				stickDownnoteMS2.setFallSpeed(3);
 				stickDownnoteMS3.setFallSpeed(3);
 			}
-			if (EasyMode.isSelected() && multi.isSelected()) {
-
+			if(EasyMode.isSelected() && multi.isSelected()) {
 				XnoteMS.setFallSpeed(1.5);
 				BnoteMS.setFallSpeed(1.5);
 				stickDownnoteMS.setFallSpeed(1.5);
@@ -581,10 +540,10 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				stickDownnoteMS3.setFallSpeed(1.5);
 			}
 			if (FoxWavedash.isSelected()) {
-
+               
 				// sets highscore for fox wavedash
 				highscore = hs.hScore(0);
-				// System.out.println("Y: "+YnoteFW.getY());
+                System.out.println("Y: "+YnoteFW.getY());
 				delayFalling();
 
 				YnoteFW.tick();
@@ -592,9 +551,9 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				RnoteFW.tick();
 
 				stickDLeftnoteFW.tick();
-
-				if (Physics.Collision(YnoteFW, ybutton2) && YnoteFW.getY() > 352 && YnoteFW.getY() < 360
-						&& ybutton2.getX() == 339) {
+				
+				
+				if (Physics.Collision(YnoteFW, ybutton2) && YnoteFW.getY() > 352 && YnoteFW.getY() < 360 && ybutton2.getX() == 339) {
 					a = 1;
 					YnoteFW.setY(-54);
 					PlaySound(cSound);
@@ -602,8 +561,7 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				}
 
-				if (Physics.Collision(RnoteFW, rbutton2) && RnoteFW.getY() > 335 && RnoteFW.getY() < 343
-						&& rbutton2.getX() == 348) {
+				if (Physics.Collision(RnoteFW, rbutton2) && RnoteFW.getY() > 335 && RnoteFW.getY() < 343 && rbutton2.getX() == 348) {
 					b = 1;
 
 					RnoteFW.setY(-74);
@@ -611,8 +569,8 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 					RnoteFW.setFalling(false);
 				}
 
-				if (Physics.Collision(stickDLeftnoteFW, stickDLeft2) && stickDLeftnoteFW.getY() > 364
-						&& stickDLeftnoteFW.getY() < 371 && stickDLeft2.getX() == 264 && stickDLeft2.getZ() == 8) {
+				if (Physics.Collision(stickDLeftnoteFW, stickDLeft3) && stickDLeftnoteFW.getY() > 364 && stickDLeftnoteFW.getY() < 371
+						&& stickDLeft3.getX() == 264 && stickDLeft3.getZ() == 8) {
 					c = 1;
 					stickDLeftnoteFW.setY(-76);
 
@@ -621,10 +579,11 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 				}
 
-				// System.out.println("counter: " + counter);
+				//System.out.println("counter: " + counter);
 
-				if (counter == 20) {
-
+				if (counter == 20)
+				{
+					
 					state = STATE.PRESENTSCORE;
 				}
 
@@ -640,19 +599,17 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 				stickDownnoteMS2.tick();
 				stickDownnoteMS3.tick();
 
-				if (Physics.Collision(BnoteMS, bbutton2) && BnoteMS.getY() > 371 && BnoteMS.getY() < 378
-						&& bbutton2.getX() == 333) {
-
+				if (Physics.Collision(BnoteMS, bbutton2) && BnoteMS.getY() > 371 && BnoteMS.getY() < 378 && bbutton2.getX() == 333) {
+				
 					a = 1;
-					// System.out.println(Bnote.getY());
+					//System.out.println(Bnote.getY());
 					BnoteMS.setY(-35);
 
 					BnoteMS.setFalling(false);
 
 				}
 
-				if (Physics.Collision(XnoteMS, xbutton2) && XnoteMS.getY() > 354 && XnoteMS.getY() < 361
-						&& xbutton2.getX() == 359) {
+				if (Physics.Collision(XnoteMS, xbutton2) && XnoteMS.getY() > 354 && XnoteMS.getY() < 361 && xbutton2.getX() == 359) {
 					b = 1;
 					XnoteMS.setY(-54);
 
@@ -761,185 +718,108 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 		}
 
 		if (state == STATE.PLAY) {
-			controls.poll();
-			eventQueue.getNextEvent(event);
 
-			Component component = event.getComponent();
-
-			if (component != null) {
-				Component.Identifier identifier = component.getIdentifier();
-				float data = component.getPollData();
-				// if (!pressed) {
-				//if (!xbutton2.IsPressed(identifier)) // &&xpress%2!=0
-				
-					//xpress++;
-				   // xbutton2.setX(-100);
-				  //  xbutton2.setY(-100);
-
-				// System.out.println(xpress);
-				//}
-
-				if (identifier == Component.Identifier.Button._0) {
-					if(xbutton2.IsPressed(identifier))
-					pressed = true;
-					//xpress = 0;
-
-					// if (pressed) {
-					// xbutton2.IsPressed(identifier) &&
-					while (pressed==true) {
-						System.out.println("in while");
-						xbutton2.setX(359);
-						xbutton2.setY(356);
-						
-						if (xbutton2.IsPressed(identifier) && xbutton2.getX() == 359) {
-							System.out.println("false");
-							pressed = false;
-							//xbutton2.setX(-100);
-						    //xbutton2.setY(-100);
-
-						}
-						else {
-							pressed = true;
-						}
-					}
-					 if (!pressed) {
-							//if (!xbutton2.IsPressed(identifier)) // &&xpress%2!=0
-							
-								//xpress++;
-							    xbutton2.setX(-100);
-							    xbutton2.setY(-100);
-
-							// System.out.println(xpress);
-							}
-					// xpress = 0;
-
-					// if(xbutton2.IsPressed(identifier))
-					// {
-					// pressed = false;
-					// xbutton2.setX(-100);
-					// xbutton2.setY(-100);
-					// }
-
-					if (identifier == Component.Identifier.Button._1) {
-
-						// abutton2.setPos(identifier);
-					} else if (identifier == Component.Identifier.Axis.X) {
-
-					}
-					
-				
-				}
+			g.drawImage(currentBackground, 0, 0, getWidth(), getHeight(), this);
+			g.setColor(Color.CYAN);
+			g.drawRect(0, 0, 50, 50);
+			g.setFont(new Font("Arial", Font.BOLD, 20));
+			g.drawString("ESC", 5, 32);
+			g.drawImage(controllerr, 220, 350, this);
+			g.drawImage(abutton, 347, 367, this);
+			g.drawImage(bbutton, 333, 372, this);
+			g.drawImage(xbutton, 359, 356, this);
+			g.drawImage(ybutton, 339, 353, this);
+			g.drawImage(lbutton, 258, 336, this);
+			g.drawImage(rbutton, 348, 336, this);
+			g.drawImage(startbutton, 302, 375, this);
+			g.drawImage(zbutton, 347, 345, this);
+			g.drawImage(stick, 264, 364, this);
+			g.drawImage(cstick, 327, 397, this); // UHJK
+			if (pause == 1) {
+				g.drawImage(pauseIcon, 300, 200, this);
 			}
-		
+			// Buttons on the controller
+			abutton2.render(g);
+			bbutton2.render(g);
+			xbutton2.render(g);
+			ybutton2.render(g);
+			lbutton2.render(g);
+			rbutton2.render(g);
+			startbutton2.render(g);
+			zbutton2.render(g);
+			//stickDLeft2.render(g);
+			stickDown3.render(g);
+			// Anote.render(g)'
 
-				g.drawImage(currentBackground, 0, 0, getWidth(), getHeight(), this);
-				g.setColor(Color.CYAN);
-				g.drawRect(0, 0, 50, 50);
-				g.setFont(new Font("Arial", Font.BOLD, 20));
-				g.drawString("ESC", 5, 32);
-				g.drawImage(controllerr, 220, 350, this);
-				g.drawImage(abutton, 347, 367, this);
-				g.drawImage(bbutton, 333, 372, this);
-				g.drawImage(xbutton, 359, 356, this);
-				g.drawImage(ybutton, 339, 353, this);
-				g.drawImage(lbutton, 258, 336, this);
-				g.drawImage(rbutton, 348, 336, this);
-				g.drawImage(startbutton, 302, 375, this);
-				g.drawImage(zbutton, 347, 345, this);
-				g.drawImage(stick, 264, 364, this);
-				g.drawImage(cstick, 327, 397, this); // UHJK
-				if (pause == 1) {
-					g.drawImage(pauseIcon, 300, 200, this);
-				}
-				// Buttons on the controller
-				abutton2.render(g);
-				bbutton2.render(g);
-				xbutton2.render(g);
-				ybutton2.render(g);
-				lbutton2.render(g);
-				rbutton2.render(g);
-				startbutton2.render(g);
-				zbutton2.render(g);
-				stickDLeft2.render(g);
-				stickDown3.render(g);
-				// Anote.render(g)'
+			// Scoring letters
+			g.setFont(new Font("Arial", Font.BOLD, 30));
+			g.setColor(Color.WHITE);
+			g.drawString("SCORE:" + score, 490, 25);
 
-				// Scoring letters
-				g.setFont(new Font("Arial", Font.BOLD, 30));
-				g.setColor(Color.WHITE);
-				g.drawString("SCORE:" + score, 490, 25);
+			if (multi.isSelected()) {
+				BnoteMS.render(g);
+				XnoteMS.render(g);
+				stickDownnoteMS.render(g);
+				stickDownnoteMS2.render(g);
+				stickDownnoteMS3.render(g);
+			}
 
-				if (multi.isSelected()) {
-					BnoteMS.render(g);
-					XnoteMS.render(g);
-					stickDownnoteMS.render(g);
-					stickDownnoteMS2.render(g);
-					stickDownnoteMS3.render(g);
-				}
+			// We need to divide the buttons that comprise of each tech into this render, so
+			// that they only are on screen when selected
+			if (FoxWavedash.isSelected()) {
+				YnoteFW.render(g);
+				//System.out.println("Y Note IS RENDERED");
+				RnoteFW.render(g);
+				stickDLeftnoteFW.render(g);
+			
+				// keeps track of highscore
+				if (score > highscore) {
+					hs.modifyFile(highscore + " FWD", score + " FWD");
 
-				// We need to divide the buttons that comprise of each tech into this render, so
-				// that they only are on screen when selected
-				if (FoxWavedash.isSelected()) {
-					if (highscore == 20) {
-						g.drawImage(checkMarkk, 340, -10, this);
-
+					// recreates the array so the new value can be replaced if it increases by more
+					// than one
+					try {
+						hs = new SaveFile();
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 
-					YnoteFW.render(g);
-					// System.out.println("Y Note IS RENDERED");
-					RnoteFW.render(g);
-					stickDLeftnoteFW.render(g);
-
-					// keeps track of highscore
-					if (score > highscore) {
-						hs.modifyFile(highscore + " FWD", score + " FWD");
-
-						// recreates the array so the new value can be replaced if it increases by more
-						// than one
-						try {
-							hs = new SaveFile();
-						} catch (FileNotFoundException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-
-					}
-					g.drawString(" HIGH SCORE:" + highscore, 399, 50);
 				}
-				// System.out.println(score);
-
-				if (nair.isSelected()) {
-					AnoteN.render(g);
-					RnoteN.render(g);
-					stickDownnoteN.render(g);
-					YnoteN.render(g);
-				}
-
-				// Lnote.render(g);
-				// Znote.render(g);
-				// cUpnote.render(g);
-				// stickUpnote.render(g);
-
-				//////////////////////////////////// where we can draw images ^^^^^
+				g.drawString(" HIGH SCORE:" + highscore, 399, 50);
 			}
-			// System.out.println(score);
-			if (state == STATE.PRESENTSCORE)
+			//System.out.println(score);
 
-			{
-				counter = 1;
-				// System.out.println(score);
-				// currentBackground = image;
-				g.drawImage(currentBackground, 0, 0, getWidth(), getHeight(), this);
-				g.setFont(new Font("Arial", Font.BOLD, 30));
-				g.setColor(Color.WHITE);
-				g.drawString("YOUR SCORE: " + score, 200, 210);
-				g.setFont(new Font("Arial", Font.BOLD, 15));
-				g.drawRect(256, 240, 125, 20);
-				g.drawString("RESTART", 282, 255);
-				// g.drawString("Press A to restart", 257, 280);
-				score = 0;
+			if (nair.isSelected()) {
+				AnoteN.render(g);
+				RnoteN.render(g);
+				stickDownnoteN.render(g);
+				YnoteN.render(g);
 			}
-		
+
+			// Lnote.render(g);
+			// Znote.render(g);
+			// cUpnote.render(g);
+			// stickUpnote.render(g);
+
+			//////////////////////////////////// where we can draw images ^^^^^
+		}
+		//System.out.println(score);
+		if (state == STATE.PRESENTSCORE) {
+			counter = 1;
+			//System.out.println(score);
+			// currentBackground = image;
+			g.drawImage(currentBackground, 0, 0, getWidth(), getHeight(), this);
+			g.setFont(new Font("Arial", Font.BOLD, 30));
+			g.setColor(Color.WHITE);
+			g.drawString("YOUR SCORE: " + score, 200, 210);
+			g.setFont(new Font("Arial", Font.BOLD, 15));
+			g.drawRect(256, 240, 125, 20);
+			g.drawString("RESTART", 282, 255);
+			// g.drawString("Press A to restart", 257, 280);
+			score = 0;
+		}
+
 		g.dispose();
 		bs.show();
 
@@ -1029,6 +909,56 @@ public class GameWindow extends Canvas implements Runnable { // This interface i
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
+		}
+
+	}
+
+	public class AL extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			abutton2.keyPressed(e);
+			bbutton2.keyPressed(e);
+			xbutton2.keyPressed(e);
+			ybutton2.keyPressed(e);
+			lbutton2.keyPressed(e);
+			rbutton2.keyPressed(e);
+			startbutton2.keyPressed(e);
+			zbutton2.keyPressed(e);
+		//	stickDLeft2.keyPressed(e);
+
+			// if (e.getKeyCode() == KeyEvent.VK_A && state == STATE.PRESENTSCORE) {
+			// state = STATE.PLAY;
+
+			// }
+			zbutton2.keyPressed(e);
+		//	stickDLeft2.keyPressed(e);
+
+			stickDown3.keyPressed(e);
+			stickDLeft3.keyPressed(e);
+
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			abutton2.keyReleased(e);
+			bbutton2.keyReleased(e);
+			xbutton2.keyReleased(e);
+			ybutton2.keyReleased(e);
+			lbutton2.keyReleased(e);
+			rbutton2.keyReleased(e);
+			startbutton2.keyReleased(e);
+			if (e.getKeyCode() == KeyEvent.VK_S) {
+				pause = 1;
+			} else {
+				pause = 0;
+			}
+
+			zbutton2.keyReleased(e);
+		//	stickDLeft2.keyReleased(e);
+			// anote.keyReleased(e);
+			// anote.setFalling(false);
+			stickDown3.keyReleased(e);
+			stickDLeft3.keyReleased(e);
 		}
 
 	}
